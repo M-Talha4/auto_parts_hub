@@ -1,7 +1,7 @@
 class Validation {
   static String? fieldvalidation(String? value, String field) {
     if (value!.isEmpty) {
-      return 'Please enter $field';
+      return 'Please $field';
     }
 
     return null;

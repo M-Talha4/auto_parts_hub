@@ -5,12 +5,24 @@ abstract class Routes {
   Routes._();
   static const ADMIN_PANEL = _Paths.ADMIN_PANEL;
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
-  static const USER_APP = _Paths.USER_APP;
+  static const SELECT_LANGUAGE = _Paths.SELECT_LANGUAGE;
+  static const LOGIN = _Paths.LOGIN;
+  static const SIGNUP = _Paths.SIGNUP;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const HOME = _Paths.DASHBOARD + _Paths.HOME;
+  static const PROFILE = _Paths.DASHBOARD + _Paths.PROFILE;
+  static const CHAT = _Paths.DASHBOARD + _Paths.CHAT;
 }
 
 abstract class _Paths {
   _Paths._();
   static const ADMIN_PANEL = '/admin-panel';
   static const SPLASH_SCREEN = '/splash-screen';
-  static const USER_APP = '/user-app';
+  static const SELECT_LANGUAGE = '/select-language';
+  static const LOGIN = '/login';
+  static const SIGNUP = '/signup';
+  static const DASHBOARD = '/dashboard';
+  static const HOME = '/home';
+  static const PROFILE = '/profile';
+  static const CHAT = '/chat';
 }

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/admin_panel_controller.dart';
+import '../controllers/chat_controller.dart';
 
-class AdminPanelView extends GetView<AdminPanelController> {
-  const AdminPanelView({super.key});
+class ChatView extends GetView<ChatController> {
+  const ChatView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AdminPanelView'),
+        title: const Text('ChatView'),
         centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          'AdminPanelView is working',
+          'ChatView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),

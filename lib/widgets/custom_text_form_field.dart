@@ -81,11 +81,12 @@ class RectangularTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          //   boxShadow: [
-          //   BoxShadow(blurRadius: 5, color: AppColor.grey, offset: Offset(2, 5))
-          // ]
-          ),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+            blurRadius: 5,
+            color: AppColor.grey.withOpacity(0.3),
+            offset: const Offset(2, 5))
+      ]),
       child: TextFormField(
         controller: controller,
         focusNode: focusNode,
@@ -116,14 +117,13 @@ class RectangularTextFormField extends StatelessWidget {
                 )
               : null,
           hintStyle: TextStyle(
-              color: hintcolor ?? AppColor.black,
+              color: hintcolor ?? AppColor.grey,
               fontSize: AppStyle.smallsize(context)),
           filled: filled,
-          fillColor: isEnabled == false
-              ? AppColor.lightGrey
-              : filled
-                  ? fillColor ?? AppColor.superLightPink
-                  : AppColor.transparent,
+          fillColor: isEnabled == false ? AppColor.lightGrey : AppColor.white,
+          // : filled
+          //     ? fillColor
+          //     : AppColor.transparent,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           contentPadding: EdgeInsets.symmetric(
@@ -137,7 +137,7 @@ class RectangularTextFormField extends StatelessWidget {
               borderSide: BorderSide(
                   color: bordercolor ?? AppColor.transparent,
                   width: borderwidth ?? 1),
-              borderRadius: BorderRadius.circular(borderradius ?? 5)),
+              borderRadius: BorderRadius.circular(borderradius ?? 8)),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: focusbordercolor ?? AppColor.primary,

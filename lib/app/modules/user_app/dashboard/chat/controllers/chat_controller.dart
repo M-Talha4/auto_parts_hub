@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class AdminPanelController extends GetxController {
-  //TODO: Implement AdminPanelController
+class ChatController extends GetxController {
+  //TODO: Implement ChatController
 
   final count = 0.obs;
 

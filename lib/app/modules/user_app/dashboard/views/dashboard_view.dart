@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/user_app_controller.dart';
+import '../controllers/dashboard_controller.dart';
 
-class UserAppView extends GetView<UserAppController> {
-  const UserAppView({Key? key}) : super(key: key);
+class DashboardView extends GetView<DashboardController> {
+  const DashboardView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UserAppView'),
+        title: const Text('DashboardView'),
         centerTitle: true,
       ),
       body: const Center(
         child: Text(
-          'UserAppView is working',
+          'DashboardView is working',
           style: TextStyle(fontSize: 20),
         ),
       ),
