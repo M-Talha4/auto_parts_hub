@@ -1,6 +1,9 @@
 import 'dart:async';
 
-import '/app/routes/app_pages.dart';
+import '/consts/const.dart';
+
+import '../../../../../routes/app_pages.dart';
+import '/utils/toast.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -16,12 +19,14 @@ class LoginController extends GetxController {
   }
 
   void login() {
-    if (formKey.currentState!.validate()) {
-      isLoading.value = true;
-      Timer(const Duration(seconds: 2), () {
-        isLoading.value == false;
-        Get.offAllNamed(Routes.HOME);
-      });
-    }
+    if (formKey.currentState!.validate()) {}
+    isLoading.value = true;
+    Timer(const Duration(seconds: 2), () {
+      isLoading.value == false;
+      showSnackbar(
+        message: loggedInSuccessfullyText,
+      );
+      Get.offAllNamed(Routes.DASHBOARD);
+    });
   }
 }

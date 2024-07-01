@@ -30,86 +30,91 @@ class LoginView extends GetView<LoginController> {
         height: height,
         child: Padding(
           padding: EdgeInsets.all(AppStyle.defaultPadding(context)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: height * 0.1,
-              ),
-              CustomText(
-                text: loginText,
-                fontSize: AppStyle.headingsize(context),
-              ),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              SizedBox(
-                height: height * 0.2,
-                child: Form(
-                  key: controller.formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      RectangularTextFormField(
-                        controller: controller.emailController,
-                        hint: enterYourEmailText,
-                        prefixIcon: Icon(Icons.mail),
-                        validation: (value) => Validation.emaiValidation(value),
-                      ),
-                      Obx(
-                        () => RectangularTextFormField(
-                          controller: controller.passwordController,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: height * 0.1,
+                ),
+                CustomText(
+                  text: loginText,
+                  fontSize: AppStyle.headingsize(context),
+                ),
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: height * 0.2,
+                  ),
+                  child: Form(
+                    key: controller.formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CustomTextFormField(
+                          controller: controller.emailController,
                           hint: enterYourEmailText,
-                          obscureText: controller.hidePassword.value,
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon: IconButton(
-                              onPressed: () => controller.showPassword(),
-                              icon: controller.hidePassword.value
-                                  ? Icon(Icons.visibility)
-                                  : Icon(Icons.visibility_off)),
+                          prefixIcon: const Icon(Icons.mail),
                           validation: (value) =>
-                              Validation.passworddValidation(value),
+                              Validation.emaiValidation(value),
                         ),
-                      ),
-                    ],
+                        Obx(
+                          () => CustomTextFormField(
+                            controller: controller.passwordController,
+                            hint: enterYourEmailText,
+                            obscureText: controller.hidePassword.value,
+                            prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                                onPressed: () => controller.showPassword(),
+                                icon: controller.hidePassword.value
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off)),
+                            validation: (value) =>
+                                Validation.passworddValidation(value),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                    onPressed: () {},
-                    child: CustomText(
-                      text: forgotPasswordText,
-                      color: AppColor.primaryLight,
-                    )),
-              ),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              Obx(() => LoadingButton(
-                    isLoading: controller.isLoading.value,
-                    onTap: () => controller.login(),
-                    text: loginText,
-                  )),
-              SizedBox(
-                height: height * 0.04,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const CustomText(
-                    text: dontHaveAnAccountText,
-                  ),
-                  TextButton(
-                      onPressed: () => Get.offNamed(Routes.SIGNUP),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                      onPressed: () {},
                       child: CustomText(
-                        text: signUpText,
+                        text: forgotPasswordText,
                         color: AppColor.primaryLight,
                       )),
-                ],
-              ),
-            ],
+                ),
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                Obx(() => LoadingButton(
+                      isLoading: controller.isLoading.value,
+                      onTap: () => controller.login(),
+                      text: loginText,
+                    )),
+                SizedBox(
+                  height: height * 0.04,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CustomText(
+                      text: dontHaveAnAccountText,
+                    ),
+                    TextButton(
+                        onPressed: () => Get.offNamed(Routes.SIGNUP),
+                        child: CustomText(
+                          text: signUpText,
+                          color: AppColor.primaryLight,
+                        )),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

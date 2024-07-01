@@ -1,15 +1,14 @@
-import '../utils/sharepreference_helper.dart';
+import '/consts/const.dart';
+import '/utils/sharepreference_helper.dart';
 
 class StaticData {
   static String accessToken = '';
   static String refreshToken = '';
-  static String uid = SharedPreferencesHelper.getString('userId') ?? '';
-  static String name = SharedPreferencesHelper.getString('name') ?? '';
-  static String email = SharedPreferencesHelper.getString('email') ?? '';
-  static String phoneNo = SharedPreferencesHelper.getString('phoneNo') ?? '';
+  static String userId = SharedPreferencesHelper.getString(spUserID) ?? '';
+  static String name = SharedPreferencesHelper.getString(spName) ?? '';
+  static String email = SharedPreferencesHelper.getString(spEmail) ?? '';
+  static String phoneNo = SharedPreferencesHelper.getString(spPhoneNO) ?? '';
   static String profileImage =
-      SharedPreferencesHelper.getString('profileImage') ?? '';
-  static String type = SharedPreferencesHelper.getString('type') ?? '';
-  static String location = SharedPreferencesHelper.getString('location') ?? '';
-  static String country = SharedPreferencesHelper.getString('country') ?? '';
+      SharedPreferencesHelper.getString(spProfileImage) ?? '';
+  static String langyuage = SharedPreferencesHelper.getString(spLanguage) ?? '';
 }

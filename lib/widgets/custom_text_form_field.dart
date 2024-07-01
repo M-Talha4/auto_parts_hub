@@ -2,7 +2,7 @@ import '/utils/style.dart';
 import '../consts/app_color.dart';
 import 'package:flutter/material.dart';
 
-class RectangularTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatelessWidget {
   final int? maxline;
   final int? maxLength;
   final double? height;
@@ -39,7 +39,7 @@ class RectangularTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validation;
 
-  const RectangularTextFormField({
+  const CustomTextFormField({
     super.key,
     this.maxline,
     this.maxLength,
@@ -83,9 +83,9 @@ class RectangularTextFormField extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
-            blurRadius: 5,
+            blurRadius: 3,
             color: AppColor.grey.withOpacity(0.3),
-            offset: const Offset(2, 5))
+            offset: const Offset(2, 4))
       ]),
       child: TextFormField(
         controller: controller,
@@ -205,8 +205,8 @@ class VerifyCodeField extends StatelessWidget {
           ),
           focusedBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: AppColor.primary, width: 2)),
-          enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColor.lightPink, width: 2))),
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColor.primaryLight!, width: 2))),
     );
   }
 }

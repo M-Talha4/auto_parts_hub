@@ -1,13 +1,9 @@
 import '/widgets/custom_button.dart';
-
 import '../../../../../consts/app_color.dart';
 import '/consts/const.dart';
-
 import '/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../../../../../utils/style.dart';
 import '../controllers/select_language_controller.dart';
 
@@ -26,53 +22,47 @@ class SelectLanguageView extends GetView<SelectLanguageController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: height * 0.2,
-              ),
               CustomText(
                 text: selectLanguge,
                 fontSize: AppStyle.headingsize(context),
               ),
               SizedBox(
-                height: height * 0.05,
+                height: height * 0.02,
               ),
-              Obx(() => Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 1),
-                      borderRadius: BorderRadius.circular(width * 0.02),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: controller.languages.length,
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (context, index) => InkWell(
+                    onTap: () => controller.onLanguageSelected(index),
+                    child: Obx(
+                      () => Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                            color: index == controller.selectedIndex.value
+                                ? AppColor.primary
+                                : null,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: CustomText(
+                          text: controller.languages[index],
+                          fontSize: width * 0.05,
+                          color: index == controller.selectedIndex.value
+                              ? AppColor.white
+                              : null,
+                        ),
+                      ),
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                          onChanged: (value) => controller
-                              .selectedLanguage.value = value.toString(),
-                          value: controller.selectedLanguage.value,
-                          isExpanded: true,
-                          hint: const CustomText(text: selectALanguge),
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            size: AppStyle.headingsize(context),
-                          ),
-                          items: controller.languages
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e,
-                                  child: CustomText(text: e),
-                                ),
-                              )
-                              .toList()),
-                    ),
-                  )),
-              const Expanded(child: SizedBox()),
-              Obx(() => CustomButton(
-                    onTap: () => controller.onContinue(),
-                    text: continueText,
-                    bgcolor: controller.selectedLanguage.value == selectALanguge
-                        ? AppColor.lightGrey
-                        : AppColor.primary,
-                  )),
-              SizedBox(
-                height: height * 0.05,
+                  ),
+                ),
+              ),
+              CustomButton(
+                onTap: () => controller.onContinue(),
+                text: continueText,
+                // bgcolor: controller.selectedIndex.value == null
+                //     ? AppColor.lightGrey
+                //     : AppColor.primary,
               ),
             ],
           ),

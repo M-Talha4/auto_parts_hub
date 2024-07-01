@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import '/consts/const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../utils/toast.dart';
 import '../../../../../routes/app_pages.dart';
 
 class SignupController extends GetxController {
@@ -24,12 +26,14 @@ class SignupController extends GetxController {
   }
 
   void signUp() {
-    if (formKey.currentState!.validate()) {
-      isLoading.value = true;
-      Timer(const Duration(seconds: 2), () {
-        isLoading.value == false;
-        Get.offAllNamed(Routes.HOME);
-      });
-    }
+    if (formKey.currentState!.validate()) {}
+    isLoading.value = true;
+    Timer(const Duration(seconds: 2), () {
+      isLoading.value == false;
+      showSnackbar(
+        message: signedUpSuccessfullyText,
+      );
+      Get.offAllNamed(Routes.DASHBOARD);
+    });
   }
 }
