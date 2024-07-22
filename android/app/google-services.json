@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "299918445125",
+    "project_id": "auto-parts-hub",
+    "storage_bucket": "auto-parts-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299918445125:android:c8bb1448ed8ba9acc2312c",
+        "android_client_info": {
+          "package_name": "com.talha.auto_parts_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBll26yJdTsHpQNIYM40Yl0F_zwYUHDUTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
