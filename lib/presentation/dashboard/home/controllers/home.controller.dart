@@ -56,6 +56,8 @@ class HomeController extends GetxController {
     DrawerItem(title: LocaleKeys.drawer_my_orders_text, icon: Icons.list_alt),
     DrawerItem(
         title: LocaleKeys.drawer_settings_text, icon: Icons.settings_outlined),
+    DrawerItem(
+        title: LocaleKeys.drawer_chat_support_text, icon: Icons.support_agent),
   ];
 
   @override
@@ -127,6 +129,10 @@ class HomeController extends GetxController {
       case LocaleKeys.drawer_settings_text:
         Get.back();
         Get.toNamed(Routes.SETTINGS);
+        break;
+      case LocaleKeys.drawer_chat_support_text:
+        Get.back();
+        Get.toNamed(Routes.CHAT_LIST);
         break;
       default:
         Get.back();

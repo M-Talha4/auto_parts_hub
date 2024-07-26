@@ -65,7 +65,17 @@ class LocaleKeys {
   static const drawer_my_cart_text = 'drawer_my_cart_text';
   static const drawer_my_orders_text = 'drawer_my_orders_text';
   static const drawer_settings_text = 'drawer_settings_text';
+  static const drawer_chat_support_text = 'drawer_chat_support_text';
   static const drawer_logout_text = 'drawer_logout_text';
+  static const settings_selected_language_text =
+      'settings_selected_language_text';
+  static const settings_theme_mode_text = 'settings_theme_mode_text';
+  static const settings_theme_mode_dark_text = 'settings_theme_mode_dark_text';
+  static const settings_theme_mode_light_text =
+      'settings_theme_mode_light_text';
+  static const settings_theme_mode_system_text =
+      'settings_theme_mode_system_text';
+  static const chat_chats_text = 'chat_chats_text';
   static const home_search_text = 'home_search_text';
   static const home_search_parts_text = 'home_search_parts_text';
   static const home_tires_text = 'home_tires_text';
@@ -253,7 +263,14 @@ class Locales {
     'drawer_my_cart_text': 'My Cart',
     'drawer_my_orders_text': 'My Orders',
     'drawer_settings_text': 'Settings',
+    'drawer_chat_support_text': 'Chat Support',
     'drawer_logout_text': 'Logout',
+    'settings_selected_language_text': 'Selected Language',
+    'settings_theme_mode_text': 'ThemeMode',
+    'settings_theme_mode_dark_text': 'Dark Mode',
+    'settings_theme_mode_light_text': 'Light Mode',
+    'settings_theme_mode_system_text': 'System',
+    'chat_chats_text': 'Chats',
     'home_search_text': 'Search',
     'home_search_parts_text': 'search parts',
     'home_tires_text': 'Tires',
@@ -415,7 +432,14 @@ class Locales {
     'drawer_my_cart_text': 'عربتي',
     'drawer_my_orders_text': 'طلباتي',
     'drawer_settings_text': 'الإعدادات',
+    'drawer_chat_support_text': 'دعم الدردشة',
     'drawer_logout_text': 'تسجيل الخروج',
+    'settings_selected_language_text': 'اللغة المختارة',
+    'settings_theme_mode_text': 'وضع السمة',
+    'settings_theme_mode_dark_text': 'الوضع الداكن',
+    'settings_theme_mode_light_text': 'وضع الفاتح',
+    'settings_theme_mode_system_text': 'النظام',
+    'chat_chats_text': 'الدردشات',
     'home_search_text': 'بحث',
     'home_search_parts_text': 'البحث عن أجزاء',
     'home_tires_text': 'الإطارات',
@@ -578,7 +602,14 @@ class Locales {
     'drawer_my_cart_text': '我的购物车',
     'drawer_my_orders_text': '我的订单',
     'drawer_settings_text': '设置',
+    'drawer_chat_support_text': '聊天支持',
     'drawer_logout_text': '登出',
+    'settings_selected_language_text': '选择的语言',
+    'settings_theme_mode_text': '主题模式',
+    'settings_theme_mode_dark_text': '黑暗模式',
+    'settings_theme_mode_light_text': '亮模式',
+    'settings_theme_mode_system_text': '系统',
+    'chat_chats_text': '聊天',
     'home_search_text': '搜索',
     'home_search_parts_text': '搜索零件',
     'home_tires_text': '轮胎',
@@ -732,7 +763,14 @@ class Locales {
     'drawer_my_cart_text': 'मेरा कार्ट',
     'drawer_my_orders_text': 'मेरे आदेश',
     'drawer_settings_text': 'सेटिंग्स',
+    'drawer_chat_support_text': 'चैट समर्थन',
     'drawer_logout_text': 'लॉग आउट करें',
+    'settings_selected_language_text': 'चयनित भाषा',
+    'settings_theme_mode_text': 'थीम मोड',
+    'settings_theme_mode_dark_text': 'डार्क मोड',
+    'settings_theme_mode_light_text': 'लाइट मोड',
+    'settings_theme_mode_system_text': 'सिस्टम',
+    'chat_chats_text': 'चैट्स',
     'home_search_text': 'खोजें',
     'home_search_parts_text': 'भाग खोजें',
     'home_tires_text': 'टायर',
@@ -894,7 +932,14 @@ class Locales {
     'drawer_my_cart_text': 'カート',
     'drawer_my_orders_text': '注文履歴',
     'drawer_settings_text': '設定',
+    'drawer_chat_support_text': 'チャットサポート',
     'drawer_logout_text': 'ログアウト',
+    'settings_selected_language_text': '選択された言語',
+    'settings_theme_mode_text': 'テーマモード',
+    'settings_theme_mode_dark_text': 'ダークモード',
+    'settings_theme_mode_light_text': 'ライトモード',
+    'settings_theme_mode_system_text': 'システム',
+    'chat_chats_text': 'チャット',
     'home_search_text': '検索',
     'home_search_parts_text': 'パーツを検索',
     'home_tires_text': 'タイヤ',
@@ -1015,7 +1060,7 @@ class Locales {
     'exception_this_user_has_been_disabled': 'このユーザーは無効になっています！',
     'exception_the_email_address_is_badly_formatted': 'メールアドレスの形式が正しくありません！',
     'exception_password_should_be_at_least_six_characters':
-        'パスワードは少なくとも6文字である必要があります！'
+        'パスワードは少なくとも6文字である必要があります!'
   };
   static const ru_RU = {
     'select_language_select_language': 'Выберите язык',
@@ -1053,7 +1098,14 @@ class Locales {
     'drawer_my_cart_text': 'Моя корзина',
     'drawer_my_orders_text': 'Мои заказы',
     'drawer_settings_text': 'Настройки',
+    'drawer_chat_support_text': 'Поддержка чата',
     'drawer_logout_text': 'Выйти',
+    'settings_selected_language_text': 'Выбранный язык',
+    'settings_theme_mode_text': 'Режим темы',
+    'settings_theme_mode_dark_text': 'Темный режим',
+    'settings_theme_mode_light_text': 'Светлый режим',
+    'settings_theme_mode_system_text': 'Система',
+    'chat_chats_text': 'Чаты',
     'home_search_text': 'Поиск',
     'home_search_parts_text': 'поиск деталей',
     'home_tires_text': 'Шины',
@@ -1217,7 +1269,14 @@ class Locales {
     'drawer_my_cart_text': 'Mi carrito',
     'drawer_my_orders_text': 'Mis pedidos',
     'drawer_settings_text': 'Configuración',
+    'drawer_chat_support_text': 'Soporte de chat',
     'drawer_logout_text': 'Cerrar sesión',
+    'settings_selected_language_text': 'Idioma seleccionado',
+    'settings_theme_mode_text': 'Modo de tema',
+    'settings_theme_mode_dark_text': 'Modo oscuro',
+    'settings_theme_mode_light_text': 'Modo claro',
+    'settings_theme_mode_system_text': 'Sistema',
+    'chat_chats_text': 'Chats',
     'home_search_text': 'Buscar',
     'home_search_parts_text': 'Buscar piezas',
     'home_tires_text': 'Neumáticos',
@@ -1387,7 +1446,14 @@ class Locales {
     'drawer_my_cart_text': 'میری ٹوکری',
     'drawer_my_orders_text': 'میرے آرڈرز',
     'drawer_settings_text': 'ترتیبات',
+    'drawer_chat_support_text': 'چیٹ سپورٹ',
     'drawer_logout_text': 'لاگ آؤٹ',
+    'settings_selected_language_text': 'منتخب کردہ زبان',
+    'settings_theme_mode_text': 'تھیم موڈ',
+    'settings_theme_mode_dark_text': 'ڈارک موڈ',
+    'settings_theme_mode_light_text': 'لائٹ موڈ',
+    'settings_theme_mode_system_text': 'سسٹم',
+    'chat_chats_text': 'چیٹس',
     'home_search_text': 'تلاش کریں',
     'home_search_parts_text': 'پرزے تلاش کریں',
     'home_tires_text': 'ٹائر',

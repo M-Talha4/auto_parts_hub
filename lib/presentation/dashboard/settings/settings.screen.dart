@@ -1,3 +1,4 @@
+import 'package:auto_parts_hub/domain/const/global_variable.dart';
 import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/generated/locales.generated.dart';
 import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
@@ -27,19 +28,19 @@ class SettingsScreen extends GetView<SettingsController> {
               )),
         ),
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: 12),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 InkWell(
                   onTap: () => controller.selectLanguage(StaticData.language),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const CustomText(
-                        // text: LocaleKeys.select_language_select_language.tr,
-                        text: 'Selected Language',
-                        fontSize: AppTextSize.titleSmallFont,
+                      CustomText(
+                        text: LocaleKeys.settings_selected_language_text.tr,
+                        fontSize: AppTextSize.titleMediumFont,
                         fontWeight: FontWeight.w500,
                       ),
                       Obx(
@@ -51,23 +52,49 @@ class SettingsScreen extends GetView<SettingsController> {
                     ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const CustomText(
-                      // text: LocaleKeys.select_language_select_language.tr,
-                      text: 'DarkMode',
-                      fontSize: AppTextSize.titleSmallFont,
-                      fontWeight: FontWeight.w500,
+                CustomText(
+                  text: '${LocaleKeys.settings_theme_mode_text.tr}:',
+                  fontSize: AppTextSize.bodyLargeFont,
+                  fontWeight: FontWeight.w500,
+                ).paddingSymmetric(vertical: 4),
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                      color: colorScheme(context).outlineVariant,
+                      borderRadius: BorderRadius.circular(4)),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: controller.themeModes.map((themeMode) {
+                        return InkWell(
+                          onTap: () => controller.selectTheme(themeMode),
+                          child: Container(
+                            width: 100,
+                            height: controller.selectedLanguage.value ==
+                                    LocaleKeys.select_language_russian_language
+                                ? 60
+                                : 32,
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color:
+                                    controller.selectedTheme.value == themeMode
+                                        ? colorScheme(context).primary
+                                        : colorScheme(context).surface,
+                                borderRadius: BorderRadius.circular(8)),
+                            child: CustomText(
+                              text: themeMode.tr,
+                              color: controller.selectedTheme.value == themeMode
+                                  ? colorScheme(context).onPrimary
+                                  : colorScheme(context).onSurface,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }).toList(),
                     ),
-                    Obx(
-                      () => Switch.adaptive(
-                        value: controller.isDarkMode.value,
-                        onChanged: (bool value) => controller.darkMode(value),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                )
               ],
             ),
           ),

@@ -28,8 +28,10 @@ class LoginController extends GetxController with LoadingMixin {
     if (formKey.currentState!.validate()) {
       setLoading(true);
       try {
-        await _loginUsecase.execute(emailController.text.trim().toString(),
-            passwordController.text.trim().toString());
+        await _loginUsecase.execute(
+          emailController.text.trim().toString(),
+          passwordController.text.trim().toString(),
+        );
         _clearFields();
         showSnackbar(
           message: LocaleKeys.auth_logged_in_successfully_text.tr,

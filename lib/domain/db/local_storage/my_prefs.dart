@@ -52,7 +52,6 @@ class MyPrefs {
   }
 
   static bool? getTheme() {
-    StaticData.isDarkMode = _getStorage.read(_isDarkTheme) ?? false;
     return _getStorage.read(_isDarkTheme);
   }
 
@@ -64,6 +63,10 @@ class MyPrefs {
   static String? getLanguage() {
     StaticData.language = _getStorage.read(_language) ?? 'english';
     return _getStorage.read(_language);
+  }
+
+  static removeTheme() {
+    _getStorage.remove(_isDarkTheme);
   }
 
   static removeUser() {

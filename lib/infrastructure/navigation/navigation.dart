@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+
 import '../../config.dart';
 import '../../presentation/screens.dart';
 import 'bindings/controllers/controllers_bindings.dart';
@@ -123,6 +125,16 @@ class Nav {
       name: Routes.ADD_CARD,
       page: () => const AddCardScreen(),
       binding: AddCardControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.CHAT_LIST,
+      page: () => const ChatListScreen(),
+      binding: ChatListControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.CHAT,
+      page: () => const ChatScreen(),
+      binding: ChatControllerBinding(),
     ),
   ];
 }

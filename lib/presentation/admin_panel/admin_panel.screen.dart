@@ -1,3 +1,4 @@
+import 'package:auto_parts_hub/presentation/admin_panel/drawer/admin_panel_drawer.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,13 +14,11 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
         title: const Text('AdminPanelScreen'),
         centerTitle: true,
       ),
-      body: InkWell(
-        onTap: () => controller.logout(),
-        child: const Center(
-          child: Text(
-            'AdminPanelScreen is working',
-            style: TextStyle(fontSize: 20),
-          ),
+      drawer: const AdminPanelDrawer(),
+      body: const Center(
+        child: Text(
+          'AdminPanelScreen is working',
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );
