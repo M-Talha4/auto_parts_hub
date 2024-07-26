@@ -28,12 +28,14 @@ class AuthDao implements AuthRepository {
   }
 
   @override
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login(String email, String password) async {
     try {
+      bool isAdmin = email.contains('@admin.com');
       User user = await _authServices
           .loginWithEmailAndPassword(email, password)
-          .then(
-              (userId) async => await _authServices.getUserCollection(userId));
+          .then((userId) async => isAdmin
+              ? await _authServices.getAdminCollection(userId)
+              : await _authServices.getUserCollection(userId));
       Get.updateLocale(
           LanguageServices.instance.onLanguageSelected(user.language));
       MyPrefs.storeLanguage(language: user.language);
@@ -58,7 +60,9 @@ class AuthDao implements AuthRepository {
           .signUpWithEmailAndPassword(user, password)
           .then((userID) {
         user.userId = userID!;
-        _authServices.createUserCollection(user);
+        user.isAdmin == true
+            ? _authServices.createAdminCollection(user)
+            : _authServices.createUserCollection(user);
       });
       MyPrefs.storeLanguage(language: user.language);
       MyPrefs.storeAdmin(isAdmin: user.isAdmin);

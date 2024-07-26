@@ -12,6 +12,8 @@ class AuthServices extends GetxService {
       firebase_auth.FirebaseAuth.instance;
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection(firebaseUsersCollection);
+  CollectionReference adminCollection =
+      FirebaseFirestore.instance.collection(firebaseAdminCollection);
   firebase_auth.UserCredential? userCredential;
 
 // ----------------------------reset password ----------------------------------
@@ -54,6 +56,43 @@ class AuthServices extends GetxService {
     }
   }
 
+  Future<UserModel> getAdminCollection(String uid) async {
+    try {
+      DocumentSnapshot doc = await adminCollection.doc(uid).get();
+      return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<UserModel>> getUsersCollection() async {
+    try {
+      QuerySnapshot querySnapshot = await userCollection.get();
+      if (querySnapshot.docs.isEmpty) {
+        return [];
+      }
+      return querySnapshot.docs
+          .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<UserModel>> getAdminsCollection() async {
+    try {
+      QuerySnapshot querySnapshot = await adminCollection.get();
+      if (querySnapshot.docs.isEmpty) {
+        return [];
+      }
+      return querySnapshot.docs
+          .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   // ---------------------------- Signup ----------------------------------
   Future<String?> signUpWithEmailAndPassword(User user, String password) async {
     try {
@@ -71,6 +110,14 @@ class AuthServices extends GetxService {
   Future<void> createUserCollection(UserModel user) async {
     try {
       await userCollection.doc(user.userId).set(user.toMap());
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> createAdminCollection(UserModel user) async {
+    try {
+      await adminCollection.doc(user.userId).set(user.toMap());
     } catch (e) {
       rethrow;
     }

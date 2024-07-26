@@ -1,5 +1,5 @@
 name: auto_parts_hub
-version: 1.0.0+1
+version: 1.8.2+1
 publish_to: none
 description: A new Flutter project.
 environment: 
@@ -15,11 +15,11 @@ dependencies:
   image_picker: ^1.1.2
   flutter_svg: ^2.0.10+1
   firebase_storage: ^12.1.0
-  dartx: ^1.2.0
   get: 4.6.6
   flutter: 
     sdk: flutter
   get_storage: ^2.1.1
+  intl: ^0.19.0
 
 dev_dependencies: 
   flutter_lints: ^3.0.0

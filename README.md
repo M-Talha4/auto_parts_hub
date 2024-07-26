@@ -1,16 +1,18 @@
-# auto_parts_hub
-
-A new Flutter project.
+# Auto Parts Hub
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Auto Parts Hub is a Flutter application designed as a platform to sell car parts. This app features both user and admin dashboards, making it easy for users to browse and purchase car parts and for admins to manage the platform.
 
-A few resources to get you started if this is your first Flutter project:
+### Special Note
+To create an admin account, use an email with `@admin.com` (e.g., `abc@admin.com`). For user accounts, use an email with `@gmail.com` (e.g., `abc@gmail.com`).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **E-commerce Platform**: Comprehensive solution for buying and selling car parts.
+- **User Dashboard**: A user-friendly interface for browsing and purchasing car parts.
+- **Admin Dashboard**: Tools for admins to manage listings, orders, and users.
+- **Clean Architecture**: Built using GetX for state management and clean architecture principles.
+- **Firebase Integration**: Utilizes Firebase for backend services, including authentication and data storage.
+- **Chat Support**: Integrated chat feature for users to communicate with admins and vice versa.
+- **Easy Account Creation**: Simple process to create user and admin accounts.

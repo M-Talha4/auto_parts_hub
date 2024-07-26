@@ -13,6 +13,7 @@ class SettingsController extends GetxController {
   int selectedIndex = 0;
   RxBool isDarkMode =
       (colorScheme(Get.context).brightness == Brightness.dark).obs;
+  RxString selectedTheme = ''.obs;
 
   List<String> languages = [
     LocaleKeys.select_language_english_language,
@@ -24,10 +25,16 @@ class SettingsController extends GetxController {
     LocaleKeys.select_language_spanish_language,
     LocaleKeys.select_language_urdu_language,
   ];
+  List<String> themeModes = [
+    LocaleKeys.settings_theme_mode_system_text,
+    LocaleKeys.settings_theme_mode_light_text,
+    LocaleKeys.settings_theme_mode_dark_text,
+  ];
 
   @override
   void onInit() {
     _getLanguage();
+    _getTheme();
     super.onInit();
   }
 
@@ -35,6 +42,17 @@ class SettingsController extends GetxController {
     String? lang = StaticData.language;
     selectedLanguage.value = capitalizeFirstLetter(lang.tr);
     selectedIndex = languages.indexOf(lang);
+  }
+
+  void _getTheme() {
+    bool? isDarkMode = MyPrefs.getTheme();
+    if (isDarkMode == null) {
+      selectedTheme.value = LocaleKeys.settings_theme_mode_system_text;
+    } else if (isDarkMode) {
+      selectedTheme.value = LocaleKeys.settings_theme_mode_dark_text;
+    } else {
+      selectedTheme.value = LocaleKeys.settings_theme_mode_light_text;
+    }
   }
 
   void selectLanguage(String language) {
@@ -91,12 +109,25 @@ class SettingsController extends GetxController {
     Get.back();
   }
 
-  void darkMode(bool darkMode) {
-    isDarkMode.value = darkMode;
-    isDarkMode.value
-        ? Get.changeThemeMode(ThemeMode.dark)
-        : Get.changeThemeMode(ThemeMode.light);
-    MyPrefs.storeTheme(isDarkMode: darkMode);
+  void selectTheme(String themeMode) {
+    switch (themeMode) {
+      case LocaleKeys.settings_theme_mode_dark_text:
+        Get.changeThemeMode(ThemeMode.dark);
+        MyPrefs.storeTheme(isDarkMode: true);
+        selectedTheme.value = themeMode;
+        break;
+
+      case LocaleKeys.settings_theme_mode_light_text:
+        Get.changeThemeMode(ThemeMode.light);
+        MyPrefs.storeTheme(isDarkMode: false);
+        selectedTheme.value = themeMode;
+        break;
+
+      default:
+        Get.changeThemeMode(ThemeMode.system);
+        MyPrefs.removeTheme();
+        selectedTheme.value = themeMode;
+    }
   }
 
   String capitalizeFirstLetter(String input) {

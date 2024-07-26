@@ -35,6 +35,8 @@ class CustomTextFormField extends StatelessWidget {
   final AutovalidateMode? autoValidateMode;
   final void Function()? onTap;
   final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
+  final void Function(PointerDownEvent)? onTapOutside;
   final TextEditingController? controller;
   final String? Function(String?)? validation;
 
@@ -73,6 +75,8 @@ class CustomTextFormField extends StatelessWidget {
     this.autoValidateMode,
     this.onTap,
     this.onChanged,
+    this.onFieldSubmitted,
+    this.onTapOutside,
     this.controller,
     this.validation,
   });
@@ -87,84 +91,85 @@ class CustomTextFormField extends StatelessWidget {
             offset: const Offset(2, 4))
       ]),
       child: TextFormField(
-        controller: controller,
-        focusNode: focusNode,
-        maxLength: maxLength,
-        obscureText: obscureText ?? false,
-        cursorColor: cursorcolor ?? colorScheme(context).onSurface,
-        maxLines: /*obscureText == true ? 1 :*/ maxline ?? 1,
-        textInputAction: inputaction,
-        style: TextStyle(
-          color: inputcolor,
-          fontSize: 16,
-        ),
-        autofocus: false,
-        keyboardType: keyboardtype,
-        onChanged: onChanged,
-        autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
-        readOnly: readOnly ?? false,
-        enabled: isEnabled ?? true,
-        decoration: InputDecoration(
-          counterText: '',
-          hintText: showlabel ?? false ? null : hint,
-          label: showlabel ?? false
-              ? Text(
-                  label!,
-                  style: TextStyle(
-                    color: labelcolor,
-                  ),
-                )
-              : null,
-          hintStyle: TextStyle(
-              color: hintcolor ?? colorScheme(context).outline, fontSize: 14),
-          filled: filled,
-          fillColor: isEnabled == false
-              ? colorScheme(context).outlineVariant
-              : colorScheme(context).surface,
-          // : filled
-          //     ? fillColor
-          //     : AppColors.transparent,
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(
-              horizontal: horizontalPadding ?? 20.0,
-              vertical: verticalPadding ?? 10),
-          errorMaxLines: 2,
-          isCollapsed: isCollapsed ?? false,
-          isDense: isDense,
-          // Border States
-          enabledBorder: OutlineInputBorder(
+          controller: controller,
+          focusNode: focusNode,
+          maxLength: maxLength,
+          obscureText: obscureText ?? false,
+          cursorColor: cursorcolor ?? colorScheme(context).onSurface,
+          maxLines: /*obscureText == true ? 1 :*/ maxline ?? 1,
+          textInputAction: inputaction,
+          style: TextStyle(
+            color: inputcolor,
+            fontSize: 16,
+          ),
+          autofocus: false,
+          keyboardType: keyboardtype,
+          onChanged: onChanged,
+          autovalidateMode: autoValidateMode ?? AutovalidateMode.disabled,
+          readOnly: readOnly ?? false,
+          enabled: isEnabled ?? true,
+          decoration: InputDecoration(
+            counterText: '',
+            hintText: showlabel ?? false ? null : hint,
+            label: showlabel ?? false
+                ? Text(
+                    label!,
+                    style: TextStyle(
+                      color: labelcolor,
+                    ),
+                  )
+                : null,
+            hintStyle: TextStyle(
+                color: hintcolor ?? colorScheme(context).outline, fontSize: 14),
+            filled: filled,
+            fillColor: isEnabled == false
+                ? colorScheme(context).outlineVariant
+                : colorScheme(context).surface,
+            // : filled
+            //     ? fillColor
+            //     : AppColors.transparent,
+            prefixIcon: prefixIcon,
+            suffixIcon: suffixIcon,
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: horizontalPadding ?? 20.0,
+                vertical: verticalPadding ?? 10),
+            errorMaxLines: 2,
+            isCollapsed: isCollapsed ?? false,
+            isDense: isDense,
+            // Border States
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: bordercolor ?? colorScheme(context).outlineVariant,
+                    width: borderwidth ?? 1),
+                borderRadius: BorderRadius.circular(borderradius ?? 8)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: focusbordercolor ?? colorScheme(context).secondary,
+                  width: focusborderwidth ?? 2,
+                ),
+                borderRadius: BorderRadius.circular(borderradius ?? 8)),
+            errorBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                  color: bordercolor ?? colorScheme(context).outlineVariant,
-                  width: borderwidth ?? 1),
-              borderRadius: BorderRadius.circular(borderradius ?? 8)),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: focusbordercolor ?? colorScheme(context).secondary,
-              width: focusborderwidth ?? 2,
+                color: colorScheme(context).error,
+                width: focusborderwidth ?? 2,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: colorScheme(context).error,
+                width: focusborderwidth ?? 2,
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: colorScheme(context).outline,
+                width: focusborderwidth ?? 2,
+              ),
             ),
           ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: colorScheme(context).error,
-              width: focusborderwidth ?? 2,
-            ),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: colorScheme(context).error,
-              width: focusborderwidth ?? 2,
-            ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: colorScheme(context).outline,
-              width: focusborderwidth ?? 2,
-            ),
-          ),
-        ),
-        validator: validation,
-      ),
+          validator: validation,
+          onFieldSubmitted: onFieldSubmitted,
+          onTapOutside: onTapOutside),
     );
   }
 }

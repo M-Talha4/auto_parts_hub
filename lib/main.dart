@@ -1,4 +1,3 @@
-import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'infrastructure/theme/theme.dart';
@@ -52,7 +51,6 @@ ThemeMode getTheme() {
   bool? isDarkMode = GetStorage().read('isDarkTheme');
   if (isDarkMode != null) {
     if (isDarkMode) {
-      StaticData.isDarkMode = isDarkMode;
       return ThemeMode.dark;
     }
     return ThemeMode.light;
