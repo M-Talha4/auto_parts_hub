@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
 import 'package:auto_parts_hub/domain/core/interfaces/orders_interface/orders_repository.dart';
 import 'package:auto_parts_hub/domain/exceptions/network_exception.dart';
@@ -28,7 +29,9 @@ class OrderDao implements OrdersRepository {
   @override
   Future<List<Orders>?> getOrders() async {
     try {
-      return await _fireStoreServices.getOrdersList();
+      return await _fireStoreServices.getOrdersList().then((orders) => orders
+          ?.where((order) => order.customerId == StaticData.userId)
+          .toList());
     } on SocketException catch (e) {
       throw NetworkException.connectionError(e.message);
     } on TimeoutException catch (e) {

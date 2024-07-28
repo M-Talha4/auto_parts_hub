@@ -21,10 +21,9 @@ class SplashController extends GetxController {
       if (userConfig.language == null) {
         Get.offNamed(Routes.LANGUAGE);
       } else if (userConfig.user != null) {
-        if (userConfig.isAdmin == true) {
-          Get.offNamed(Routes.ADMIN_PANEL);
-        }
-        Get.offNamed(Routes.HOME);
+        userConfig.isAdmin == true
+            ? Get.offNamed(Routes.ADMIN_PANEL)
+            : Get.offNamed(Routes.HOME);
       } else {
         Get.offNamed(Routes.LOGIN);
       }

@@ -119,7 +119,7 @@ class HomeDrawer extends GetView<HomeController> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => ListTile(
                         onTap: () => controller.onTapDrawerItem(
-                            controller.drawerItems[index].title, context),
+                            controller.drawerItems[index].title),
                         minLeadingWidth: 4,
                         leading: Icon(controller.drawerItems[index].icon),
                         title: CustomText(

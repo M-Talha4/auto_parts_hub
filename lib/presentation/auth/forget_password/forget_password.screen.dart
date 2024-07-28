@@ -20,7 +20,6 @@ class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
         title: CustomText(
           text: LocaleKeys.auth_forget_password_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(

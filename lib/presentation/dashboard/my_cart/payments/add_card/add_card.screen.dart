@@ -21,7 +21,6 @@ class AddCardScreen extends GetView<AddCardController> {
         title: CustomText(
           text: LocaleKeys.payment_add_credit_card_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(

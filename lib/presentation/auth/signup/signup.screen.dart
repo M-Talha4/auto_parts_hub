@@ -22,7 +22,6 @@ class SignupScreen extends GetView<SignupController> {
         title: CustomText(
           text: LocaleKeys.auth_sign_up_text.tr,
         ),
-        centerTitle: true,
       ),
       body: SizedBox(
         width: width,

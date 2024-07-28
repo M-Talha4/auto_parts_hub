@@ -17,10 +17,11 @@ class FireStoreServices extends GetxService {
       FirebaseFirestore.instance.collection(firebaseUsersCollection);
   CollectionReference productsCollection =
       FirebaseFirestore.instance.collection(firebaseProductsCollection);
+  late CollectionReference orderCollection =
+      FirebaseFirestore.instance.collection(firebaseOrderCollection);
   late CollectionReference addressCollection;
   late CollectionReference cardCollection;
   late CollectionReference cartCollection;
-  late CollectionReference orderCollection;
   List<Product> productList = [];
   List<Orders> orderList = [];
   @override
@@ -39,9 +40,6 @@ class FireStoreServices extends GetxService {
     cartCollection = usersCollection
         .doc(StaticData.userId)
         .collection(firebaseUsersSubCollectionCart);
-    orderCollection = usersCollection
-        .doc(StaticData.userId)
-        .collection(firebaseUsersSubCollectionOrder);
     productList = await getProductsList();
     orderList = await getOrdersList() ?? [];
   }

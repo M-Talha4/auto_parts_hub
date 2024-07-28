@@ -14,7 +14,6 @@ class MyOrdersScreen extends GetView<MyOrdersController> {
           title: CustomText(
             text: LocaleKeys.drawer_my_orders_text.tr,
           ),
-          centerTitle: true,
           leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(

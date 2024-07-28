@@ -20,7 +20,6 @@ class ChatListScreen extends GetView<ChatListController> {
         title: CustomText(
           text: LocaleKeys.chat_chats_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(

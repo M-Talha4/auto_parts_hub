@@ -1,4 +1,3 @@
-import 'package:auto_parts_hub/domain/const/app_colors.dart';
 import 'package:auto_parts_hub/domain/const/global_variable.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +15,14 @@ class AllCategoriesScreen extends GetView<AllCategoriesController> {
     final double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
         appBar: AppBar(
+          title: CustomText(
+            text: LocaleKeys.my_cart_products_text.tr,
+          ),
           leading: IconButton(
               onPressed: () => Get.back(),
-              icon: Icon(
+              icon: const Icon(
                 Icons.keyboard_arrow_left,
-                size: 26,
-                color: colorScheme(context).onPrimaryContainer,
               )),
-          backgroundColor: DarkAppColors.transparent,
         ),
         body: SingleChildScrollView(
           child: Column(

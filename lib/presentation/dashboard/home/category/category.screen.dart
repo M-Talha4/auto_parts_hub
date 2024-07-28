@@ -31,26 +31,39 @@ class CategoryScreen extends GetView<CategoryController> {
                           child: Icon(
                             Icons.keyboard_arrow_left,
                             size: width * 0.09,
-                            color: Colors.white,
+                            color: controller.iconColor,
                           ),
                         ),
                         flexibleSpace: ClipRRect(
                           borderRadius: const BorderRadius.vertical(
                               bottom: Radius.circular(30)),
                           child: FlexibleSpaceBar(
-                            centerTitle: true,
                             titlePadding:
                                 EdgeInsets.only(bottom: controller.padding),
                             title: Container(
                                 width: width,
                                 height: width * 0.1,
-                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(
+                                    left: controller
+                                                .scrollController.hasClients &&
+                                            controller.scrollController.position
+                                                    .pixels >
+                                                150
+                                        ? 70
+                                        : 0),
+                                alignment:
+                                    controller.scrollController.hasClients &&
+                                            controller.scrollController.position
+                                                    .pixels >
+                                                150
+                                        ? Alignment.centerLeft
+                                        : Alignment.center,
                                 decoration: BoxDecoration(
                                   color: controller.textBgColor,
                                 ),
                                 child: Text(controller.title.tr,
                                     style: TextStyle(
-                                      color: colorScheme(context).surface,
+                                      color: controller.iconColor,
                                     ))),
                             background: Container(
                               decoration: BoxDecoration(

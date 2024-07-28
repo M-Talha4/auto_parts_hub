@@ -159,6 +159,14 @@ class LocaleKeys {
   static const profile_name = 'profile_name';
   static const profile_phone_no = 'profile_phone_no';
   static const profile_updated = 'profile_updated';
+  static const admin_panel_admin_panel_text = 'admin_panel_admin_panel_text';
+  static const admin_panel_welcome_text = 'admin_panel_welcome_text';
+  static const admin_panel_manage_orders_text =
+      'admin_panel_manage_orders_text';
+  static const admin_panel_manage_users_text = 'admin_panel_manage_users_text';
+  static const admin_panel_manage_products_text =
+      'admin_panel_manage_products_text';
+  static const admin_panel_add_products_text = 'admin_panel_add_products_text';
   static const button_save = 'button_save';
   static const button_continue = 'button_continue';
   static const button_back_to_home = 'button_back_to_home';

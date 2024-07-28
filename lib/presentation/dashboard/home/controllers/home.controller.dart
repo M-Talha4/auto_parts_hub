@@ -112,10 +112,9 @@ class HomeController extends GetxController {
 
 //------------------------------ Drawer-------------------------
 
-  void onTapDrawerItem(String screen, BuildContext context) {
+  void onTapDrawerItem(String screen) {
     switch (screen) {
       case LocaleKeys.drawer_profile_text:
-        Get.back();
         Get.toNamed(Routes.PROFILE);
         break;
       case LocaleKeys.drawer_my_cart_text:
@@ -123,15 +122,12 @@ class HomeController extends GetxController {
         Get.toNamed(Routes.MY_CART);
         break;
       case LocaleKeys.drawer_my_orders_text:
-        Get.back();
         Get.toNamed(Routes.MY_ORDERS);
         break;
       case LocaleKeys.drawer_settings_text:
-        Get.back();
         Get.toNamed(Routes.SETTINGS);
         break;
       case LocaleKeys.drawer_chat_support_text:
-        Get.back();
         Get.toNamed(Routes.CHAT_LIST);
         break;
       default:

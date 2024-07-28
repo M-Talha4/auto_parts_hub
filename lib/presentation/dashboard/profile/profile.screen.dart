@@ -22,7 +22,6 @@ class ProfileScreen extends GetView<ProfileController> {
           title: CustomText(
             text: LocaleKeys.drawer_profile_text.tr,
           ),
-          centerTitle: true,
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(

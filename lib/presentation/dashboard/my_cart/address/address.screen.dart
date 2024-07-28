@@ -19,7 +19,6 @@ class AddressScreen extends GetView<AddressController> {
         title: CustomText(
           text: LocaleKeys.address_address_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(
