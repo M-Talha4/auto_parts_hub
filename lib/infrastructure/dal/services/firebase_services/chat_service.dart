@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:auto_parts_hub/domain/const/const.dart';
 import 'package:auto_parts_hub/domain/const/static_data.dart';
+import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
 import 'package:auto_parts_hub/infrastructure/dal/models/chat_model/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -20,11 +21,11 @@ class ChatService extends GetxService {
         timestamp: Timestamp.now());
 
     List<String> chatId = [senderId, otherId]..sort();
-    String chatRoomid = chatId.join('-');
+    String chatRoomId = chatId.join('-');
 
     try {
       chatCollection
-          .doc(chatRoomid)
+          .doc(chatRoomId)
           .collection(firebaseChatSubCollectionMessage)
           .add(messageModel.toMap());
     } catch (e) {
@@ -36,10 +37,38 @@ class ChatService extends GetxService {
     String senderId = StaticData.userId;
     try {
       List<String> chatId = [senderId, otherId]..sort();
-      String chatRoomid = chatId.join('-');
+      String chatRoomId = chatId.join('-');
       return chatCollection
-          .doc(chatRoomid)
+          .doc(chatRoomId)
           .collection(firebaseChatSubCollectionMessage);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteChat(String userId, List<User> admins) async {
+    try {
+      for (var admin in admins) {
+        List<String> chatId = [userId, admin.userId]..sort();
+        String chatRoomId = chatId.join('-');
+        await _deleteChat(chatRoomId);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> _deleteChat(String chatRoomId) async {
+    try {
+      QuerySnapshot querySnapshot = await chatCollection
+          .doc(chatRoomId)
+          .collection(firebaseChatSubCollectionMessage)
+          .get();
+      if (querySnapshot.docs.isNotEmpty) {
+        for (var doc in querySnapshot.docs) {
+          doc.reference.delete();
+        }
+      }
     } catch (e) {
       rethrow;
     }

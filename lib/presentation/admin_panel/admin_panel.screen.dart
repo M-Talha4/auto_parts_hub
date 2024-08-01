@@ -14,7 +14,7 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(LocaleKeys.admin_panel_admin_panel_text),
+          title: Text(LocaleKeys.admin_panel_admin_panel_text.tr),
         ),
         drawer: const AdminPanelDrawer(),
         body: SingleChildScrollView(
@@ -22,13 +22,13 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             RichText(
                 text: TextSpan(
-                    text: 'Welcome ',
+                    text: LocaleKeys.admin_panel_welcome_text.tr,
                     style: TextStyle(
                         fontSize: AppTextSize.titleSmallFont,
                         color: colorScheme(context).primaryContainer),
                     children: [
                   TextSpan(
-                    text: '${StaticData.name},',
+                    text: ' ${StaticData.name},',
                     style: TextStyle(
                         fontSize: AppTextSize.titleMediumFont,
                         color: colorScheme(context).secondary),
@@ -61,8 +61,9 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                                       controller.adminPanelItems[index].image),
                                 ),
                                 CustomText(
-                                    text: controller
-                                        .adminPanelItems[index].title.tr)
+                                        text: controller
+                                            .adminPanelItems[index].title.tr)
+                                    .paddingSymmetric(horizontal: 6)
                               ],
                             )
                           : Column(
@@ -90,8 +91,9 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                                           ))),
                                 ),
                                 CustomText(
-                                    text: controller
-                                        .adminPanelItems[index].title.tr)
+                                        text: controller
+                                            .adminPanelItems[index].title.tr)
+                                    .paddingSymmetric(horizontal: 6)
                               ],
                             ),
                     ),

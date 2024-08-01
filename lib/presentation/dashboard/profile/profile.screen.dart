@@ -52,11 +52,11 @@ class ProfileScreen extends GetView<ProfileController> {
                     child: Stack(
                       children: [
                         CircleAvatar(
-                          radius: width * 0.18,
+                          radius: 65,
                           backgroundColor: colorScheme(context).outline,
                           child: Obx(
                             () => CircleAvatar(
-                              radius: width * 0.16,
+                              radius: 60,
                               backgroundColor: colorScheme(context).secondary,
                               child: controller.imagePath.value == ''
                                   ? controller.isPicked.value ||
@@ -65,12 +65,13 @@ class ProfileScreen extends GetView<ProfileController> {
                                           child: Image.file(
                                             controller.image!.absolute,
                                             fit: BoxFit.cover,
-                                            width: width * 0.36,
+                                            width: 120,
+                                            height: 120,
                                           ),
                                         )
                                       : SvgPicture.asset(
                                           ImagePath.proileAvatarSvg,
-                                          height: width * 0.25,
+                                          height: 80,
                                           colorFilter: ColorFilter.mode(
                                               colorScheme(context).onSecondary,
                                               BlendMode.srcIn),
@@ -79,7 +80,8 @@ class ProfileScreen extends GetView<ProfileController> {
                                       child: Image.network(
                                       controller.imagePath.value,
                                       fit: BoxFit.cover,
-                                      width: width * 0.36,
+                                      width: 120,
+                                      height: 120,
                                     )),
                             ),
                           ),
@@ -91,7 +93,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               onTap: controller.pickFromGallery,
                               child: Icon(
                                 Icons.camera_alt,
-                                color: colorScheme(context).secondary,
+                                color: colorScheme(context).outlineVariant,
                                 size: 26,
                               )),
                         ),

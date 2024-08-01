@@ -1,23 +1,27 @@
 import 'package:auto_parts_hub/domain/const/assets_paths.dart';
+import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
 import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/logout_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/home_usecase/get_products_usecase.dart';
+import 'package:auto_parts_hub/domain/core/usecase/products_usecase/get_products_usecase.dart';
 import 'package:auto_parts_hub/domain/core/usecase/home_usecase/search_product_usecase.dart';
+import 'package:auto_parts_hub/domain/core/usecase/users_usecase/check_account_deletion_usecase.dart';
 import 'package:auto_parts_hub/domain/db/local_storage/my_prefs.dart';
 import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
 import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
 import 'package:auto_parts_hub/domain/utils/logger.dart';
 import 'package:auto_parts_hub/generated/locales.generated.dart';
 import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final LogoutUsecase _logoutUsecase;
   final GetProductsUsecase _getProductsUsecase;
   final SearchProductUsecase _searchProductUsecase;
-  final LogoutUsecase _logoutUsecase;
+  final CheckAccountDeletionUsecase _checkAccountDeletionUsecase;
   HomeController(this._getProductsUsecase, this._searchProductUsecase,
-      this._logoutUsecase);
+      this._logoutUsecase, this._checkAccountDeletionUsecase);
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController searchController = TextEditingController();
@@ -63,6 +67,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     getProducts();
+    checkForDeletion();
     debounce(
         query,
         time: const Duration(milliseconds: 300),
@@ -73,6 +78,7 @@ class HomeController extends GetxController {
   Future<void> getProducts() async {
     try {
       productList = await _getProductsUsecase.execute() ?? [];
+      productList.shuffle();
       finalList.value = productList;
     } catch (e) {
       if (e is AppException) {
@@ -81,6 +87,11 @@ class HomeController extends GetxController {
         Logger.e(e.toString());
       }
     }
+  }
+
+  void onSearchOff() {
+    finalList.value = productList;
+    isSearching.value = false;
   }
 
   void searchFor(String query) {
@@ -107,6 +118,30 @@ class HomeController extends GetxController {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> checkForDeletion() async {
+    try {
+      await _checkAccountDeletionUsecase.execute(StaticData.userId);
+    } catch (e) {
+      confirmLogout(Get.context!, StaticData.userId);
+    }
+  }
+
+  Future<void> confirmLogout(BuildContext context, String userId) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('${LocaleKeys.drawer_logout_text.tr}!!'),
+          content: Text(LocaleKeys.exception_you_have_been_banned.tr),
+          actions: <Widget>[
+            CustomButton(onTap: logout, text: LocaleKeys.drawer_logout_text.tr)
+          ],
+        );
+      },
     );
   }
 

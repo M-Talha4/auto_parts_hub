@@ -16,9 +16,9 @@ ElevatedButtonThemeData get lightElevatedButtonTheme => ElevatedButtonThemeData(
           ),
         ),
         shape: WidgetStateProperty.all(
-          const RoundedRectangleBorder(
-              // borderRadius: BorderRadius.circular(AppConst.btnRadius),
-              ),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
         ),
       ),
     );
@@ -37,9 +37,9 @@ ElevatedButtonThemeData get darkElevatedButtonTheme => ElevatedButtonThemeData(
           ),
         ),
         shape: WidgetStateProperty.all(
-          const RoundedRectangleBorder(
-              // borderRadius: BorderRadius.circular(AppConst.btnRadius),
-              ),
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
         ),
       ),
     );

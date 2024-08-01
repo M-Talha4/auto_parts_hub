@@ -48,7 +48,7 @@ class SignupController extends GetxController with LoadingMixin {
             user, passwordController.text.trim().toString());
         _clearFields();
         showSnackbar(
-          message: LocaleKeys.auth_logged_in_successfully_text.tr,
+          message: LocaleKeys.auth_signed_up_successfully_text.tr,
         );
         Timer(const Duration(milliseconds: 800), () {
           if (StaticData.isAdmin) {

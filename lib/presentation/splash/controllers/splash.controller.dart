@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:auto_parts_hub/domain/core/usecase/user_config_usecase/user_config_usecase.dart';
+import 'package:auto_parts_hub/domain/core/usecase/users_usecase/user_config_usecase.dart';
 import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
 
 class SplashController extends GetxController {

@@ -1,5 +1,5 @@
 import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/domain/core/usecase/orders_usecase/get_orders_usecase.dart';
+import 'package:auto_parts_hub/domain/core/usecase/orders_usecase/get_user_orders_usecase.dart';
 import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
 import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
 import 'package:auto_parts_hub/domain/utils/logger.dart';
@@ -9,8 +9,8 @@ import 'package:get/get.dart';
 
 class MyOrdersController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final GetOrdersUsecase _getOrdersUsecase;
-  MyOrdersController(this._getOrdersUsecase);
+  final GetUserOrdersUsecase _getUserOrdersUsecase;
+  MyOrdersController(this._getUserOrdersUsecase);
 
   RxList<Orders> orderList = RxList.empty();
   late TabController tabController;
@@ -24,7 +24,7 @@ class MyOrdersController extends GetxController
 
   Future<void> _getOrders() async {
     try {
-      orderList.value = await _getOrdersUsecase.execute() ?? [];
+      orderList.value = await _getUserOrdersUsecase.execute() ?? [];
     } catch (e) {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);

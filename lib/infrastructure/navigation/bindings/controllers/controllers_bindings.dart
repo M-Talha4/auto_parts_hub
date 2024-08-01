@@ -1,4 +1,4 @@
-export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/add_products.controller.binding.dart'; 
+export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/admin/add_products/add_products.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/admin/admin_panel.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/auth/forget_password.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/auth/login.controller.binding.dart';
@@ -15,9 +15,9 @@ export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/ho
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/home/category/category.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/home/home.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/language/language.controller.binding.dart';
-export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/manage_orders.controller.binding.dart'; 
-export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/manage_products.controller.binding.dart'; 
-export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/manage_users.controller.binding.dart'; 
+export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/admin/manage_orders/manage_orders.controller.binding.dart';
+export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/admin/manage_products/manage_products.controller.binding.dart';
+export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/admin/manage_users/manage_users.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/notifications/notifications.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/orders/my_orders.controller.binding.dart';
 export 'package:auto_parts_hub/infrastructure/navigation/bindings/controllers/product_detail/product_detail.controller.binding.dart';

@@ -45,8 +45,7 @@ class HomeScreen extends GetView<HomeController> {
                                 color: colorScheme(context).outlineVariant,
                               ),
                               suffixIcon: InkWell(
-                                onTap: () =>
-                                    controller.isSearching.value = false,
+                                onTap: () => controller.onSearchOff(),
                                 child: const Icon(
                                   Icons.close_rounded,
                                 ),

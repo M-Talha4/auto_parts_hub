@@ -63,16 +63,16 @@ class HomeDrawer extends GetView<HomeController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CircleAvatar(
-                                radius: width * 0.078,
+                                radius: 28,
                                 backgroundColor: colorScheme(context).outline,
                                 child: CircleAvatar(
-                                  radius: width * 0.072,
+                                  radius: 25,
                                   backgroundColor:
                                       colorScheme(context).secondary,
                                   child: StaticData.profileImage == ''
                                       ? SvgPicture.asset(
                                           ImagePath.proileAvatarSvg,
-                                          height: width * 0.07,
+                                          height: 35,
                                           colorFilter: ColorFilter.mode(
                                               colorScheme(context).onPrimary,
                                               BlendMode.srcIn),
@@ -81,7 +81,8 @@ class HomeDrawer extends GetView<HomeController> {
                                           child: Image.network(
                                           StaticData.profileImage,
                                           fit: BoxFit.cover,
-                                          width: width * 0.36,
+                                          width: 50,
+                                          height: 50,
                                         )),
                                 ),
                               ),
