@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +9,8 @@ import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
 import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
 
 class AuthServices extends GetxService {
+  final FireStoreServices _fireStoreServices;
+  AuthServices(this._fireStoreServices);
   final firebase_auth.FirebaseAuth _firebaseAuth =
       firebase_auth.FirebaseAuth.instance;
   CollectionReference userCollection =
@@ -49,8 +52,13 @@ class AuthServices extends GetxService {
 
   Future<UserModel> getUserCollection(String uid) async {
     try {
+      _fireStoreServices.loggedIn(uid);
       DocumentSnapshot doc = await userCollection.doc(uid).get();
-      return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+      if (doc.exists) {
+        return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+      }
+      logout();
+      throw 'User has been deleted by Admin!';
     } catch (e) {
       rethrow;
     }
@@ -109,6 +117,7 @@ class AuthServices extends GetxService {
 
   Future<void> createUserCollection(UserModel user) async {
     try {
+      _fireStoreServices.loggedIn(user.userId);
       await userCollection.doc(user.userId).set(user.toMap());
     } catch (e) {
       rethrow;

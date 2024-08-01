@@ -1,4 +1,8 @@
+export 'package:auto_parts_hub/presentation/admin_panel/modules/add_products/add_products.screen.dart';
 export 'package:auto_parts_hub/presentation/admin_panel/admin_panel.screen.dart';
+export 'package:auto_parts_hub/presentation/admin_panel/modules/manage_orders/manage_orders.screen.dart';
+export 'package:auto_parts_hub/presentation/admin_panel/modules/manage_products/manage_products.screen.dart';
+export 'package:auto_parts_hub/presentation/admin_panel/modules/manage_users/manage_users.screen.dart';
 export 'package:auto_parts_hub/presentation/auth/forget_password/forget_password.screen.dart';
 export 'package:auto_parts_hub/presentation/auth/login/login.screen.dart';
 export 'package:auto_parts_hub/presentation/auth/signup/signup.screen.dart';

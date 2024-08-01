@@ -19,7 +19,6 @@ class SettingsScreen extends GetView<SettingsController> {
           title: CustomText(
             text: LocaleKeys.drawer_settings_text.tr,
           ),
-          centerTitle: true,
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(

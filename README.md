@@ -5,7 +5,7 @@
 Auto Parts Hub is a Flutter application designed as a platform to sell car parts. This app features both user and admin dashboards, making it easy for users to browse and purchase car parts and for admins to manage the platform.
 
 ### Special Note
-To create an admin account, use an email with `@admin.com` (e.g., `abc@admin.com`). For user accounts, use an email with `@gmail.com` (e.g., `abc@gmail.com`).
+To create an admin account, use an email with `@admin.com` (e.g., `abc@admin.com`). For user accounts, use an other email like `@abc.ab` or `@gmail.com` (e.g., `abc@gmail.com`).
 
 ### Features
 

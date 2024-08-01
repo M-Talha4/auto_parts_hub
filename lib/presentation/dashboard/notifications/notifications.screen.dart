@@ -11,7 +11,6 @@ class NotificationsScreen extends GetView<NotificationsController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('NotificationsScreen'),
-        centerTitle: true,
       ),
       body: const Center(
         child: Text(

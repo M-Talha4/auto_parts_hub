@@ -22,7 +22,6 @@ class LoginScreen extends GetView<LoginController> {
         title: CustomText(
           text: LocaleKeys.auth_login_text.tr,
         ),
-        centerTitle: true,
       ),
       body: SizedBox(
         width: width,

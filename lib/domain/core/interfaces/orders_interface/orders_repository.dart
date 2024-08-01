@@ -3,5 +3,7 @@ import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_mode
 
 abstract class OrdersRepository {
   Future<void> submitOrder(OrdersModel order);
-  Future<List<Orders>?> getOrders();
+  Future<List<Orders>?> getUserOrders();
+  Future<List<Orders>?> getAllOrders();
+  Future<void> changeOrderStatus(String orderId, String orderStatus);
 }

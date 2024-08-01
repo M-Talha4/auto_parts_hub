@@ -19,7 +19,6 @@ class MyCartScreen extends GetView<MyCartController> {
         title: CustomText(
           text: LocaleKeys.drawer_my_cart_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(

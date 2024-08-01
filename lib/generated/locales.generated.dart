@@ -159,6 +159,46 @@ class LocaleKeys {
   static const profile_name = 'profile_name';
   static const profile_phone_no = 'profile_phone_no';
   static const profile_updated = 'profile_updated';
+  static const admin_panel_email_text = 'admin_panel_email_text';
+  static const admin_panel_admin_panel_text = 'admin_panel_admin_panel_text';
+  static const admin_panel_welcome_text = 'admin_panel_welcome_text';
+  static const admin_panel_delivered_text = 'admin_panel_delivered_text';
+  static const admin_panel_manage_orders_text =
+      'admin_panel_manage_orders_text';
+  static const admin_panel_manage_users_text = 'admin_panel_manage_users_text';
+  static const admin_panel_manage_products_text =
+      'admin_panel_manage_products_text';
+  static const admin_panel_add_products_text = 'admin_panel_add_products_text';
+  static const admin_panel_edit_product_text = 'admin_panel_edit_product_text';
+  static const admin_panel_category_text = 'admin_panel_category_text';
+  static const admin_panel_product_name_text = 'admin_panel_product_name_text';
+  static const admin_panel_product_desc_text = 'admin_panel_product_desc_text';
+  static const admin_panel_product_price_text =
+      'admin_panel_product_price_text';
+  static const admin_panel_product_brand_text =
+      'admin_panel_product_brand_text';
+  static const admin_panel_product_vehicle_text =
+      'admin_panel_product_vehicle_text';
+  static const admin_panel_select_category_text =
+      'admin_panel_select_category_text';
+  static const admin_panel_enter_product_name_text =
+      'admin_panel_enter_product_name_text';
+  static const admin_panel_enter_product_desc_text =
+      'admin_panel_enter_product_desc_text';
+  static const admin_panel_enter_product_price_text =
+      'admin_panel_enter_product_price_text';
+  static const admin_panel_enter_product_brand_text =
+      'admin_panel_enter_product_brand_text';
+  static const admin_panel_enter_product_vehicle_text =
+      'admin_panel_enter_product_vehicle_text';
+  static const admin_panel_product_added_successfully_text =
+      'admin_panel_product_added_successfully_text';
+  static const admin_panel_product_updated_successfully_text =
+      'admin_panel_product_updated_successfully_text';
+  static const button_edit = 'button_edit';
+  static const button_delete = 'button_delete';
+  static const button_accept = 'button_accept';
+  static const button_cancel = 'button_cancel';
   static const button_save = 'button_save';
   static const button_continue = 'button_continue';
   static const button_back_to_home = 'button_back_to_home';
@@ -221,6 +261,12 @@ class LocaleKeys {
       'exception_an_unknown_error_occurred';
   static const exception_this_user_has_been_disabled =
       'exception_this_user_has_been_disabled';
+  static const exception_you_have_been_banned =
+      'exception_you_have_been_banned';
+  static const exception_please_choose_a_category =
+      'exception_please_choose_a_category';
+  static const exception_please_choose_an_image_first =
+      'exception_please_choose_an_image_first';
   static const exception_the_email_address_is_badly_formatted =
       'exception_the_email_address_is_badly_formatted';
   static const exception_password_should_be_at_least_six_characters =
@@ -342,6 +388,35 @@ class Locales {
     'profile_name': 'Name:',
     'profile_phone_no': 'Phone No:',
     'profile_updated': 'Profile Updated!',
+    'admin_panel_email_text': 'Email',
+    'admin_panel_admin_panel_text': 'Admin Panel',
+    'admin_panel_welcome_text': 'Welcome',
+    'admin_panel_delivered_text': 'Delivered',
+    'admin_panel_manage_orders_text': 'Manage Orders',
+    'admin_panel_manage_users_text': 'Manage Users',
+    'admin_panel_manage_products_text': 'Manage Products',
+    'admin_panel_add_products_text': 'Add Products',
+    'admin_panel_edit_product_text': 'Edit Product',
+    'admin_panel_category_text': 'Category',
+    'admin_panel_product_name_text': 'Name',
+    'admin_panel_product_desc_text': 'Description',
+    'admin_panel_product_price_text': 'Price',
+    'admin_panel_product_brand_text': 'Brand',
+    'admin_panel_product_vehicle_text': 'Vehicle',
+    'admin_panel_select_category_text': 'Select Category',
+    'admin_panel_enter_product_name_text': 'Enter product name',
+    'admin_panel_enter_product_desc_text': 'Enter product description',
+    'admin_panel_enter_product_price_text': 'Enter product price',
+    'admin_panel_enter_product_brand_text': 'Enter product brand',
+    'admin_panel_enter_product_vehicle_text': 'Enter product vehicle',
+    'admin_panel_product_added_successfully_text':
+        'Product added successfully!',
+    'admin_panel_product_updated_successfully_text':
+        'Product updated successfully!',
+    'button_edit': 'Edit',
+    'button_delete': 'Delete',
+    'button_accept': 'Accept',
+    'button_cancel': 'Cancel',
     'button_save': 'Save',
     'button_continue': 'Continue',
     'button_back_to_home': 'Back to Home',
@@ -390,7 +465,10 @@ class Locales {
     'exception_email_is_already_in_use': 'Email is already in use!',
     'exception_network_connection_error': 'Network Connection Error!',
     'exception_an_unknown_error_occurred': 'An unknown error occurred!',
+    'exception_please_choose_a_category': 'Please choose a category!',
+    'exception_please_choose_an_image_first': 'Please select an image first!',
     'exception_this_user_has_been_disabled': 'This user has been disabled!',
+    'exception_you_have_been_banned': 'You have been BANNED!',
     'exception_the_email_address_is_badly_formatted':
         'The email address is badly formatted!',
     'exception_password_should_be_at_least_six_characters':
@@ -511,6 +589,33 @@ class Locales {
     'profile_name': 'الاسم:',
     'profile_phone_no': 'رقم الهاتف:',
     'profile_updated': 'تم تحديث الملف الشخصي!',
+    'admin_panel_email_text': 'البريد الإلكتروني',
+    'admin_panel_admin_panel_text': 'لوحة الإدارة',
+    'admin_panel_welcome_text': 'أهلاً بك',
+    'admin_panel_delivered_text': 'تم التوصيل',
+    'admin_panel_manage_orders_text': 'إدارة الطلبات',
+    'admin_panel_manage_users_text': 'إدارة المستخدمين',
+    'admin_panel_manage_products_text': 'إدارة المنتجات',
+    'admin_panel_add_products_text': 'إضافة منتجات',
+    'admin_panel_edit_product_text': 'تحرير المنتج',
+    'admin_panel_category_text': 'الفئة',
+    'admin_panel_product_name_text': 'الاسم',
+    'admin_panel_product_desc_text': 'الوصف',
+    'admin_panel_product_price_text': 'السعر',
+    'admin_panel_product_brand_text': 'العلامة التجارية',
+    'admin_panel_product_vehicle_text': 'المركبة',
+    'admin_panel_select_category_text': 'اختر الفئة',
+    'admin_panel_enter_product_name_text': 'أدخل اسم المنتج',
+    'admin_panel_enter_product_desc_text': 'أدخل وصف المنتج',
+    'admin_panel_enter_product_price_text': 'أدخل سعر المنتج',
+    'admin_panel_enter_product_brand_text': 'أدخل علامة المنتج',
+    'admin_panel_enter_product_vehicle_text': 'أدخل مركبة المنتج',
+    'admin_panel_product_added_successfully_text': 'تم إضافة المنتج بنجاح!',
+    'admin_panel_product_updated_successfully_text': 'تم تحديث المنتج بنجاح!',
+    'button_edit': 'تحرير',
+    'button_delete': 'حذف',
+    'button_accept': 'قبول',
+    'button_cancel': 'إلغاء',
     'button_save': 'حفظ',
     'button_continue': 'استمر',
     'button_add': 'إضافة',
@@ -562,8 +667,11 @@ class Locales {
     'exception_network_connection_error': 'خطأ في اتصال الشبكة!',
     'exception_an_unknown_error_occurred': 'حدث خطأ غير معروف!',
     'exception_this_user_has_been_disabled': 'تم تعطيل هذا المستخدم!',
+    'exception_you_have_been_banned': 'لقد تم حظرك!',
     'exception_the_email_address_is_badly_formatted':
         'عنوان البريد الإلكتروني منسق بشكل سيء!',
+    'exception_please_choose_a_category': 'يرجى اختيار فئة!',
+    'exception_please_choose_an_image_first': 'يرجى اختيار صورة أولاً!',
     'exception_password_should_be_at_least_six_characters':
         'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل!'
   };
@@ -681,6 +789,33 @@ class Locales {
     'profile_name': '姓名:',
     'profile_phone_no': '电话号码:',
     'profile_updated': '个人资料已更新！',
+    'admin_panel_email_text': '电子邮件',
+    'admin_panel_admin_panel_text': '管理面板',
+    'admin_panel_welcome_text': '欢迎',
+    'admin_panel_delivered_text': '已交付',
+    'admin_panel_manage_orders_text': '管理订单',
+    'admin_panel_manage_users_text': '管理用户',
+    'admin_panel_manage_products_text': '管理产品',
+    'admin_panel_add_products_text': '添加产品',
+    'admin_panel_edit_product_text': '编辑产品',
+    'admin_panel_category_text': '类别',
+    'admin_panel_product_name_text': '名称',
+    'admin_panel_product_desc_text': '描述',
+    'admin_panel_product_price_text': '价格',
+    'admin_panel_product_brand_text': '品牌',
+    'admin_panel_product_vehicle_text': '车辆',
+    'admin_panel_select_category_text': '选择类别',
+    'admin_panel_enter_product_name_text': '输入产品名称',
+    'admin_panel_enter_product_desc_text': '输入产品描述',
+    'admin_panel_enter_product_price_text': '输入产品价格',
+    'admin_panel_enter_product_brand_text': '输入产品品牌',
+    'admin_panel_enter_product_vehicle_text': '输入产品车辆',
+    'admin_panel_product_added_successfully_text': '产品添加成功!',
+    'admin_panel_product_updated_successfully_text': '产品更新成功!',
+    'button_edit': '编辑',
+    'button_delete': '删除',
+    'button_accept': '接受',
+    'button_cancel': '取消',
     'button_save': '保存',
     'button_continue': '继续',
     'button_add': '添加',
@@ -723,7 +858,10 @@ class Locales {
     'exception_email_is_already_in_use': '电子邮件已被使用！',
     'exception_network_connection_error': '网络连接错误！',
     'exception_an_unknown_error_occurred': '发生未知错误！',
+    'exception_please_choose_a_category': '请选择一个类别!',
+    'exception_please_choose_an_image_first': '请先选择一张图片!',
     'exception_this_user_has_been_disabled': '该用户已被禁用！',
+    'exception_you_have_been_banned': '你已被禁止!',
     'exception_the_email_address_is_badly_formatted': '电子邮件格式错误！',
     'exception_password_should_be_at_least_six_characters': '密码应至少为6个字符!'
   };
@@ -842,6 +980,35 @@ class Locales {
     'profile_name': 'नाम:',
     'profile_phone_no': 'फोन नंबर:',
     'profile_updated': 'प्रोफ़ाइल अपडेट की गई!',
+    'admin_panel_email_text': 'ईमेल',
+    'admin_panel_admin_panel_text': 'व्यवस्थापक पैनल',
+    'admin_panel_welcome_text': 'स्वागत है',
+    'admin_panel_delivered_text': 'प्रसारित किया गया',
+    'admin_panel_manage_orders_text': 'ऑर्डर प्रबंधित करें',
+    'admin_panel_manage_users_text': 'उपयोगकर्ताओं को प्रबंधित करें',
+    'admin_panel_manage_products_text': 'उत्पाद प्रबंधित करें',
+    'admin_panel_add_products_text': 'उत्पाद जोड़ें',
+    'admin_panel_edit_product_text': 'उत्पाद संपादित करें',
+    'admin_panel_category_text': 'श्रेणी',
+    'admin_panel_product_name_text': 'नाम',
+    'admin_panel_product_desc_text': 'विवरण',
+    'admin_panel_product_price_text': 'मूल्य',
+    'admin_panel_product_brand_text': 'ब्रांड',
+    'admin_panel_product_vehicle_text': 'वाहन',
+    'admin_panel_select_category_text': 'श्रेणी चुनें',
+    'admin_panel_enter_product_name_text': 'उत्पाद का नाम दर्ज करें',
+    'admin_panel_enter_product_desc_text': 'उत्पाद विवरण दर्ज करें',
+    'admin_panel_enter_product_price_text': 'उत्पाद मूल्य दर्ज करें',
+    'admin_panel_enter_product_brand_text': 'उत्पाद ब्रांड दर्ज करें',
+    'admin_panel_enter_product_vehicle_text': 'उत्पाद वाहन दर्ज करें',
+    'admin_panel_product_added_successfully_text':
+        'उत्पाद सफलतापूर्वक जोड़ा गया!',
+    'admin_panel_product_updated_successfully_text':
+        'उत्पाद सफलतापूर्वक अपडेट किया गया!',
+    'button_edit': 'संपादित करें',
+    'button_delete': 'हटाएं',
+    'button_accept': 'स्वीकार करें',
+    'button_cancel': 'रद्द करें',
     'button_save': 'सहेजें',
     'button_continue': 'जारी रखें',
     'button_add': 'जोड़ें',
@@ -892,6 +1059,9 @@ class Locales {
     'exception_an_unknown_error_occurred': 'एक अज्ञात त्रुटि हुई!',
     'exception_this_user_has_been_disabled':
         'यह उपयोगकर्ता अक्षम कर दिया गया है!',
+    'exception_please_choose_a_category': 'कृपया एक श्रेणी चुनें!',
+    'exception_please_choose_an_image_first': 'कृपया पहले एक चित्र चुनें!',
+    'exception_you_have_been_banned': 'आपको प्रतिबंधित कर दिया गया है!',
     'exception_the_email_address_is_badly_formatted':
         'ईमेल पता खराब प्रारूपित है!',
     'exception_password_should_be_at_least_six_characters':
@@ -1011,6 +1181,33 @@ class Locales {
     'profile_name': '名前:',
     'profile_phone_no': '電話番号:',
     'profile_updated': 'プロフィールが更新されました！',
+    'admin_panel_email_text': 'メール',
+    'admin_panel_admin_panel_text': '管理パネル',
+    'admin_panel_welcome_text': 'ようこそ',
+    'admin_panel_delivered_text': '配達済み',
+    'admin_panel_manage_orders_text': '注文管理',
+    'admin_panel_manage_users_text': 'ユーザー管理',
+    'admin_panel_manage_products_text': '製品管理',
+    'admin_panel_add_products_text': '製品を追加',
+    'admin_panel_edit_product_text': '製品を編集する',
+    'admin_panel_category_text': 'カテゴリ',
+    'admin_panel_product_name_text': '名前',
+    'admin_panel_product_desc_text': '説明',
+    'admin_panel_product_price_text': '価格',
+    'admin_panel_product_brand_text': 'ブランド',
+    'admin_panel_product_vehicle_text': '車両',
+    'admin_panel_select_category_text': 'カテゴリを選択',
+    'admin_panel_enter_product_name_text': '製品名を入力してください',
+    'admin_panel_enter_product_desc_text': '製品の説明を入力してください',
+    'admin_panel_enter_product_price_text': '製品の価格を入力してください',
+    'admin_panel_enter_product_brand_text': '製品ブランドを入力してください',
+    'admin_panel_enter_product_vehicle_text': '製品の車両を入力してください',
+    'admin_panel_product_added_successfully_text': '製品が正常に追加されました!',
+    'admin_panel_product_updated_successfully_text': '製品が正常に更新されました!',
+    'button_edit': '編集',
+    'button_delete': '削除',
+    'button_accept': '承諾する',
+    'button_cancel': 'キャンセル',
     'button_save': '保存',
     'button_continue': '続ける',
     'button_add': '追加',
@@ -1058,6 +1255,9 @@ class Locales {
     'exception_network_connection_error': 'ネットワーク接続エラー！',
     'exception_an_unknown_error_occurred': '不明なエラーが発生しました！',
     'exception_this_user_has_been_disabled': 'このユーザーは無効になっています！',
+    'exception_you_have_been_banned': 'あなたは禁止されています!',
+    'exception_please_choose_a_category': 'カテゴリを選択してください！',
+    'exception_please_choose_an_image_first': '最初に画像を選択してください！',
     'exception_the_email_address_is_badly_formatted': 'メールアドレスの形式が正しくありません！',
     'exception_password_should_be_at_least_six_characters':
         'パスワードは少なくとも6文字である必要があります!'
@@ -1177,6 +1377,35 @@ class Locales {
     'profile_name': 'Имя:',
     'profile_phone_no': 'Номер телефона:',
     'profile_updated': 'Профиль обновлен!',
+    'admin_panel_email_text': 'Эл. почта',
+    'admin_panel_admin_panel_text': 'Панель администратора',
+    'admin_panel_welcome_text': 'Добро пожаловать',
+    'admin_panel_delivered_text': 'Доставлено',
+    'admin_panel_manage_orders_text': 'Управление заказами',
+    'admin_panel_manage_users_text': 'Управление пользователями',
+    'admin_panel_manage_products_text': 'Управление продуктами',
+    'admin_panel_add_products_text': 'Добавить продукты',
+    'admin_panel_edit_product_text': 'Редактировать продукт',
+    'admin_panel_category_text': 'Категория',
+    'admin_panel_product_name_text': 'Имя',
+    'admin_panel_product_desc_text': 'Описание',
+    'admin_panel_product_price_text': 'Цена',
+    'admin_panel_product_brand_text': 'Бренд',
+    'admin_panel_product_vehicle_text': 'Транспортное средство',
+    'admin_panel_select_category_text': 'Выберите категорию',
+    'admin_panel_enter_product_name_text': 'Введите название продукта',
+    'admin_panel_enter_product_desc_text': 'Введите описание продукта',
+    'admin_panel_enter_product_price_text': 'Введите цену продукта',
+    'admin_panel_enter_product_brand_text': 'Введите бренд продукта',
+    'admin_panel_enter_product_vehicle_text':
+        'Введите транспортное средство продукта',
+    'admin_panel_product_added_successfully_text': 'Продукт успешно добавлен!',
+    'admin_panel_product_updated_successfully_text':
+        'Продукт успешно обновлен!',
+    'button_edit': 'Редактировать',
+    'button_delete': 'Удалить',
+    'button_accept': 'Принять',
+    'button_cancel': 'Отмена',
     'button_save': 'Сохранить',
     'button_continue': 'Продолжить',
     'button_add': 'Добавить',
@@ -1228,6 +1457,10 @@ class Locales {
     'exception_network_connection_error': 'Ошибка сетевого соединения!',
     'exception_an_unknown_error_occurred': 'Произошла неизвестная ошибка!',
     'exception_this_user_has_been_disabled': 'Этот пользователь был отключен!',
+    'exception_you_have_been_banned': 'Вы были заблокированы!',
+    'exception_please_choose_a_category': 'Пожалуйста, выберите категорию!',
+    'exception_please_choose_an_image_first':
+        'Пожалуйста, сначала выберите изображение!',
     'exception_the_email_address_is_badly_formatted':
         'Электронная почта неправильно отформатирована!',
     'exception_password_should_be_at_least_six_characters':
@@ -1349,6 +1582,37 @@ class Locales {
     'profile_name': 'Nombre:',
     'profile_phone_no': 'Número de teléfono:',
     'profile_updated': '¡Perfil actualizado!',
+    'admin_panel_email_text': 'Correo electrónico',
+    'admin_panel_admin_panel_text': 'Panel de administración',
+    'admin_panel_welcome_text': 'Bienvenido',
+    'admin_panel_delivered_text': 'Entregado',
+    'admin_panel_manage_orders_text': 'Gestionar pedidos',
+    'admin_panel_manage_users_text': 'Gestionar usuarios',
+    'admin_panel_manage_products_text': 'Gestionar productos',
+    'admin_panel_add_products_text': 'Añadir productos',
+    'admin_panel_edit_product_text': 'Editar producto',
+    'admin_panel_category_text': 'Categoría',
+    'admin_panel_product_name_text': 'Nombre',
+    'admin_panel_product_desc_text': 'Descripción',
+    'admin_panel_product_price_text': 'Precio',
+    'admin_panel_product_brand_text': 'Marca',
+    'admin_panel_product_vehicle_text': 'Vehículo',
+    'admin_panel_select_category_text': 'Seleccionar Categoría',
+    'admin_panel_enter_product_name_text': 'Ingrese el nombre del producto',
+    'admin_panel_enter_product_desc_text':
+        'Ingrese la descripción del producto',
+    'admin_panel_enter_product_price_text': 'Ingrese el precio del producto',
+    'admin_panel_enter_product_brand_text': 'Ingrese la marca del producto',
+    'admin_panel_enter_product_vehicle_text':
+        'Ingrese el vehículo del producto',
+    'admin_panel_product_added_successfully_text':
+        '¡Producto agregado exitosamente!',
+    'admin_panel_product_updated_successfully_text':
+        '¡Producto actualizado exitosamente!',
+    'button_edit': 'Editar',
+    'button_delete': 'Eliminar',
+    'button_accept': 'Aceptar',
+    'button_cancel': 'Cancelar',
     'button_save': 'Guardar',
     'button_continue': 'Continuar',
     'button_add': 'Agregar',
@@ -1403,8 +1667,12 @@ class Locales {
         'El correo electrónico ya está en uso!',
     'exception_network_connection_error': 'Error de conexión de red!',
     'exception_an_unknown_error_occurred': 'Ocurrió un error desconocido!',
+    'exception_please_choose_a_category': '¡Por favor, elija una categoría!',
+    'exception_please_choose_an_image_first':
+        '¡Por favor, seleccione una imagen primero!',
     'exception_this_user_has_been_disabled':
         'Este usuario ha sido deshabilitado!',
+    'exception_you_have_been_banned': '¡Has sido BANEADO!',
     'exception_the_email_address_is_badly_formatted':
         'La dirección de correo electrónico está mal formateada!',
     'exception_password_should_be_at_least_six_characters':
@@ -1525,6 +1793,35 @@ class Locales {
     'profile_name': 'نام:',
     'profile_phone_no': 'فون نمبر:',
     'profile_updated': 'پروفائل اپ ڈیٹ کر دی گئی!',
+    'admin_panel_email_text': 'ای میل',
+    'admin_panel_admin_panel_text': 'ایڈمن پینل',
+    'admin_panel_welcome_text': 'خوش آمدید',
+    'admin_panel_delivered_text': 'ترسیل کیا گیا',
+    'admin_panel_manage_orders_text': 'آرڈرز کو منظم کریں',
+    'admin_panel_manage_users_text': 'صارفین کا انتظام کریں',
+    'admin_panel_manage_products_text': 'مصنوعات کا انتظام کریں',
+    'admin_panel_add_products_text': 'مصنوعات شامل کریں',
+    'admin_panel_edit_product_text': 'پروڈکٹ میں ترمیم کریں',
+    'admin_panel_category_text': 'زمرہ',
+    'admin_panel_product_name_text': 'نام',
+    'admin_panel_product_desc_text': 'تفصیل',
+    'admin_panel_product_price_text': 'قیمت',
+    'admin_panel_product_brand_text': 'برانڈ',
+    'admin_panel_product_vehicle_text': 'گاڑی',
+    'admin_panel_select_category_text': 'زمرہ منتخب کریں',
+    'admin_panel_enter_product_name_text': 'پروڈکٹ کا نام درج کریں',
+    'admin_panel_enter_product_desc_text': 'پروڈکٹ کی تفصیل درج کریں',
+    'admin_panel_enter_product_price_text': 'پروڈکٹ کی قیمت درج کریں',
+    'admin_panel_enter_product_brand_text': 'پروڈکٹ برانڈ درج کریں',
+    'admin_panel_enter_product_vehicle_text': 'پروڈکٹ گاڑی درج کریں',
+    'admin_panel_product_added_successfully_text':
+        'پروڈکٹ کامیابی کے ساتھ شامل کیا گیا!',
+    'admin_panel_product_updated_successfully_text':
+        'پروڈکٹ کامیابی کے ساتھ اپ ڈیٹ کیا گیا!',
+    'button_edit': 'ترمیم کریں',
+    'button_delete': 'حذف کریں',
+    'button_accept': 'قبول کریں',
+    'button_cancel': 'منسوخ کریں',
     'button_save': 'محفوظ کریں',
     'button_continue': 'جاری رکھیں',
     'button_add': 'شامل کریں',
@@ -1575,8 +1872,12 @@ class Locales {
     'exception_network_connection_error': 'نیٹ ورک کنکشن کی خرابی!',
     'exception_an_unknown_error_occurred': 'نامعلوم خرابی واقع ہوئی!',
     'exception_this_user_has_been_disabled': 'یہ صارف غیر فعال کردیا گیا ہے!',
+    'exception_you_have_been_banned': 'آپ کو پابند کر دیا گیا ہے!',
     'exception_the_email_address_is_badly_formatted':
         'ای میل ایڈریس کا فارمیٹ غلط ہے!',
+    'exception_please_choose_a_category': 'براہ کرم ایک زمرہ منتخب کریں!',
+    'exception_please_choose_an_image_first':
+        'براہ کرم پہلے ایک تصویر منتخب کریں!',
     'exception_password_should_be_at_least_six_characters':
         'پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے!'
   };

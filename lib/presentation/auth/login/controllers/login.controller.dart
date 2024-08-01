@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_parts_hub/domain/utils/logger.dart';
+import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
 import 'package:auto_parts_hub/generated/locales.generated.dart';
 import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
@@ -49,9 +49,13 @@ class LoginController extends GetxController with LoadingMixin {
       } catch (e) {
         if (e is AppException) {
           showSnackbar(message: e.message!, icon: e.icon, isError: true);
-        } else {
-          Logger.e(e.toString());
         }
+        if (e.toString() == 'User has been deleted by Admin!') {
+          showSnackbar(
+              message: LocaleKeys.exception_you_have_been_banned.tr,
+              isError: true);
+        }
+        Logger.e(e.toString());
       }
       setLoading(false);
     }

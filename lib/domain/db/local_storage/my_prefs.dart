@@ -33,7 +33,6 @@ class MyPrefs {
 
   static storeTheme({required bool isDarkMode}) {
     _getStorage.write(_isDarkTheme, isDarkMode);
-    StaticData.isAdmin = isDarkMode;
   }
 
   static UserModel? getUser() {

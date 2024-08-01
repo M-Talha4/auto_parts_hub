@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'dart:io';
-
+import 'dart:async';
+import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
 import 'package:auto_parts_hub/domain/core/interfaces/orders_interface/orders_repository.dart';
 import 'package:auto_parts_hub/domain/exceptions/network_exception.dart';
@@ -26,9 +26,37 @@ class OrderDao implements OrdersRepository {
   }
 
   @override
-  Future<List<Orders>?> getOrders() async {
+  Future<List<Orders>?> getUserOrders() async {
+    try {
+      return await _fireStoreServices.getOrdersList().then((orders) => orders
+          ?.where((order) => order.customerId == StaticData.userId)
+          .toList());
+    } on SocketException catch (e) {
+      throw NetworkException.connectionError(e.message);
+    } on TimeoutException catch (e) {
+      throw RequestTimeoutException.timeOut(e.message!);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Orders>?> getAllOrders() async {
     try {
       return await _fireStoreServices.getOrdersList();
+    } on SocketException catch (e) {
+      throw NetworkException.connectionError(e.message);
+    } on TimeoutException catch (e) {
+      throw RequestTimeoutException.timeOut(e.message!);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> changeOrderStatus(String orderId, String orderStatus) async {
+    try {
+      await _fireStoreServices.updateOrder(orderId, orderStatus);
     } on SocketException catch (e) {
       throw NetworkException.connectionError(e.message);
     } on TimeoutException catch (e) {

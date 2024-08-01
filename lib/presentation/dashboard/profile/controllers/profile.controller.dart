@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:auto_parts_hub/domain/const/static_data.dart';
 import 'package:auto_parts_hub/domain/core/usecase/profile_usecae/update_profile_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/profile_usecae/upload_image_usecase.dart';
+import 'package:auto_parts_hub/domain/core/usecase/profile_usecae/upload_profile_image_usecase.dart';
 import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
 import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
 import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
@@ -13,9 +13,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileController extends GetxController with LoadingMixin {
-  final UploadImageUsecase _uploadImageUsecase;
+  final UploadProfileImageUsecase _uploadProfileImageUsecase;
   final UpdateProfileUsecase _updateProfileUsecase;
-  ProfileController(this._uploadImageUsecase, this._updateProfileUsecase);
+  ProfileController(
+      this._uploadProfileImageUsecase, this._updateProfileUsecase);
 
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -72,7 +73,8 @@ class ProfileController extends GetxController with LoadingMixin {
 
   Future<void> _uploadImage() async {
     try {
-      StaticData.profileImage = await _uploadImageUsecase.execute(image!) ?? '';
+      StaticData.profileImage =
+          await _uploadProfileImageUsecase.execute(image!) ?? '';
       _updateUser();
     } catch (e) {
       if (e is AppException) {
@@ -96,6 +98,7 @@ class ProfileController extends GetxController with LoadingMixin {
           profileImage: StaticData.profileImage);
 
       await _updateProfileUsecase.execute(user);
+      isEnabled.value = false;
       showSnackbar(message: LocaleKeys.profile_updated.tr);
     } catch (e) {
       if (e is AppException) {

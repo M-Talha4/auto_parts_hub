@@ -18,7 +18,6 @@ class LanguageScreen extends GetView<LanguageController> {
         title: CustomText(
           text: LocaleKeys.select_language_select_language.tr,
         ),
-        centerTitle: true,
       ),
       body: GetBuilder(
           init: LanguageController(),

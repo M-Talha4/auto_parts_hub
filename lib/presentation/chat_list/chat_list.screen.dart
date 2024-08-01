@@ -14,13 +14,11 @@ class ChatListScreen extends GetView<ChatListController> {
   const ChatListScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
           text: LocaleKeys.chat_chats_text.tr,
         ),
-        centerTitle: true,
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(
@@ -40,15 +38,15 @@ class ChatListScreen extends GetView<ChatListController> {
               child: ListTile(
                 onTap: () => Get.toNamed(Routes.CHAT, arguments: person),
                 leading: CircleAvatar(
-                  radius: width * 0.078,
+                  radius: 28,
                   backgroundColor: colorScheme(context).outline,
                   child: CircleAvatar(
-                    radius: width * 0.072,
+                    radius: 25,
                     backgroundColor: colorScheme(context).secondary,
-                    child: StaticData.profileImage == ''
+                    child: controller.chatList[index].profileImage == ''
                         ? SvgPicture.asset(
                             ImagePath.proileAvatarSvg,
-                            height: width * 0.07,
+                            height: 35,
                             colorFilter: ColorFilter.mode(
                                 colorScheme(context).onPrimary,
                                 BlendMode.srcIn),
@@ -57,7 +55,8 @@ class ChatListScreen extends GetView<ChatListController> {
                             child: Image.network(
                             StaticData.profileImage,
                             fit: BoxFit.cover,
-                            width: width * 0.36,
+                            width: 50,
+                            height: 50,
                           )),
                   ),
                 ),

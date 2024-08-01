@@ -136,5 +136,25 @@ class Nav {
       page: () => const ChatScreen(),
       binding: ChatControllerBinding(),
     ),
+    GetPage(
+      name: Routes.MANAGE_ORDERS,
+      page: () => const ManageOrdersScreen(),
+      binding: ManageOrdersControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MANAGE_USERS,
+      page: () => const ManageUsersScreen(),
+      binding: ManageUsersControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.MANAGE_PRODUCTS,
+      page: () => const ManageProductsScreen(),
+      binding: ManageProductsControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.ADD_PRODUCTS,
+      page: () => const AddProductsScreen(),
+      binding: AddProductsControllerBinding(),
+    ),
   ];
 }

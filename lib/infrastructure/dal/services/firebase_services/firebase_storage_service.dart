@@ -18,4 +18,19 @@ class FirebaseStorageService extends GetxService {
       rethrow;
     }
   }
+
+  Future<String?> uploadProductImage(File file) async {
+    try {
+      String id = DateTime.now().toString();
+      String url;
+      Reference imageRef = storageReference.child('products/$id.png');
+      TaskSnapshot snapshot = await imageRef.putFile(file);
+      debugPrint(snapshot.toString());
+      url = await imageRef.getDownloadURL();
+      List<String> list = [id, url];
+      return list.join('_');
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

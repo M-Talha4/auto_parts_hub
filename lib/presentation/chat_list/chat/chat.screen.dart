@@ -18,7 +18,6 @@ class ChatScreen extends GetView<ChatController> {
           title: CustomText(
             text: controller.user.name,
           ),
-          centerTitle: true,
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(

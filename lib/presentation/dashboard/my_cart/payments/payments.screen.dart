@@ -20,7 +20,6 @@ class PaymentsScreen extends GetView<PaymentsController> {
           title: CustomText(
             text: LocaleKeys.payment_payment_text.tr,
           ),
-          centerTitle: true,
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(

@@ -9,9 +9,9 @@ class ImagePath {
   static const String masterCardLogoImage =
       'assets/images/mastercard_logo.webp';
   static const String visaLogoImage = 'assets/images/visa_logo.webp';
+  static const String manageOrdersimages = 'assets/images/manage_orders.webp';
+  static const String manageUserimages = 'assets/images/manage_users.webp';
+  static const String manageProductsimages =
+      'assets/images/manage_products.webp';
   static const String proileAvatarSvg = 'assets/images/profile_avatar.svg';
-}
-
-class IconPath {
-  static const String fbIcon = 'assets/icons/fb_icon.svg';
 }

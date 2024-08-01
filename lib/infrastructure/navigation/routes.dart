@@ -11,11 +11,15 @@ class Routes {
   static const ADMIN_PANEL = '/admin-panel';
   static const ALL_CATEGORIES = '/all-categories';
   static const CATEGORY = '/category';
+  static const CHAT = '/chat';
   static const CHAT_LIST = '/chat-list';
   static const FORGET_PASSWORD = '/forget-password';
   static const HOME = '/home';
   static const LANGUAGE = '/language';
   static const LOGIN = '/login';
+  static const MANAGE_ORDERS = '/manage-orders';
+  static const MANAGE_PRODUCTS = '/manage-products';
+  static const MANAGE_USERS = '/manage-users';
   static const MY_CART = '/my-cart';
   static const MY_ORDERS = '/my-orders';
   static const NOTIFICATIONS = '/notifications';
@@ -26,5 +30,5 @@ class Routes {
   static const SETTINGS = '/settings';
   static const SIGNUP = '/signup';
   static const SPLASH = '/splash';
-  static const CHAT = '/chat';
+  static const ADD_PRODUCTS = '/add-products';
 }

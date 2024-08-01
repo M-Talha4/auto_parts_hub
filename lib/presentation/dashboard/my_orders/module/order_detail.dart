@@ -18,7 +18,6 @@ class OrderDetail extends GetView<MyOrdersController> {
           title: CustomText(
             text: LocaleKeys.order_order_detail_text.tr,
           ),
-          centerTitle: true,
           leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(
