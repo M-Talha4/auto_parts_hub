@@ -33,6 +33,9 @@ class FireStoreServices extends GetxService {
   }
 
   Future<void> loggedIn(userId) async {
+    if (StaticData.userId == '') {
+      return;
+    }
     addressCollection = usersCollection
         .doc(userId)
         .collection(firebaseUsersSubCollectionAddress);

@@ -17,6 +17,7 @@ class TileCartItems extends StatelessWidget {
     return ListView.separated(
         itemCount: order.cartItems!.length,
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) => Divider(
               height: height * 0.03,
               thickness: 1,
