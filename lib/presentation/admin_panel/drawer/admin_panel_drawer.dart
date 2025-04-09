@@ -29,85 +29,75 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
             children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: height * 0.24,
-                    child: Stack(
+                  Container(
+                    height: 200,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: colorScheme(context).primary,
+                      borderRadius: const BorderRadius.horizontal(
+                          right: Radius.circular(12)),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          height: height * 0.2,
-                          decoration: BoxDecoration(
+                        InkWell(
+                          onTap: () => Get.back(),
+                          child: Container(
                             color: colorScheme(context).primary,
-                            borderRadius: const BorderRadius.horizontal(
-                                right: Radius.circular(12)),
+                            child: Icon(
+                              Icons.close,
+                              color: colorScheme(context).onPrimary,
+                              size: width * 0.048,
+                            ),
                           ),
                         ),
-                        Positioned(
-                            right: 10,
-                            top: 10,
-                            child: InkWell(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                  color: colorScheme(context).primary,
-                                  child: Icon(
-                                    Icons.close,
-                                    color: colorScheme(context).onPrimary,
-                                    size: width * 0.048,
-                                  ),
-                                ))),
-                        Positioned(
-                          bottom: height * 0.01,
-                          left: 15,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                radius: 28,
-                                backgroundColor: colorScheme(context).outline,
-                                child: CircleAvatar(
-                                  radius: 25,
-                                  backgroundColor:
-                                      colorScheme(context).secondary,
-                                  child: StaticData.profileImage == ''
-                                      ? SvgPicture.asset(
-                                          ImagePath.proileAvatarSvg,
-                                          height: 35,
-                                          colorFilter: ColorFilter.mode(
-                                              colorScheme(context).onPrimary,
-                                              BlendMode.srcIn),
-                                        )
-                                      : ClipOval(
-                                          child: Image.network(
-                                          StaticData.profileImage,
-                                          fit: BoxFit.cover,
-                                          width: 50,
-                                          height: 50,
-                                        )),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 28,
+                              backgroundColor: colorScheme(context).onPrimary,
+                              child: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: colorScheme(context).secondary,
+                                child: StaticData.profileImage == ''
+                                    ? SvgPicture.asset(
+                                        ImagePath.proileAvatarSvg,
+                                        height: 35,
+                                        colorFilter: ColorFilter.mode(
+                                            colorScheme(context).onPrimary,
+                                            BlendMode.srcIn),
+                                      )
+                                    : ClipOval(
+                                        child: Image.network(
+                                        StaticData.profileImage,
+                                        fit: BoxFit.cover,
+                                        width: 50,
+                                        height: 50,
+                                      )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomText(
+                                  text: StaticData.name,
+                                  color: colorScheme(context).onPrimary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: AppTextSize.bodySmallFont,
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CustomText(
-                                    text: StaticData.name,
-                                    color: colorScheme(context).onPrimary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: AppTextSize.bodySmallFont,
-                                  ),
-                                  CustomText(
-                                    text: StaticData.email,
-                                    color: colorScheme(context).onPrimary,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: AppTextSize.bodySmallFont,
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                                CustomText(
+                                  text: StaticData.email,
+                                  color: colorScheme(context).onPrimary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: AppTextSize.bodySmallFont,
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ],
                     ),

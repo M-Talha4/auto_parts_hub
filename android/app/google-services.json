@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "299918445125",
-    "project_id": "auto-parts-hub",
-    "storage_bucket": "auto-parts-hub.appspot.com"
+    "project_number": "524531441500",
+    "project_id": "autopartshub-e3ad7",
+    "storage_bucket": "autopartshub-e3ad7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:299918445125:android:c8bb1448ed8ba9acc2312c",
+        "mobilesdk_app_id": "1:524531441500:android:21d69c74a51ca817ef2b99",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiDmZx7iORH4wwVVTEpOaJWgv3pSYmoW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524531441500:android:d60b6077ff0c512aef2b99",
         "android_client_info": {
           "package_name": "com.talha.auto_parts_hub"
         }
@@ -15,7 +34,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBll26yJdTsHpQNIYM40Yl0F_zwYUHDUTY"
+          "current_key": "AIzaSyDiDmZx7iORH4wwVVTEpOaJWgv3pSYmoW8"
         }
       ],
       "services": {

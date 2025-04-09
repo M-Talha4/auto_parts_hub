@@ -34,6 +34,7 @@ class HomeScreen extends GetView<HomeController> {
                     alignment: Alignment.center,
                     height: 40,
                     width: width,
+                    margin: EdgeInsets.only(top: 12),
                     child: controller.isSearching.value == true
                         ? SizedBox(
                             width: width * 0.9,
@@ -64,25 +65,22 @@ class HomeScreen extends GetView<HomeController> {
                                     Icons.menu_rounded,
                                   )),
                               const Spacer(),
-                              InkWell(
-                                  onTap: () =>
+                              IconButton(
+                                  onPressed: () =>
                                       controller.isSearching.value = true,
-                                  child: const Icon(
+                                  icon: const Icon(
                                     Icons.search_rounded,
                                   )),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: InkWell(
-                                    onTap: () => Get.toNamed(Routes.MY_CART),
-                                    child: const Icon(
-                                      Icons.shopping_cart_outlined,
-                                    )),
-                              ),
                               InkWell(
-                                  onTap: () => controller.notificationDialog(),
-                                  // Get.toNamed(Routes.NOTIFICATIONS),
+                                  onTap: () => Get.toNamed(Routes.MY_CART),
                                   child: const Icon(
+                                    Icons.shopping_cart_outlined,
+                                  )),
+                              IconButton(
+                                  onPressed: () =>
+                                      controller.notificationDialog(),
+                                  // Get.toNamed(Routes.NOTIFICATIONS),
+                                  icon: const Icon(
                                     Icons.notifications_none_outlined,
                                   )),
                             ],

@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -53,10 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBll26yJdTsHpQNIYM40Yl0F_zwYUHDUTY',
-    appId: '1:299918445125:android:c8bb1448ed8ba9acc2312c',
-    messagingSenderId: '299918445125',
-    projectId: 'auto-parts-hub',
-    storageBucket: 'auto-parts-hub.appspot.com',
+    apiKey: 'AIzaSyDiDmZx7iORH4wwVVTEpOaJWgv3pSYmoW8',
+    appId: '1:524531441500:android:d60b6077ff0c512aef2b99',
+    messagingSenderId: '524531441500',
+    projectId: 'autopartshub-e3ad7',
+    storageBucket: 'autopartshub-e3ad7.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBLVoKR0QFa-DgHCSj1NbgPj50RwzSW3sM',
+    appId: '1:524531441500:ios:95bc2c74ee4f64efef2b99',
+    messagingSenderId: '524531441500',
+    projectId: 'autopartshub-e3ad7',
+    storageBucket: 'autopartshub-e3ad7.appspot.com',
+    iosBundleId: 'com.example.autoPartsHub',
+  );
+
 }

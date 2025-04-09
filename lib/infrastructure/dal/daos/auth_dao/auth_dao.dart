@@ -55,7 +55,7 @@ class AuthDao implements AuthRepository {
   @override
   Future<void> signup(UserModel user, String password) async {
     try {
-      if (user.email.contains('@admin.com')) user.isAdmin = true;
+      if (user.email == 'admin@admin.com') user.isAdmin = true;
       await _authServices
           .signUpWithEmailAndPassword(user, password)
           .then((userID) {

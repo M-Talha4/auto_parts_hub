@@ -8,6 +8,7 @@ import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/chat.controller.dart';
+import 'modules/chat_message_module.dart';
 
 class ChatScreen extends GetView<ChatController> {
   const ChatScreen({super.key});
@@ -28,7 +29,7 @@ class ChatScreen extends GetView<ChatController> {
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               StreamBuilder(
                 stream: controller.getMessages(),
@@ -68,58 +69,8 @@ class ChatScreen extends GetView<ChatController> {
                           MessageModel message = messages[index];
                           bool isUserSent =
                               StaticData.userId == message.senderId;
-                          return Column(
-                            crossAxisAlignment: isUserSent
-                                ? CrossAxisAlignment.end
-                                : CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    color: isUserSent
-                                        ? colorScheme(context).secondary
-                                        : colorScheme(context).outlineVariant,
-                                    borderRadius: BorderRadius.only(
-                                      topRight:
-                                          Radius.circular(isUserSent ? 0 : 12),
-                                      topLeft:
-                                          Radius.circular(isUserSent ? 12 : 0),
-                                      bottomRight: const Radius.circular(12),
-                                      bottomLeft: const Radius.circular(12),
-                                    )),
-                                child: ConstrainedBox(
-                                  constraints:
-                                      const BoxConstraints(maxWidth: 250),
-                                  child: CustomText(
-                                    text: message.message,
-                                    color: colorScheme(context).onPrimary,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CustomText(
-                                    text: controller
-                                        .convertTime(message.timestamp),
-                                    fontSize: AppTextSize.bodyMediumFont,
-                                    color: colorScheme(context).outline,
-                                  ),
-                                  isUserSent
-                                      ? Obx(
-                                          () => Icon(
-                                            controller.isLoading.value == true
-                                                ? Icons.timer_outlined
-                                                : Icons.done_all_rounded,
-                                            color: colorScheme(context).outline,
-                                            size: AppTextSize.bodyMediumFont,
-                                          ).paddingOnly(left: 4),
-                                        )
-                                      : const SizedBox()
-                                ],
-                              ),
-                            ],
-                          ).paddingOnly(bottom: 12);
+                          return ChatMessageModule(
+                              isUserSent: isUserSent, message: message);
                         });
                   }
                 },
