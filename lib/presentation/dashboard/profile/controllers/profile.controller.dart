@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/usecase/profile_usecae/update_profile_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/profile_usecae/upload_profile_image_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
+import '/domain/const/static_data.dart';
+import '/domain/core/usecase/profile_usecae/update_profile_usecase.dart';
+import '/domain/core/usecase/profile_usecae/upload_profile_image_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -80,7 +80,7 @@ class ProfileController extends GetxController with LoadingMixin {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
     setLoading(false);
@@ -89,13 +89,15 @@ class ProfileController extends GetxController with LoadingMixin {
   Future<void> _updateUser() async {
     try {
       UserModel user = UserModel(
-          userId: StaticData.userId,
-          name: nameController.text.trim().toString(),
-          email: StaticData.email,
-          isAdmin: StaticData.isAdmin,
-          language: StaticData.language,
-          phoneNo: phoneController.text.trim().toString(),
-          profileImage: StaticData.profileImage);
+        userId: StaticData.userId,
+        name: nameController.text.trim().toString(),
+        email: StaticData.email,
+        isAdmin: StaticData.isAdmin,
+        language: StaticData.language,
+        phoneNo: phoneController.text.trim().toString(),
+        profileImage: StaticData.profileImage,
+        fcmToken: '',
+      );
 
       await _updateProfileUsecase.execute(user);
       isEnabled.value = false;
@@ -104,7 +106,7 @@ class ProfileController extends GetxController with LoadingMixin {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
     setLoading(false);

@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/core/interfaces/product_interdace/products_repository.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/delete_product_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/get_products_usecase.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/product_dao/product_dao.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firebase_storage_service.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/domain/core/interfaces/product_interdace/products_repository.dart';
+import '/domain/core/usecase/products_usecase/delete_product_usecase.dart';
+import '/domain/core/usecase/products_usecase/get_products_usecase.dart';
+import '/infrastructure/dal/daos/product_dao/product_dao.dart';
+import '/infrastructure/dal/services/firebase_services/firebase_storage_service.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../presentation/admin_panel/modules/manage_products/controllers/manage_products.controller.dart';

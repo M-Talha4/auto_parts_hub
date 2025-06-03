@@ -1,15 +1,14 @@
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/entities/cart_entities/cart.dart';
-import 'package:auto_parts_hub/domain/core/usecase/cart_usecase/delete_cart_item_usecae.dart';
-import 'package:auto_parts_hub/domain/core/usecase/cart_usecase/get_cart_items_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/cart_usecase/update_cart_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/cart_models/cart_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_model.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import '/domain/const/static_data.dart';
+import '/domain/core/usecase/cart_usecase/delete_cart_item_usecae.dart';
+import '/domain/core/usecase/cart_usecase/get_cart_items_usecase.dart';
+import '/domain/core/usecase/cart_usecase/update_cart_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/cart_models/cart_model.dart';
+import '/infrastructure/dal/models/order_models/order_model.dart';
+import '/infrastructure/navigation/routes.dart';
 import 'package:get/get.dart';
 
 class MyCartController extends GetxController {
@@ -19,8 +18,8 @@ class MyCartController extends GetxController {
   MyCartController(this._getCartItemsUsecase, this._updateCartUsecase,
       this._deleteCartItemUsecae);
 
-  List<Cart> items = [];
-  RxList<Cart> cartItems = RxList.empty();
+  List<CartModel> items = [];
+  RxList<CartModel> cartItems = RxList.empty();
   RxInt amount = 0.obs;
   RxInt discount = 0.obs;
   RxInt totalAmount = 0.obs;
@@ -34,7 +33,7 @@ class MyCartController extends GetxController {
 
   void _getCartItems() async {
     try {
-      items = await _getCartItemsUsecase.execute() ?? [];
+      items = (await _getCartItemsUsecase.execute() ?? []) as List<CartModel>;
       cartItems.value = items;
       for (var item in cartItems) {
         count.add(item.itemCount);
@@ -44,20 +43,23 @@ class MyCartController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
 
   void increaseItemsCount(index) {
-    cartItems[index].itemCount++;
+    cartItems[index] =
+        cartItems[index].copyWith(itemCount: cartItems[index].itemCount + 1);
     _updateCarItems(cartItems[index].itemId, cartItems[index].itemCount);
     count[index]++;
   }
 
   void decreaseItemsCount(index) {
     if (cartItems[index].itemCount != 1) {
-      cartItems[index].itemCount--;
+      cartItems[index] =
+          cartItems[index].copyWith(itemCount: cartItems[index].itemCount - 1);
+
       _updateCarItems(cartItems[index].itemId, cartItems[index].itemCount);
       count[index]--;
     } else {
@@ -75,7 +77,7 @@ class MyCartController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
@@ -88,7 +90,7 @@ class MyCartController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
@@ -113,12 +115,13 @@ class MyCartController extends GetxController {
   onTapContinue() {
     if (cartItems.isNotEmpty) {
       OrdersModel ordersModel = OrdersModel(
-          orderId: DateTime.now().toString(),
-          customerId: StaticData.userId,
-          customerEmail: StaticData.email,
-          orderStatus: 'IN-PROCESS',
-          orderPrice: totalAmount.value,
-          cartItems: items as List<CartModel>);
+        orderId: DateTime.now().toString(),
+        customerId: StaticData.userId,
+        customerEmail: StaticData.email,
+        orderStatus: 'IN-PROCESS',
+        orderPrice: totalAmount.value,
+        cartItems: items,
+      );
       Get.toNamed(Routes.ADDRESS,
           arguments: {'order': ordersModel, 'amount': amount.value});
     } else {

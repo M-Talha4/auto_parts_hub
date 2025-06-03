@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/domain/core/usecase/orders_usecase/get_user_orders_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/presentation/dashboard/my_orders/module/order_detail.dart';
+import '/domain/core/entities/order_entities/order_entity.dart';
+import '/domain/core/usecase/orders_usecase/get_user_orders_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/presentation/dashboard/my_orders/module/order_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class MyOrdersController extends GetxController
   final GetUserOrdersUsecase _getUserOrdersUsecase;
   MyOrdersController(this._getUserOrdersUsecase);
 
-  RxList<Orders> orderList = RxList.empty();
+  RxList<OrdersEntity> orderList = RxList.empty();
   late TabController tabController;
   int selectedIndex = 0;
   @override
@@ -29,7 +29,7 @@ class MyOrdersController extends GetxController
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }

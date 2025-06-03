@@ -1,11 +1,12 @@
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/assets_paths.dart';
+import '/domain/const/static_data.dart';
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -53,11 +54,11 @@ class ProfileScreen extends GetView<ProfileController> {
                       children: [
                         CircleAvatar(
                           radius: 65,
-                          backgroundColor: colorScheme(context).outline,
+                          backgroundColor: context.colorScheme.outline,
                           child: Obx(
                             () => CircleAvatar(
                               radius: 60,
-                              backgroundColor: colorScheme(context).secondary,
+                              backgroundColor: context.colorScheme.secondary,
                               child: controller.imagePath.value == ''
                                   ? controller.isPicked.value ||
                                           controller.image != null
@@ -73,7 +74,7 @@ class ProfileScreen extends GetView<ProfileController> {
                                           ImagePath.proileAvatarSvg,
                                           height: 80,
                                           colorFilter: ColorFilter.mode(
-                                              colorScheme(context).onSecondary,
+                                              context.colorScheme.onSecondary,
                                               BlendMode.srcIn),
                                         )
                                   : ClipOval(
@@ -93,7 +94,7 @@ class ProfileScreen extends GetView<ProfileController> {
                               onTap: controller.pickFromGallery,
                               child: Icon(
                                 Icons.camera_alt,
-                                color: colorScheme(context).outlineVariant,
+                                color: context.colorScheme.outlineVariant,
                                 size: 26,
                               )),
                         ),
@@ -118,7 +119,7 @@ class ProfileScreen extends GetView<ProfileController> {
                           text: StaticData.userId,
                           maxlines: 2,
                           fontSize: 18,
-                          color: colorScheme(context).secondary,
+                          color: context.colorScheme.secondary,
                           decoration: TextDecoration.underline,
                         ),
                       ),
@@ -132,7 +133,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     () => CustomTextFormField(
                       controller: controller.nameController,
                       isEnabled: controller.isEnabled.value,
-                      validation: (value) => Validation.fieldvalidation(
+                      validator: (value) => Validation.fieldvalidation(
                           value, LocaleKeys.auth_enter_your_name_text.tr),
                     ),
                   ),
@@ -144,7 +145,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     () => CustomTextFormField(
                       controller: controller.phoneController,
                       isEnabled: controller.isEnabled.value,
-                      validation: (value) =>
+                      validator: (value) =>
                           Validation.phoneNumberValidation(value),
                     ),
                   ),
@@ -152,10 +153,14 @@ class ProfileScreen extends GetView<ProfileController> {
                     height: 30,
                   ),
                   Obx(
-                    () => LoadingButton(
-                        onTap: controller.onSave,
-                        text: LocaleKeys.button_save.tr,
-                        isLoading: controller.isLoading.value),
+                    () => controller.isLoading.value
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : CustomButton(
+                            onPressed: controller.onSave,
+                            text: LocaleKeys.button_save.tr,
+                          ),
                   )
                 ]),
           ),

@@ -1,9 +1,10 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/my_cart.controller.dart';
@@ -41,7 +42,7 @@ class MyCartScreen extends GetView<MyCartController> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
-                        width: 1, color: colorScheme(context).primary)),
+                        width: 1, color: context.colorScheme.primary)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -75,7 +76,7 @@ class MyCartScreen extends GetView<MyCartController> {
                     separatorBuilder: (context, index) => Divider(
                           height: height * 0.03,
                           thickness: 1,
-                          color: colorScheme(context).secondary,
+                          color: context.colorScheme.secondary,
                         ),
                     itemBuilder: (context, index) => Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +85,7 @@ class MyCartScreen extends GetView<MyCartController> {
                               height: width * 0.3,
                               width: width * 0.3,
                               decoration: BoxDecoration(
-                                  color: colorScheme(context).secondary,
+                                  color: context.colorScheme.secondary,
                                   borderRadius: BorderRadius.circular(6),
                                   image: DecorationImage(
                                     image: NetworkImage(
@@ -122,7 +123,7 @@ class MyCartScreen extends GetView<MyCartController> {
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           width: 1,
-                                          color: colorScheme(context).primary)),
+                                          color: context.colorScheme.primary)),
                                   child: Obx(
                                     () => CustomText(
                                       text: controller.count[index].toString(),
@@ -141,7 +142,7 @@ class MyCartScreen extends GetView<MyCartController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -159,7 +160,7 @@ class MyCartScreen extends GetView<MyCartController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +180,7 @@ class MyCartScreen extends GetView<MyCartController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,13 +200,13 @@ class MyCartScreen extends GetView<MyCartController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               SizedBox(
                 height: height * 0.015,
               ),
               CustomButton(
-                  onTap: () => controller.onTapContinue(),
+                  onPressed: () => controller.onTapContinue(),
                   text: LocaleKeys.button_continue.tr)
             ]),
           ),

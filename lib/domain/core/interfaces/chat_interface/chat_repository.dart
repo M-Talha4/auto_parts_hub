@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart' show QuerySnapshot;
 
 abstract class ChatRepository {

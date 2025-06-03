@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/product_interdace/products_repository.dart';
+import '/domain/core/interfaces/product_interdace/products_repository.dart';
 
 class DeleteProductUsecase {
   final ProductsRepository _productsRepository;

@@ -1,20 +1,22 @@
 import 'package:get/get.dart';
-import 'package:auto_parts_hub/presentation/splash/controllers/splash.controller.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/splash_interface/splash_repository.dart';
-import 'package:auto_parts_hub/domain/core/usecase/users_usecase/user_config_usecase.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/splash_dao/splash_dao.dart';
+import '../../../../domain/core/usecase/users_usecase/get_current_user_usecase.dart';
+import '../../../dal/services/firebase_services/user_services.dart';
+import '/presentation/splash/controllers/splash.controller.dart';
+import '/domain/core/interfaces/splash_interface/splash_repository.dart';
+import '/infrastructure/dal/daos/splash_dao/splash_dao.dart';
 
 class SplashControllerBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SplashRepository>(
-      () => SplashDao(),
+      () => SplashDao(Get.find<UserServices>()),
     );
-    Get.lazyPut<UserConfigUsecase>(
-      () => UserConfigUsecase(Get.find<SplashRepository>()),
+
+    Get.lazyPut<GetCurrentUserUsecase>(
+      () => GetCurrentUserUsecase(Get.find<SplashRepository>()),
     );
     Get.lazyPut<SplashController>(
-      () => SplashController(Get.find<UserConfigUsecase>()),
+      () => SplashController(Get.find<GetCurrentUserUsecase>()),
     );
   }
 }

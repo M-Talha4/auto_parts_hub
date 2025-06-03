@@ -1,6 +1,6 @@
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'controllers/manage_orders.controller.dart';
 import 'module/order_tab_body.dart';

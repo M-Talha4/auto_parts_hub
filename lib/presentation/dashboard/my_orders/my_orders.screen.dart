@@ -1,5 +1,5 @@
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/generated/locales.generated.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/my_orders.controller.dart';

@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/usecase/chat_usecase.dart/get_chat_list_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
+import '/domain/const/static_data.dart';
+import '/domain/core/usecase/chat_usecase.dart/get_chat_list_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
 import 'package:get/get.dart';
 
 class ChatListController extends GetxController {
@@ -26,7 +26,7 @@ class ChatListController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       }
-      Logger.e(e);
+      Logger.error(message: e);
     }
   }
 }

@@ -1,5 +1,5 @@
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
 
 abstract class HomeRepository {
-  List<Product> searchProducts(String query);
+  List<ProductEntity> searchProducts(String query);
 }

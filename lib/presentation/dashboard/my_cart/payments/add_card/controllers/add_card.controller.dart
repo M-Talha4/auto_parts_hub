@@ -1,8 +1,8 @@
-import 'package:auto_parts_hub/domain/core/usecase/payment_usecase/add_card_usecase.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
-import 'package:auto_parts_hub/presentation/dashboard/my_cart/payments/controllers/payments.controller.dart';
+import '/domain/core/usecase/payment_usecase/add_card_usecase.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
+import '/presentation/dashboard/my_cart/payments/controllers/payments.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

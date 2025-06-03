@@ -1,13 +1,14 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/core/entities/order_entities/order_entity.dart';
+import '/generated/locales.generated.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class TileCartItems extends StatelessWidget {
-  final Orders order;
+  final OrdersEntity order;
   const TileCartItems({super.key, required this.order});
 
   @override
@@ -21,7 +22,7 @@ class TileCartItems extends StatelessWidget {
         separatorBuilder: (context, index) => Divider(
               height: height * 0.03,
               thickness: 1,
-              color: colorScheme(context).secondary,
+              color: context.colorScheme.secondary,
             ),
         itemBuilder: (context, index) {
           return Row(
@@ -31,7 +32,7 @@ class TileCartItems extends StatelessWidget {
                 height: width * 0.3,
                 width: width * 0.3,
                 decoration: BoxDecoration(
-                    color: colorScheme(context).onSurface,
+                    color: context.colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(6),
                     image: DecorationImage(
                       image: NetworkImage(order.cartItems![index].itemImage),
@@ -56,8 +57,8 @@ class TileCartItems extends StatelessWidget {
                       color: order.orderStatus == 'IN-PROCESS'
                           ? Colors.amber
                           : order.orderStatus == 'DELIVERD'
-                              ? colorScheme(context).secondary
-                              : colorScheme(context).error,
+                              ? context.colorScheme.secondary
+                              : context.colorScheme.error,
                     ),
                     Row(
                       children: [
@@ -66,7 +67,7 @@ class TileCartItems extends StatelessWidget {
                         ),
                         CustomText(
                             text: order.cartItems![index].itemCount.toString(),
-                            color: colorScheme(context).secondary),
+                            color: context.colorScheme.secondary),
                       ],
                     ),
                     PriceText(

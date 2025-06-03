@@ -1,6 +1,6 @@
+import '/domain/utils/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../domain/const/global_variable.dart';
 import '../../../../infrastructure/dal/models/chat_model/message_model.dart';
 import '../../../../infrastructure/theme/text_size.dart';
 import '../../../widgets/custom_text.dart';
@@ -23,8 +23,8 @@ class ChatMessageModule extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               color: isUserSent
-                  ? colorScheme(context).secondary
-                  : colorScheme(context).outlineVariant,
+                  ? context.colorScheme.secondary
+                  : context.colorScheme.outlineVariant,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(isUserSent ? 0 : 12),
                 topLeft: Radius.circular(isUserSent ? 12 : 0),
@@ -35,7 +35,7 @@ class ChatMessageModule extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 250),
             child: CustomText(
               text: message.message,
-              color: colorScheme(context).onPrimary,
+              color: context.colorScheme.onPrimary,
             ),
           ),
         ),
@@ -48,7 +48,7 @@ class ChatMessageModule extends StatelessWidget {
                 CustomText(
                   text: controller.convertTime(message.timestamp),
                   fontSize: AppTextSize.bodyMediumFont,
-                  color: colorScheme(context).outline,
+                  color: context.colorScheme.outline,
                 ),
                 isUserSent
                     ? Obx(
@@ -56,7 +56,7 @@ class ChatMessageModule extends StatelessWidget {
                           controller.isLoading.value == true
                               ? Icons.timer_outlined
                               : Icons.done_all_rounded,
-                          color: colorScheme(context).outline,
+                          color: context.colorScheme.outline,
                           size: AppTextSize.bodyMediumFont,
                         ).paddingOnly(left: 4),
                       )

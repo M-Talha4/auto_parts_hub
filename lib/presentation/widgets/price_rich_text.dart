@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
+import '/domain/utils/context_extensions.dart';
 import 'package:flutter/material.dart';
 
 class PriceText extends StatelessWidget {
@@ -36,7 +36,7 @@ class PriceText extends StatelessWidget {
           TextSpan(
             text: ' $currency',
             style: TextStyle(
-              color: currenyColor ?? colorScheme(context).onSurface,
+              color: currenyColor ?? context.colorScheme.onSurface,
               fontSize: fontSize ?? 16,
               fontStyle: fontstyle,
               fontWeight: fontWeight,

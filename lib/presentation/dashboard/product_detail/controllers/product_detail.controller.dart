@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
-import 'package:auto_parts_hub/domain/core/usecase/cart_usecase/add_to_cart_usecase.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/cart_models/cart_model.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
+import '/domain/core/usecase/cart_usecase/add_to_cart_usecase.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/cart_models/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class ProductDetailController extends GetxController with LoadingMixin {
   ProductDetailController(this._addToCartUsecase);
 
   TextEditingController searchController = TextEditingController();
-  Product product = Get.arguments;
+  ProductEntity product = Get.arguments;
   RxInt currentIndex = 0.obs;
 
   addToCart() async {

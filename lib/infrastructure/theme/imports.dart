@@ -9,6 +9,5 @@ export '/infrastructure/theme/widget_theme/tab_bar_theme.dart';
 export '/infrastructure/theme/widget_theme/divider_theme.dart';
 export '/infrastructure/theme/widget_theme/switch_theme.dart';
 export '/infrastructure/theme/widget_theme/card_theme.dart';
-export '/domain/const/global_variable.dart';
 export '../../domain/const/app_colors.dart';
 export 'app_color_scheme.dart';

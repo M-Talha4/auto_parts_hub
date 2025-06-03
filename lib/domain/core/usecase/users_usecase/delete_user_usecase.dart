@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/user_management_interface/user_management_repository.dart';
+import '/domain/core/interfaces/user_management_interface/user_management_repository.dart';
 
 class DeleteUserUsecase {
   final UserManagementRepository _userManagementRepository;

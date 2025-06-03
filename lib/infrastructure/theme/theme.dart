@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../domain/const/global_variable.dart';
 import 'imports.dart';
 
 class AppTheme {

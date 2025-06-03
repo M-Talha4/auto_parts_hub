@@ -1,15 +1,14 @@
-import 'package:auto_parts_hub/domain/core/entities/credit_card_entities/credit_card.dart';
-import 'package:auto_parts_hub/domain/core/usecase/orders_usecase/submit_orders_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/payment_usecase/delete_card_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/payment_usecase/get_card_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_model.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import '/domain/core/usecase/orders_usecase/submit_orders_usecase.dart';
+import '/domain/core/usecase/payment_usecase/delete_card_usecase.dart';
+import '/domain/core/usecase/payment_usecase/get_card_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
+import '/infrastructure/dal/models/order_models/order_model.dart';
+import '/infrastructure/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +25,7 @@ class PaymentsController extends GetxController with LoadingMixin {
   RxInt discount = 0.obs;
   RxInt totalAmount = 0.obs;
   RxBool showCVV = false.obs;
-  RxList<CreditCard> cardList = RxList.empty();
+  RxList<CreditCardModel> cardList = RxList.empty();
 
   @override
   onInit() async {
@@ -36,14 +35,15 @@ class PaymentsController extends GetxController with LoadingMixin {
 
   void _getCardList() async {
     try {
-      cardList.value = await _getCardUsecase.execute() ?? [];
+      cardList.value =
+          (await _getCardUsecase.execute() ?? []) as List<CreditCardModel>;
       totalAmount.value = order.orderPrice!;
       discount.value = amount - totalAmount.value;
     } catch (e) {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
@@ -85,7 +85,7 @@ class PaymentsController extends GetxController with LoadingMixin {
     if (cardList.isNotEmpty) {
       if (selectedIndex.value != -1) {
         setLoading(true);
-        order.paymentDetails = cardList[selectedIndex.value] as CreditCardModel;
+        order = order.copyWith(paymentDetails: cardList[selectedIndex.value]);
         try {
           await _submitOrdersUsecase.execute(order);
           setLoading(false);
@@ -94,7 +94,7 @@ class PaymentsController extends GetxController with LoadingMixin {
           if (e is AppException) {
             showSnackbar(message: e.message!, icon: e.icon, isError: true);
           } else {
-            Logger.e(e.toString());
+            Logger.error(message: e.toString());
           }
         }
       } else {

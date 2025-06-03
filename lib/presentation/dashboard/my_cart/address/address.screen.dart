@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/infrastructure/theme/imports.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/address.controller.dart';
@@ -51,8 +51,8 @@ class AddressScreen extends GetView<AddressController> {
                         return Obx(
                           () => Card(
                             color: controller.selectedIndex.value == index
-                                ? colorScheme(context).secondary
-                                : colorScheme(context).onPrimary,
+                                ? context.colorScheme.secondary
+                                : context.colorScheme.onPrimary,
                             child: ListTile(
                                 onTap: () =>
                                     controller.selectedIndex.value = index,
@@ -64,8 +64,8 @@ class AddressScreen extends GetView<AddressController> {
                                       fontSize: 20,
                                       color: controller.selectedIndex.value ==
                                               index
-                                          ? colorScheme(context).surface
-                                          : colorScheme(context).onSurface,
+                                          ? context.colorScheme.surface
+                                          : context.colorScheme.onSurface,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 subtitle: Column(
@@ -113,8 +113,8 @@ class AddressScreen extends GetView<AddressController> {
                                       Icons.delete,
                                       color: controller.selectedIndex.value ==
                                               index
-                                          ? colorScheme(context).surface
-                                          : colorScheme(context).error,
+                                          ? context.colorScheme.surface
+                                          : context.colorScheme.error,
                                     ))),
                           ),
                         );
@@ -124,7 +124,7 @@ class AddressScreen extends GetView<AddressController> {
               height: 20,
             ),
             CustomButton(
-                onTap: () => controller.onTapContinue(),
+                onPressed: () => controller.onTapContinue(),
                 text: LocaleKeys.button_continue.tr),
             const SizedBox(
               height: 10,
@@ -136,10 +136,10 @@ class AddressScreen extends GetView<AddressController> {
         padding: const EdgeInsets.only(bottom: 50),
         child: FloatingActionButton(
           onPressed: () => Get.toNamed(Routes.ADD_ADDRESS),
-          backgroundColor: colorScheme(context).primary,
+          backgroundColor: context.colorScheme.primary,
           child: Icon(
             Icons.add_location_alt_outlined,
-            color: colorScheme(context).onPrimary,
+            color: context.colorScheme.onPrimary,
             size: 26,
           ),
         ),

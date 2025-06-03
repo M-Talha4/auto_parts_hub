@@ -1,10 +1,10 @@
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
-import 'package:auto_parts_hub/domain/core/usecase/users_usecase/delete_user_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/users_usecase/get_users_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
+import '/domain/core/entities/user_entities/user_entity.dart';
+import '/domain/core/usecase/users_usecase/delete_user_usecase.dart';
+import '/domain/core/usecase/users_usecase/get_users_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +13,7 @@ class ManageUsersController extends GetxController {
   final DeleteUserUsecase _deleteUserUsecase;
   ManageUsersController(this._getUsersUsecase, this._deleteUserUsecase);
 
-  RxList<User> usersList = RxList.empty();
+  RxList<UserEntity> usersList = RxList.empty();
 
   @override
   onInit() {
@@ -28,7 +28,7 @@ class ManageUsersController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       }
-      Logger.e(e);
+      Logger.error(message: e);
     }
   }
 
@@ -68,7 +68,7 @@ class ManageUsersController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       }
-      Logger.e(e);
+      Logger.error(message: e);
     }
   }
 }

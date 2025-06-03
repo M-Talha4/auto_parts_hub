@@ -1,50 +1,50 @@
 import 'package:flutter/foundation.dart';
 
 class Logger {
+  static const String _resetColor = '\x1B[0m'; // Reset
+  static const String _infoColor = '\x1B[32m'; // Green
   static const String _errorColor = '\x1B[31m'; // Red
   static const String _debugColor = '\x1B[34m'; // Blue
-  static const String _infoColor = '\x1B[32m'; // Green
   static const String _warningColor = '\x1B[33m'; // Yellow
-  static const String _resetColor = '\x1B[0m'; // Reset
 
-  static void e(dynamic message) {
+  static void debug({required dynamic message, StackTrace? stackTrace}) {
     if (kDebugMode) {
       var stackTrace = StackTrace.current;
       print(
-          '$_errorColor[ERROR] [${_getCallingMethodName(stackTrace)}]:\n $message $_resetColor');
+          '$_debugColor [DEBUG] $message ${_getCallingMethodName(stackTrace, _debugColor, '[DEBUG]')}$_resetColor');
     }
   }
 
-  static void d(dynamic message) {
+  static void info({required dynamic message}) {
+    if (kDebugMode) {
+      print('$_infoColor [INFO] $message$_resetColor');
+    }
+  }
+
+  static void warning({required dynamic message, StackTrace? stackTrace}) {
     if (kDebugMode) {
       var stackTrace = StackTrace.current;
       print(
-          '$_debugColor[DEBUG] [${_getCallingMethodName(stackTrace)}]:\n$message$_resetColor');
+          '$_warningColor [WARNING] $message ${_getCallingMethodName(stackTrace, _warningColor, '[WARNING]')}$_resetColor');
     }
   }
 
-  static void i(dynamic message) {
+  static void error({required dynamic message, StackTrace? stackTrace}) {
     if (kDebugMode) {
-      var stackTrace = StackTrace.current;
       print(
-          '$_infoColor[INFO] [${_getCallingMethodName(stackTrace)}]:\n$message$_resetColor');
+          '$_errorColor [ERROR] $message ${_getCallingMethodName(stackTrace, _errorColor, '[ERROR]')}$_resetColor');
     }
   }
 
-  static void w(dynamic message) {
-    if (kDebugMode) {
-      var stackTrace = StackTrace.current;
-      print(
-          '$_warningColor[WARNING] [${_getCallingMethodName(stackTrace)}]:\n$message$_resetColor');
+  static String _getCallingMethodName(
+      StackTrace? stackTrace, String color, String type) {
+    if (stackTrace == null) {
+      return '';
     }
-  }
-
-  static String _getCallingMethodName(StackTrace stackTrace) {
     var stackTraceLines = stackTrace.toString().split('\n');
-    if (stackTraceLines.length > 1) {
-      var relevantLine = stackTraceLines[1].trim();
-      return relevantLine;
+    if (stackTraceLines.isNotEmpty) {
+      return '\n $_errorColor [ERROR] [\n${stackTraceLines.join('\n$_warningColor $type ')}\n]';
     }
-    return 'Unknown method';
+    return '';
   }
 }

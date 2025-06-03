@@ -1,11 +1,11 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/imports.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/add_products.controller.dart';
@@ -42,7 +42,7 @@ class AddProductsScreen extends GetView<AddProductsController> {
                     padding: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6),
-                        color: colorScheme(context).outline),
+                        color: context.colorScheme.outline),
                     child: Obx(
                       () => controller.imagePath.value == ''
                           ? controller.isPicked.value ||
@@ -68,7 +68,7 @@ class AddProductsScreen extends GetView<AddProductsController> {
                                     )
                                   : Icon(
                                       Icons.image_outlined,
-                                      color: colorScheme(context).onPrimary,
+                                      color: context.colorScheme.onPrimary,
                                       size: 150,
                                     )
                           : ClipRRect(
@@ -97,7 +97,7 @@ class AddProductsScreen extends GetView<AddProductsController> {
                     CustomTextFormField(
                       controller: controller.nameController,
                       hint: LocaleKeys.admin_panel_enter_product_name_text.tr,
-                      validation: (value) => Validation.fieldvalidation(value,
+                      validator: (value) => Validation.fieldvalidation(value,
                           LocaleKeys.admin_panel_enter_product_name_text.tr),
                     ).paddingOnly(bottom: 12),
                     CustomText(
@@ -106,8 +106,8 @@ class AddProductsScreen extends GetView<AddProductsController> {
                     CustomTextFormField(
                       controller: controller.brandController,
                       hint: LocaleKeys.admin_panel_enter_product_brand_text.tr,
-                      keyboardtype: TextInputType.emailAddress,
-                      validation: (value) => Validation.fieldvalidation(value,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) => Validation.fieldvalidation(value,
                           LocaleKeys.admin_panel_enter_product_brand_text.tr),
                     ).paddingOnly(bottom: 12),
                     CustomText(
@@ -117,10 +117,10 @@ class AddProductsScreen extends GetView<AddProductsController> {
                       controller: controller.vehicleController,
                       hint:
                           LocaleKeys.admin_panel_enter_product_vehicle_text.tr,
-                      label:
+                      labelText:
                           LocaleKeys.admin_panel_enter_product_vehicle_text.tr,
-                      keyboardtype: TextInputType.phone,
-                      validation: (value) => Validation.fieldvalidation(value,
+                      keyboardType: TextInputType.phone,
+                      validator: (value) => Validation.fieldvalidation(value,
                           LocaleKeys.admin_panel_enter_product_vehicle_text.tr),
                     ).paddingOnly(bottom: 12),
                     CustomText(
@@ -129,17 +129,16 @@ class AddProductsScreen extends GetView<AddProductsController> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 12),
                       decoration: BoxDecoration(
-                          color: colorScheme(context).surface,
+                          color: context.colorScheme.surface,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                               width: 1,
-                              color: colorScheme(context).outlineVariant),
+                              color: context.colorScheme.outlineVariant),
                           boxShadow: [
                             BoxShadow(
                                 blurRadius: 3,
-                                color: colorScheme(context)
-                                    .outline
-                                    .withOpacity(0.3),
+                                color:
+                                    context.colorScheme.outline.withAlpha(75),
                                 offset: const Offset(2, 4))
                           ]),
                       child: Obx(
@@ -163,8 +162,8 @@ class AddProductsScreen extends GetView<AddProductsController> {
                     CustomTextFormField(
                       controller: controller.priceController,
                       hint: LocaleKeys.admin_panel_enter_product_price_text.tr,
-                      keyboardtype: TextInputType.visiblePassword,
-                      validation: (value) {
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (value) {
                         RegExp regex = RegExp(r'^\d+$');
                         if (value == null ||
                             !regex.hasMatch(value.toString())) {
@@ -179,21 +178,24 @@ class AddProductsScreen extends GetView<AddProductsController> {
                     CustomTextFormField(
                       controller: controller.descController,
                       hint: LocaleKeys.admin_panel_enter_product_desc_text.tr,
-                      keyboardtype: TextInputType.visiblePassword,
+                      keyboardType: TextInputType.visiblePassword,
                       maxline: 5,
-                      validation: (value) => Validation.fieldvalidation(value,
+                      validator: (value) => Validation.fieldvalidation(value,
                           LocaleKeys.admin_panel_enter_product_desc_text.tr),
                     ).paddingOnly(bottom: 12),
                   ],
                 ),
               ),
-              Obx(() => LoadingButton(
-                    isLoading: controller.isLoading.value,
-                    onTap: () => controller.addOrEdit(),
-                    text: controller.isEditing
-                        ? LocaleKeys.button_edit.tr
-                        : LocaleKeys.button_add.tr,
-                  )),
+              Obx(() => controller.isLoading.value
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : CustomButton(
+                      onPressed: () => controller.addOrEdit(),
+                      text: controller.isEditing
+                          ? LocaleKeys.button_edit.tr
+                          : LocaleKeys.button_add.tr,
+                    )),
             ],
           ),
         ),

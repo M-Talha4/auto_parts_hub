@@ -1,10 +1,10 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/chat_model/message_model.dart';
-import 'package:auto_parts_hub/infrastructure/theme/imports.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/static_data.dart';
+import '/infrastructure/dal/models/chat_model/message_model.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/chat.controller.dart';
@@ -40,7 +40,7 @@ class ChatScreen extends GetView<ChatController> {
                           child: CustomText(
                         text: 'Something went wrong!',
                         fontSize: AppTextSize.headlineSmallFont,
-                        color: colorScheme(context).error,
+                        color: context.colorScheme.error,
                       )),
                     );
                   } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -80,15 +80,15 @@ class ChatScreen extends GetView<ChatController> {
                   Flexible(
                       child: CustomTextFormField(
                     controller: controller.chatController,
-                    bordercolor: colorScheme(context).secondary,
-                    borderradius: 16,
+                    borderColor: context.colorScheme.secondary,
+                    borderRadius: 16,
                     onFieldSubmitted: (p0) => controller.sendMessages(),
                   )),
                   InkWell(
                       onTap: controller.sendMessages,
                       child: Icon(
                         Icons.send,
-                        color: colorScheme(context).primary,
+                        color: context.colorScheme.primary,
                       )).paddingOnly(left: 8)
                 ],
               ),

@@ -1,8 +1,9 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/static_data.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class SettingsScreen extends GetView<SettingsController> {
                 Container(
                   padding: const EdgeInsets.all(6),
                   decoration: BoxDecoration(
-                      color: colorScheme(context).outlineVariant,
+                      color: context.colorScheme.outlineVariant,
                       borderRadius: BorderRadius.circular(4)),
                   child: Obx(
                     () => Row(
@@ -78,14 +79,14 @@ class SettingsScreen extends GetView<SettingsController> {
                             decoration: BoxDecoration(
                                 color:
                                     controller.selectedTheme.value == themeMode
-                                        ? colorScheme(context).primary
-                                        : colorScheme(context).surface,
+                                        ? context.colorScheme.primary
+                                        : context.colorScheme.surface,
                                 borderRadius: BorderRadius.circular(8)),
                             child: CustomText(
                               text: themeMode.tr,
                               color: controller.selectedTheme.value == themeMode
-                                  ? colorScheme(context).onPrimary
-                                  : colorScheme(context).onSurface,
+                                  ? context.colorScheme.onPrimary
+                                  : context.colorScheme.onSurface,
                               textAlign: TextAlign.center,
                             ),
                           ),

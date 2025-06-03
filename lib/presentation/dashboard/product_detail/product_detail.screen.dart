@@ -1,9 +1,10 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/product_detail.controller.dart';
@@ -21,7 +22,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
               icon: Icon(
                 Icons.keyboard_arrow_left,
                 size: AppTextSize.displayMediumFont,
-                color: colorScheme(context).onPrimaryContainer,
+                color: context.colorScheme.onPrimaryContainer,
               )),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -36,7 +37,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                   width: width * 0.85,
                   alignment: Alignment.bottomCenter,
                   decoration: BoxDecoration(
-                    color: colorScheme(context).secondary,
+                    color: context.colorScheme.secondary,
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
                         image: NetworkImage(controller.product.productImage),
@@ -67,7 +68,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                           CustomText(
                             text: controller.product.productBrand,
                             fontSize: AppTextSize.titleSmallFont,
-                            color: colorScheme(context).outline,
+                            color: context.colorScheme.outline,
                             fontWeight: FontWeight.w500,
                           ),
                         ],
@@ -83,7 +84,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                           CustomText(
                             text: controller.product.productVehicle,
                             fontSize: AppTextSize.titleSmallFont,
-                            color: colorScheme(context).outline,
+                            color: context.colorScheme.outline,
                             fontWeight: FontWeight.w500,
                           ),
                         ],
@@ -99,7 +100,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                           CustomText(
                             text: controller.product.productCategory,
                             fontSize: AppTextSize.titleSmallFont,
-                            color: colorScheme(context).outline,
+                            color: context.colorScheme.outline,
                             fontWeight: FontWeight.w500,
                           ),
                         ],
@@ -128,7 +129,7 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                       CustomText(
                         text: controller.product.productDescription,
                         fontSize: AppTextSize.titleSmallFont,
-                        color: colorScheme(context).outline,
+                        color: context.colorScheme.outline,
                         fontWeight: FontWeight.w500,
                       ),
                     ],
@@ -138,14 +139,17 @@ class ProductDetailScreen extends GetView<ProductDetailController> {
                   height: 10,
                 ),
                 Obx(
-                  () => LoadingButton(
-                      onTap: () {
-                        if (!controller.isLoading.value) {
-                          controller.addToCart();
-                        }
-                      },
-                      isLoading: controller.isLoading.value,
-                      text: LocaleKeys.product_detail_add_to_cart_text.tr),
+                  () => controller.isLoading.value
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : CustomButton(
+                          onPressed: () {
+                            if (!controller.isLoading.value) {
+                              controller.addToCart();
+                            }
+                          },
+                          text: LocaleKeys.product_detail_add_to_cart_text.tr),
                 ),
                 const SizedBox(
                   height: 10,

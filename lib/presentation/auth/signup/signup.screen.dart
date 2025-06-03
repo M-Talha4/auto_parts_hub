@@ -1,14 +1,15 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
+import '/domain/utils/context_extensions.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'controllers/signup.controller.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text_field.dart';
 
 class SignupScreen extends GetView<SignupController> {
   const SignupScreen({super.key});
@@ -52,9 +53,9 @@ class SignupScreen extends GetView<SignupController> {
                         CustomTextFormField(
                           controller: controller.nameController,
                           hint: LocaleKeys.auth_enter_your_name_text.tr,
-                          keyboardtype: TextInputType.name,
+                          keyboardType: TextInputType.name,
                           prefixIcon: const Icon(Icons.person),
-                          validation: (value) => Validation.fieldvalidation(
+                          validator: (value) => Validation.fieldvalidation(
                               value, LocaleKeys.auth_enter_your_name_text.tr),
                         ),
                         const SizedBox(
@@ -63,9 +64,9 @@ class SignupScreen extends GetView<SignupController> {
                         CustomTextFormField(
                           controller: controller.emailController,
                           hint: LocaleKeys.auth_enter_your_email_text.tr,
-                          keyboardtype: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.mail),
-                          validation: (value) =>
+                          validator: (value) =>
                               Validation.emaiValidation(value),
                         ),
                         const SizedBox(
@@ -74,9 +75,9 @@ class SignupScreen extends GetView<SignupController> {
                         CustomTextFormField(
                           controller: controller.phoneNoController,
                           hint: LocaleKeys.auth_number_example.tr,
-                          keyboardtype: TextInputType.phone,
+                          keyboardType: TextInputType.phone,
                           prefixIcon: const Icon(Icons.phone),
-                          validation: (value) =>
+                          validator: (value) =>
                               Validation.phoneNumberValidation(value),
                         ),
                         const SizedBox(
@@ -86,7 +87,7 @@ class SignupScreen extends GetView<SignupController> {
                           () => CustomTextFormField(
                             controller: controller.passwordController,
                             hint: LocaleKeys.auth_enter_your_password_text.tr,
-                            keyboardtype: TextInputType.visiblePassword,
+                            keyboardType: TextInputType.visiblePassword,
                             obscureText: controller.hidePassword.value,
                             prefixIcon: const Icon(Icons.lock),
                             suffixIcon: IconButton(
@@ -94,13 +95,13 @@ class SignupScreen extends GetView<SignupController> {
                                 icon: controller.hidePassword.value
                                     ? Icon(
                                         Icons.visibility,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer,
+                                        color: context
+                                            .colorScheme.onPrimaryContainer,
                                       )
                                     : Icon(Icons.visibility_off,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer)),
-                            validation: (value) =>
+                                        color: context
+                                            .colorScheme.onPrimaryContainer)),
+                            validator: (value) =>
                                 Validation.passwordValidation(value),
                           ),
                         ),
@@ -111,7 +112,7 @@ class SignupScreen extends GetView<SignupController> {
                           () => CustomTextFormField(
                             controller: controller.confPasswordController,
                             hint: LocaleKeys.auth_retype_password_text.tr,
-                            keyboardtype: TextInputType.visiblePassword,
+                            keyboardType: TextInputType.visiblePassword,
                             obscureText: controller.hideConfirmPassword.value,
                             prefixIcon: const Icon(Icons.lock),
                             suffixIcon: IconButton(
@@ -120,13 +121,13 @@ class SignupScreen extends GetView<SignupController> {
                                 icon: controller.hideConfirmPassword.value
                                     ? Icon(
                                         Icons.visibility,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer,
+                                        color: context
+                                            .colorScheme.onPrimaryContainer,
                                       )
                                     : Icon(Icons.visibility_off,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer)),
-                            validation: (value) => Validation.confirmPassword(
+                                        color: context
+                                            .colorScheme.onPrimaryContainer)),
+                            validator: (value) => Validation.confirmPassword(
                                 value, controller.passwordController.text),
                           ),
                         ),
@@ -137,11 +138,14 @@ class SignupScreen extends GetView<SignupController> {
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Obx(() => LoadingButton(
-                      isLoading: controller.isLoading.value,
-                      onTap: () => controller.signUp(),
-                      text: LocaleKeys.auth_sign_up_text.tr,
-                    )),
+                Obx(() => controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        onPressed: () => controller.signUp(),
+                        text: LocaleKeys.auth_sign_up_text.tr,
+                      )),
                 SizedBox(
                   height: height * 0.04,
                 ),
@@ -155,7 +159,7 @@ class SignupScreen extends GetView<SignupController> {
                         onPressed: () => Get.offNamed(Routes.LOGIN),
                         child: CustomText(
                           text: LocaleKeys.auth_login_text.tr,
-                          color: colorScheme(context).secondary,
+                          color: context.colorScheme.secondary,
                         )),
                   ],
                 ),

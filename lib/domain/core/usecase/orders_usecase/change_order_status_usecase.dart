@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/orders_interface/orders_repository.dart';
+import '/domain/core/interfaces/orders_interface/orders_repository.dart';
 
 class ChangeOrderStatusUsecase {
   final OrdersRepository _ordersRepository;

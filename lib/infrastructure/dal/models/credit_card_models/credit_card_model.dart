@@ -1,16 +1,51 @@
-import 'dart:convert';
-import '../../../../domain/core/entities/credit_card_entities/credit_card.dart';
+import 'package:json_annotation/json_annotation.dart';
+import '../../../../domain/core/entities/credit_card_entities/credit_card_entity.dart';
 
-class CreditCardModel extends CreditCard {
+part 'credit_card_model.g.dart';
+
+@JsonSerializable()
+class CreditCardModel extends CreditCardEntity {
+  @override
+  @JsonKey(name: 'id', defaultValue: '')
+  final String id;
+
+  @override
+  @JsonKey(name: 'name', defaultValue: '')
+  final String name;
+
+  @override
+  @JsonKey(name: 'cardNo', defaultValue: '')
+  final String cardNo;
+
+  @override
+  @JsonKey(name: 'cardType', defaultValue: '')
+  final String cardType;
+
+  @override
+  @JsonKey(name: 'expDate', defaultValue: '')
+  final String expDate;
+
+  @override
+  @JsonKey(name: 'cvvCode', defaultValue: '')
+  final String cvvCode;
+
   CreditCardModel({
-    required super.id,
-    required super.name,
-    required super.cardNo,
-    required super.cardType,
-    required super.expDate,
-    required super.cvvCode,
-  });
+    required this.id,
+    required this.name,
+    required this.cardNo,
+    required this.cardType,
+    required this.expDate,
+    required this.cvvCode,
+  }) : super(
+          id: id,
+          name: name,
+          cardNo: cardNo,
+          cardType: cardType,
+          expDate: expDate,
+          cvvCode: cvvCode,
+        );
 
+  // CopyWith method
   CreditCardModel copyWith({
     String? id,
     String? name,
@@ -29,42 +64,8 @@ class CreditCardModel extends CreditCard {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'cardNo': cardNo,
-      'cardType': cardType,
-      'expDate': expDate,
-      'cvvCode': cvvCode,
-    };
-  }
-
-  factory CreditCardModel.fromMap(Map<String, dynamic> map) {
-    return CreditCardModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      cardNo: map['cardNo'] as String,
-      cardType: map['cardType'] as String,
-      expDate: map['expDate'] as String,
-      cvvCode: map['cvvCode'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CreditCardModel.fromJson(String source) =>
-      CreditCardModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'CardModel(id: $id, name: $name, cardNo: $cardNo, cardType: $cardType, expDate: $expDate, cvvCode: $cvvCode)';
-  }
-
-  @override
-  bool operator ==(covariant CreditCardModel other) {
-    if (identical(this, other)) return true;
-
+  // Equals method to compare two instances
+  bool equals(CreditCardModel other) {
     return other.id == id &&
         other.name == name &&
         other.cardNo == cardNo &&
@@ -73,13 +74,10 @@ class CreditCardModel extends CreditCard {
         other.cvvCode == cvvCode;
   }
 
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        cardNo.hashCode ^
-        cardType.hashCode ^
-        expDate.hashCode ^
-        cvvCode.hashCode;
-  }
+  // Factory method for json_serializable
+  factory CreditCardModel.fromJson(Map<String, dynamic> json) =>
+      _$CreditCardModelFromJson(json);
+
+  // toJson method for json_serializable
+  Map<String, dynamic> toJson() => _$CreditCardModelToJson(this);
 }

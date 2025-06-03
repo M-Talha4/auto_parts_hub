@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/orders_interface/orders_repository.dart';
-import 'package:auto_parts_hub/domain/exceptions/network_exception.dart';
-import 'package:auto_parts_hub/domain/exceptions/time_out_exception.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/domain/const/static_data.dart';
+import '/domain/core/interfaces/orders_interface/orders_repository.dart';
+import '/domain/exceptions/network_exception.dart';
+import '/domain/exceptions/time_out_exception.dart';
+import '/infrastructure/dal/models/order_models/order_model.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 
 class OrderDao implements OrdersRepository {
   final FireStoreServices _fireStoreServices;
@@ -26,10 +25,10 @@ class OrderDao implements OrdersRepository {
   }
 
   @override
-  Future<List<Orders>?> getUserOrders() async {
+  Future<List<OrdersModel>> getUserOrders() async {
     try {
       return await _fireStoreServices.getOrdersList().then((orders) => orders
-          ?.where((order) => order.customerId == StaticData.userId)
+          .where((order) => order.customerId == StaticData.userId)
           .toList());
     } on SocketException catch (e) {
       throw NetworkException.connectionError(e.message);
@@ -41,7 +40,7 @@ class OrderDao implements OrdersRepository {
   }
 
   @override
-  Future<List<Orders>?> getAllOrders() async {
+  Future<List<OrdersModel>> getAllOrders() async {
     try {
       return await _fireStoreServices.getOrdersList();
     } on SocketException catch (e) {

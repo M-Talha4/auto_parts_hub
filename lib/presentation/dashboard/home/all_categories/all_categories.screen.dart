@@ -1,12 +1,13 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
+import '/domain/utils/context_extensions.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'controllers/all_categories.controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 
 class AllCategoriesScreen extends GetView<AllCategoriesController> {
   const AllCategoriesScreen({super.key});
@@ -45,7 +46,7 @@ class AllCategoriesScreen extends GetView<AllCategoriesController> {
                       width: width * 0.8,
                       alignment: Alignment.bottomCenter,
                       decoration: BoxDecoration(
-                        color: colorScheme(context).primary,
+                        color: context.colorScheme.primary,
                         image: DecorationImage(
                             image: AssetImage(controller.carouselImages[index]),
                             fit: BoxFit.fill),
@@ -55,11 +56,11 @@ class AllCategoriesScreen extends GetView<AllCategoriesController> {
                         height: width * 0.1,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          color: colorScheme(context).primary,
+                          color: context.colorScheme.primary,
                         ),
                         child: CustomText(
                           text: controller.carouselTitles[index].tr,
-                          color: colorScheme(context).onPrimary,
+                          color: context.colorScheme.onPrimary,
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
                         ),
@@ -106,7 +107,7 @@ class AllCategoriesScreen extends GetView<AllCategoriesController> {
                         Container(
                           height: 120,
                           decoration: BoxDecoration(
-                              color: colorScheme(context).onPrimaryContainer,
+                              color: context.colorScheme.onPrimaryContainer,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(width: 1),
                               image: DecorationImage(
@@ -119,7 +120,7 @@ class AllCategoriesScreen extends GetView<AllCategoriesController> {
                           maxlines: 1,
                           overflow: TextOverflow.ellipsis,
                           fontSize: 18,
-                          color: colorScheme(context).primary,
+                          color: context.colorScheme.primary,
                         ),
                         PriceText(
                             price: controller.products[index].productPrice,

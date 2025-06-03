@@ -1,7 +1,7 @@
-import 'package:auto_parts_hub/domain/core/usecase/address_usecase/add_address_usecase.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/address_models/address_model.dart';
-import 'package:auto_parts_hub/presentation/dashboard/my_cart/address/controllers/address.controller.dart';
+import '/domain/core/usecase/address_usecase/add_address_usecase.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/infrastructure/dal/models/address_models/address_model.dart';
+import '/presentation/dashboard/my_cart/address/controllers/address.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

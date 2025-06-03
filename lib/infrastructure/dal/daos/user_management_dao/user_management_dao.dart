@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/user_management_interface/user_management_repository.dart';
-import 'package:auto_parts_hub/domain/exceptions/network_exception.dart';
-import 'package:auto_parts_hub/domain/exceptions/time_out_exception.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/auth_services.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/chat_service.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/domain/core/entities/user_entities/user_entity.dart';
+import '/domain/core/interfaces/user_management_interface/user_management_repository.dart';
+import '/domain/exceptions/network_exception.dart';
+import '/domain/exceptions/time_out_exception.dart';
+import '/infrastructure/dal/services/firebase_services/auth_services.dart';
+import '/infrastructure/dal/services/firebase_services/chat_service.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 
 class UserManagementDao implements UserManagementRepository {
   final ChatService _chatService;
@@ -32,7 +32,7 @@ class UserManagementDao implements UserManagementRepository {
   }
 
   @override
-  Future<List<User>?> getAllUsers() async {
+  Future<List<UserEntity>?> getAllUsers() async {
     try {
       return await _fireStoreServices.getUsersCollection();
     } on SocketException catch (e) {
@@ -45,9 +45,9 @@ class UserManagementDao implements UserManagementRepository {
   }
 
   @override
-  Future<void> checkAccountDeletion(String userId) async {
+  Future<void> checkAccountDeletion() async {
     try {
-      await _authServices.getUserCollection(userId);
+      await _authServices.getUserCollection();
     } on SocketException catch (e) {
       throw NetworkException.connectionError(e.message);
     } on TimeoutException catch (e) {

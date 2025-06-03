@@ -1,11 +1,11 @@
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/logout_usecase.dart';
-import 'package:auto_parts_hub/domain/db/local_storage/my_prefs.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import '/domain/const/assets_paths.dart';
+import '/domain/core/usecase/auth_usecase/logout_usecase.dart';
+import '/domain/db/local_storage/my_prefs.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,7 +88,7 @@ class AdminPanelController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e);
       }
     }
   }

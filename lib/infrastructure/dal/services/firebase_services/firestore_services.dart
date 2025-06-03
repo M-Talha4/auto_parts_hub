@@ -1,18 +1,15 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:auto_parts_hub/domain/const/const.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/entities/cart_entities/cart.dart';
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
-import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
-import 'package:auto_parts_hub/domain/core/entities/address_entities/address.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/cart_models/cart_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/address_models/address_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/product_models/product_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
+import '/domain/const/const.dart';
+import '/domain/const/static_data.dart';
+import '/domain/core/entities/order_entities/order_entity.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
+import '/infrastructure/dal/models/cart_models/cart_model.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
+import '/infrastructure/dal/models/order_models/order_model.dart';
+import '/infrastructure/dal/models/address_models/address_model.dart';
+import '/infrastructure/dal/models/product_models/product_model.dart';
+import '/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
 
 class FireStoreServices extends GetxService {
   CollectionReference usersCollection =
@@ -24,31 +21,36 @@ class FireStoreServices extends GetxService {
   late CollectionReference addressCollection;
   late CollectionReference cardCollection;
   late CollectionReference cartCollection;
-  List<Product> productList = [];
-  List<Orders> orderList = [];
+  List<ProductEntity> productList = [];
+  List<OrdersEntity> orderList = [];
+
   @override
   onInit() {
     loggedIn(StaticData.userId);
     super.onInit();
   }
 
-  Future<void> loggedIn(userId) async {
-    if (StaticData.userId == '') {
-      return;
+  Future<void> loggedIn(String userId) async {
+    if (StaticData.userId == '') return;
+    try {
+      addressCollection = usersCollection
+          .doc(userId)
+          .collection(firebaseUsersSubCollectionAddress);
+      cardCollection = usersCollection
+          .doc(userId)
+          .collection(firebaseUsersSubCollectionCard);
+      cartCollection = usersCollection
+          .doc(userId)
+          .collection(firebaseUsersSubCollectionCart);
+      productList = await getProductsList();
+      orderList = await getOrdersList();
+    } catch (e) {
+      rethrow;
     }
-    addressCollection = usersCollection
-        .doc(userId)
-        .collection(firebaseUsersSubCollectionAddress);
-    cardCollection =
-        usersCollection.doc(userId).collection(firebaseUsersSubCollectionCard);
-    cartCollection =
-        usersCollection.doc(userId).collection(firebaseUsersSubCollectionCart);
-    productList = await getProductsList();
-    orderList = await getOrdersList() ?? [];
   }
 
-// ----------------------------Products ----------------------------------
-  Future<List<Product>> getProductsList() async {
+// ---------------------------- Products ----------------------------------
+  Future<List<ProductModel>> getProductsList() async {
     try {
       QuerySnapshot querySnapshot = await productsCollection.get();
       if (querySnapshot.docs.isEmpty) {
@@ -56,7 +58,7 @@ class FireStoreServices extends GetxService {
       } else {
         return querySnapshot.docs
             .map((doc) =>
-                ProductModel.fromMap(doc.data() as Map<String, dynamic>))
+                ProductModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {
@@ -66,7 +68,7 @@ class FireStoreServices extends GetxService {
 
   Future<void> addProduct(ProductModel product) async {
     try {
-      await productsCollection.doc(product.productId).set(product.toMap());
+      await productsCollection.doc(product.productId).set(product.toJson());
     } catch (e) {
       rethrow;
     }
@@ -74,7 +76,7 @@ class FireStoreServices extends GetxService {
 
   Future<void> updateProduct(ProductModel product) async {
     try {
-      await productsCollection.doc(product.productId).update(product.toMap());
+      await productsCollection.doc(product.productId).update(product.toJson());
     } catch (e) {
       rethrow;
     }
@@ -89,14 +91,15 @@ class FireStoreServices extends GetxService {
   }
 
 // ---------------------------------- Cart ------------------------------------
-  Future<List<Cart>> getCartItems() async {
+  Future<List<CartModel>> getCartItems() async {
     try {
       QuerySnapshot querySnapshot = await cartCollection.get();
       if (querySnapshot.docs.isEmpty) {
         return [];
       } else {
         return querySnapshot.docs
-            .map((doc) => CartModel.fromMap(doc.data() as Map<String, dynamic>))
+            .map(
+                (doc) => CartModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {
@@ -109,7 +112,7 @@ class FireStoreServices extends GetxService {
       DocumentSnapshot docSnapshot =
           await cartCollection.doc(cartItem.itemId).get();
       if (!docSnapshot.exists) {
-        await cartCollection.doc(cartItem.itemId).set(cartItem.toMap());
+        await cartCollection.doc(cartItem.itemId).set(cartItem.toJson());
         return 'done';
       }
       return null;
@@ -150,7 +153,7 @@ class FireStoreServices extends GetxService {
   }
 
 // ----------------------------Address Cllection----------------------------------
-  Future<List<Address>> getAddressList() async {
+  Future<List<AddressModel>> getAddressList() async {
     try {
       QuerySnapshot querySnapshot = await addressCollection.get();
       if (querySnapshot.docs.isEmpty) {
@@ -158,7 +161,7 @@ class FireStoreServices extends GetxService {
       } else {
         return querySnapshot.docs
             .map((doc) =>
-                AddressModel.fromMap(doc.data() as Map<String, dynamic>))
+                AddressModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {
@@ -168,7 +171,7 @@ class FireStoreServices extends GetxService {
 
   Future<void> addAddress(AddressModel address) async {
     try {
-      await addressCollection.doc(address.id).set(address.toMap());
+      await addressCollection.doc(address.id).set(address.toJson());
     } catch (e) {
       rethrow;
     }
@@ -184,7 +187,7 @@ class FireStoreServices extends GetxService {
 
   // //------------------------------------Card/Payment----------------
 
-  Future<List<CreditCardModel>?> getCardList() async {
+  Future<List<CreditCardModel>> getCardList() async {
     try {
       QuerySnapshot querySnapshot = await cardCollection.get();
       if (querySnapshot.docs.isEmpty) {
@@ -192,7 +195,7 @@ class FireStoreServices extends GetxService {
       } else {
         return querySnapshot.docs
             .map((doc) =>
-                CreditCardModel.fromMap(doc.data() as Map<String, dynamic>))
+                CreditCardModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {
@@ -202,7 +205,7 @@ class FireStoreServices extends GetxService {
 
   Future<void> addCard(CreditCardModel card) async {
     try {
-      await cardCollection.doc(card.id).set(card.toMap());
+      await cardCollection.doc(card.id).set(card.toJson());
     } catch (e) {
       rethrow;
     }
@@ -218,7 +221,7 @@ class FireStoreServices extends GetxService {
 
   // //------------------------------- Order  ----------------------------------
 
-  Future<List<Orders>?> getOrdersList() async {
+  Future<List<OrdersModel>> getOrdersList() async {
     try {
       QuerySnapshot querySnapshot = await orderCollection.get();
       if (querySnapshot.docs.isEmpty) {
@@ -226,7 +229,7 @@ class FireStoreServices extends GetxService {
       } else {
         return querySnapshot.docs
             .map((doc) =>
-                OrdersModel.fromMap(doc.data() as Map<String, dynamic>))
+                OrdersModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       }
     } catch (e) {
@@ -236,7 +239,7 @@ class FireStoreServices extends GetxService {
 
   Future<void> submitOrder(OrdersModel order) async {
     try {
-      await orderCollection.doc(order.orderId).set(order.toMap());
+      await orderCollection.doc(order.orderId).set(order.toJson());
       await deleteCartCollection(order.cartItems!);
     } catch (e) {
       rethrow;
@@ -253,14 +256,14 @@ class FireStoreServices extends GetxService {
 
 //------------------------------ User ---------------------------------
 
-  Future<List<User>> getUsersCollection() async {
+  Future<List<UserModel>> getUsersCollection() async {
     try {
       QuerySnapshot querySnapshot = await usersCollection.get();
       if (querySnapshot.docs.isEmpty) {
         return [];
       }
       return querySnapshot.docs
-          .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
     } catch (e) {
       rethrow;

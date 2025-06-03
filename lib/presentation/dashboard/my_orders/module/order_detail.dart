@@ -1,8 +1,9 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/dashboard/my_orders/controllers/my_orders.controller.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/presentation/dashboard/my_orders/controllers/my_orders.controller.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +35,7 @@ class OrderDetail extends GetView<MyOrdersController> {
               separatorBuilder: (context, index) => Divider(
                     height: height * 0.03,
                     thickness: 1,
-                    color: colorScheme(context).secondary,
+                    color: context.colorScheme.secondary,
                   ),
               itemBuilder: (context, index) {
                 return Row(
@@ -44,7 +45,7 @@ class OrderDetail extends GetView<MyOrdersController> {
                       height: width * 0.3,
                       width: width * 0.3,
                       decoration: BoxDecoration(
-                          color: colorScheme(context).onSurface,
+                          color: context.colorScheme.onSurface,
                           borderRadius: BorderRadius.circular(6),
                           image: DecorationImage(
                             image:
@@ -70,8 +71,8 @@ class OrderDetail extends GetView<MyOrdersController> {
                             color: order.orderStatus == 'IN-PROCESS'
                                 ? Colors.amber
                                 : order.orderStatus == 'DELIVERD'
-                                    ? colorScheme(context).secondary
-                                    : colorScheme(context).error,
+                                    ? context.colorScheme.secondary
+                                    : context.colorScheme.error,
                           ),
                           Row(
                             children: [
@@ -81,7 +82,7 @@ class OrderDetail extends GetView<MyOrdersController> {
                               CustomText(
                                   text: order.cartItems![index].itemCount
                                       .toString(),
-                                  color: colorScheme(context).secondary),
+                                  color: context.colorScheme.secondary),
                             ],
                           ),
                           PriceText(

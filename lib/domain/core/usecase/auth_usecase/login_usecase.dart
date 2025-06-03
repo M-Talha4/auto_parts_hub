@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/auth_interface/auth_repository.dart';
+import '/domain/core/interfaces/auth_interface/auth_repository.dart';
 
 class LoginUsecase {
   final AuthRepository _authRepository;

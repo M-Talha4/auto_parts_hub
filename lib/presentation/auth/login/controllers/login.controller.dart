@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/login_usecase.dart';
+import '/domain/utils/logger.dart';
+import '/domain/const/static_data.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/generated/locales.generated.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/domain/core/usecase/auth_usecase/login_usecase.dart';
 
 class LoginController extends GetxController with LoadingMixin {
   final LoginUsecase _loginUsecase;
@@ -55,7 +55,7 @@ class LoginController extends GetxController with LoadingMixin {
               message: LocaleKeys.exception_you_have_been_banned.tr,
               isError: true);
         }
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
       setLoading(false);
     }

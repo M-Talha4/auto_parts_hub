@@ -1,11 +1,12 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/login.controller.dart';
@@ -54,9 +55,9 @@ class LoginScreen extends GetView<LoginController> {
                         CustomTextFormField(
                           controller: controller.emailController,
                           hint: LocaleKeys.auth_enter_your_email_text.tr,
-                          keyboardtype: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.mail),
-                          validation: (value) =>
+                          validator: (value) =>
                               Validation.emaiValidation(value),
                         ),
                         const SizedBox(
@@ -66,7 +67,7 @@ class LoginScreen extends GetView<LoginController> {
                           () => CustomTextFormField(
                             controller: controller.passwordController,
                             hint: LocaleKeys.auth_enter_your_password_text.tr,
-                            keyboardtype: TextInputType.visiblePassword,
+                            keyboardType: TextInputType.visiblePassword,
                             obscureText: controller.hidePassword.value,
                             prefixIcon: const Icon(Icons.lock),
                             suffixIcon: IconButton(
@@ -74,13 +75,13 @@ class LoginScreen extends GetView<LoginController> {
                                 icon: controller.hidePassword.value
                                     ? Icon(
                                         Icons.visibility,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer,
+                                        color: context
+                                            .colorScheme.onPrimaryContainer,
                                       )
                                     : Icon(Icons.visibility_off,
-                                        color: colorScheme(context)
-                                            .onPrimaryContainer)),
-                            validation: (value) =>
+                                        color: context
+                                            .colorScheme.onPrimaryContainer)),
+                            validator: (value) =>
                                 Validation.passwordValidation(value),
                           ),
                         ),
@@ -94,17 +95,20 @@ class LoginScreen extends GetView<LoginController> {
                       onPressed: () => Get.toNamed(Routes.FORGET_PASSWORD),
                       child: CustomText(
                         text: LocaleKeys.auth_forgot_password_text.tr,
-                        color: colorScheme(context).secondary,
+                        color: context.colorScheme.secondary,
                       )),
                 ),
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Obx(() => LoadingButton(
-                      isLoading: controller.isLoading.value,
-                      onTap: () => controller.login(),
-                      text: LocaleKeys.auth_login_text.tr,
-                    )),
+                Obx(() => controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        onPressed: () => controller.login(),
+                        text: LocaleKeys.auth_login_text.tr,
+                      )),
                 SizedBox(
                   height: height * 0.04,
                 ),
@@ -118,7 +122,7 @@ class LoginScreen extends GetView<LoginController> {
                         onPressed: () => Get.offNamed(Routes.SIGNUP),
                         child: CustomText(
                           text: LocaleKeys.auth_sign_up_text.tr,
-                          color: colorScheme(context).secondary,
+                          color: context.colorScheme.secondary,
                         )),
                   ],
                 ),

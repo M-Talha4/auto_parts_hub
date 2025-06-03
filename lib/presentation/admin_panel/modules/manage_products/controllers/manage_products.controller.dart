@@ -1,10 +1,10 @@
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/delete_product_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/get_products_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
+import '/domain/core/usecase/products_usecase/delete_product_usecase.dart';
+import '/domain/core/usecase/products_usecase/get_products_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class ManageProductsController extends GetxController {
     this._deleteProductUsecase,
   );
 
-  RxList<Product> productsList = RxList.empty();
+  RxList<ProductEntity> productsList = RxList.empty();
 
   @override
   void onInit() {
@@ -32,7 +32,7 @@ class ManageProductsController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       }
-      Logger.e(e);
+      Logger.error(message: e);
     }
   }
 
@@ -72,7 +72,7 @@ class ManageProductsController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       }
-      Logger.e(e);
+      Logger.error(message: e);
     }
   }
 }

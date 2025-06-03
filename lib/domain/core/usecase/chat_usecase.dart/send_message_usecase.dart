@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/chat_interface/chat_repository.dart';
+import '/domain/core/interfaces/chat_interface/chat_repository.dart';
 
 class SendMessageUsecase {
   final ChatRepository _chatRepository;

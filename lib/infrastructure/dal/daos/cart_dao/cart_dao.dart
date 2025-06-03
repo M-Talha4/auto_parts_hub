@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:auto_parts_hub/domain/core/entities/cart_entities/cart.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/cart_interface/cart_repository.dart';
-import 'package:auto_parts_hub/domain/exceptions/network_exception.dart';
-import 'package:auto_parts_hub/domain/exceptions/time_out_exception.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/cart_models/cart_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/domain/core/interfaces/cart_interface/cart_repository.dart';
+import '/domain/exceptions/network_exception.dart';
+import '/domain/exceptions/time_out_exception.dart';
+import '/infrastructure/dal/models/cart_models/cart_model.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 
 class CartDao implements CartRepository {
   final FireStoreServices _fireStoreServices;
@@ -25,7 +24,7 @@ class CartDao implements CartRepository {
   }
 
   @override
-  Future<List<Cart>?> getCartItems() async {
+  Future<List<CartModel>> getCartItems() async {
     try {
       return await _fireStoreServices.getCartItems();
     } on SocketException catch (e) {

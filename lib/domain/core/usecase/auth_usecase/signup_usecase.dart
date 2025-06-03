@@ -1,5 +1,5 @@
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/auth_interface/auth_repository.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
+import '/domain/core/interfaces/auth_interface/auth_repository.dart';
 
 class SignupUsecase {
   final AuthRepository _authRepository;

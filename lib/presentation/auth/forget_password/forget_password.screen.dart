@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'controllers/forget_password.controller.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text_field.dart';
 
 class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
   const ForgetPasswordScreen({super.key});
@@ -58,9 +58,9 @@ class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
                         CustomTextFormField(
                           controller: controller.emailController,
                           hint: LocaleKeys.auth_enter_your_email_text.tr,
-                          keyboardtype: TextInputType.emailAddress,
+                          keyboardType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.mail),
-                          validation: (value) =>
+                          validator: (value) =>
                               Validation.emaiValidation(value),
                         ),
                       ],
@@ -70,11 +70,14 @@ class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Obx(() => LoadingButton(
-                      isLoading: controller.isLoading.value,
-                      onTap: () => controller.resetPassword(),
-                      text: LocaleKeys.auth_reset_text.tr,
-                    )),
+                Obx(() => controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        onPressed: () => controller.resetPassword(),
+                        text: LocaleKeys.auth_reset_text.tr,
+                      )),
               ],
             ),
           ),

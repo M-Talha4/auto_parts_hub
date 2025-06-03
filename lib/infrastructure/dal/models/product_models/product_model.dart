@@ -1,18 +1,63 @@
-import 'dart:convert';
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
+import 'package:json_annotation/json_annotation.dart';
+import '../../../../domain/core/entities/product_entities/product_entity.dart';
 
-class ProductModel extends Product {
+part 'product_model.g.dart';
+
+@JsonSerializable()
+class ProductModel extends ProductEntity {
+  @override
+  @JsonKey(name: 'productId')
+  final String productId;
+
+  @override
+  @JsonKey(name: 'productBrand')
+  final String productBrand;
+
+  @override
+  @JsonKey(name: 'productCategory')
+  final String productCategory;
+
+  @override
+  @JsonKey(name: 'productDescription')
+  final String productDescription;
+
+  @override
+  @JsonKey(name: 'productImage')
+  final String productImage;
+
+  @override
+  @JsonKey(name: 'productName')
+  final String productName;
+
+  @override
+  @JsonKey(name: 'productPrice')
+  final int productPrice;
+
+  @override
+  @JsonKey(name: 'productVehicle')
+  final String productVehicle;
+
   ProductModel({
-    required super.productId,
-    required super.productBrand,
-    required super.productCategory,
-    required super.productDescription,
-    required super.productImage,
-    required super.productName,
-    required super.productPrice,
-    required super.productVehicle,
-  });
+    required this.productId,
+    required this.productBrand,
+    required this.productCategory,
+    required this.productDescription,
+    required this.productImage,
+    required this.productName,
+    required this.productPrice,
+    required this.productVehicle,
+  }) : super(
+          productId: productId,
+          productBrand: productBrand,
+          productCategory: productCategory,
+          productDescription: productDescription,
+          productImage: productImage,
+          productName: productName,
+          productPrice: productPrice,
+          productVehicle: productVehicle,
+        );
 
+  // CopyWith method
   ProductModel copyWith({
     String? productId,
     String? productBrand,
@@ -35,47 +80,10 @@ class ProductModel extends Product {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'productId': productId,
-      'productBrand': productBrand,
-      'productCategory': productCategory,
-      'productDescription': productDescription,
-      'productImage': productImage,
-      'productName': productName,
-      'productPrice': productPrice,
-      'productVehicle': productVehicle,
-    };
-  }
-
-  factory ProductModel.fromMap(Map<String, dynamic> map) {
-    return ProductModel(
-      productId: map['productId'] as String,
-      productBrand: map['productBrand'] as String,
-      productCategory: map['productCategory'] as String,
-      productDescription: map['productDescription'] as String,
-      productImage: map['productImage'] as String,
-      productName: map['productName'] as String,
-      productPrice: map['productPrice'] as int,
-      productVehicle: map['productVehicle'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductModel.fromJson(String source) =>
-      ProductModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'ProductModel(productId: $productId, productBrand: $productBrand, productCategory: $productCategory, productDescription: $productDescription, productImage: $productImage, productName: $productName, productPrice: $productPrice, productVehicle: $productVehicle)';
-  }
-
-  @override
-  bool operator ==(covariant ProductModel other) {
-    if (identical(this, other)) return true;
-
-    return other.productId == productId &&
+  // Equals method
+  bool equals(Object other) {
+    return other is ProductModel &&
+        other.productId == productId &&
         other.productBrand == productBrand &&
         other.productCategory == productCategory &&
         other.productDescription == productDescription &&
@@ -85,15 +93,9 @@ class ProductModel extends Product {
         other.productVehicle == productVehicle;
   }
 
-  @override
-  int get hashCode {
-    return productId.hashCode ^
-        productBrand.hashCode ^
-        productCategory.hashCode ^
-        productDescription.hashCode ^
-        productImage.hashCode ^
-        productName.hashCode ^
-        productPrice.hashCode ^
-        productVehicle.hashCode;
-  }
+  // JSON Serialization Methods
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 }

@@ -1,10 +1,11 @@
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/utils/validation.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text_form_field.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/assets_paths.dart';
+import '/domain/utils/validation.dart';
+import '/generated/locales.generated.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/add_card.controller.dart';
@@ -50,14 +51,13 @@ class AddCardScreen extends GetView<AddCardController> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           decoration: BoxDecoration(
-                              color: colorScheme(context).onPrimary,
+                              color: context.colorScheme.onPrimary,
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
                                     blurRadius: 3,
-                                    color: colorScheme(context)
-                                        .outline
-                                        .withOpacity(0.3),
+                                    color: context.colorScheme.outline
+                                        .withAlpha(75),
                                     offset: const Offset(2, 4))
                               ]),
                           child: Row(
@@ -106,9 +106,9 @@ class AddCardScreen extends GetView<AddCardController> {
                         CustomTextFormField(
                           controller: controller.nameController,
                           hint: LocaleKeys.payment_enter_name_on_card_text.tr,
-                          keyboardtype: TextInputType.name,
+                          keyboardType: TextInputType.name,
                           prefixIcon: const Icon(Icons.label),
-                          validation: (value) => Validation.fieldvalidation(
+                          validator: (value) => Validation.fieldvalidation(
                               value,
                               LocaleKeys.payment_enter_name_on_card_text.tr),
                         ),
@@ -118,9 +118,9 @@ class AddCardScreen extends GetView<AddCardController> {
                         CustomTextFormField(
                           controller: controller.cardNoController,
                           hint: LocaleKeys.payment_card_no_example_text.tr,
-                          keyboardtype: TextInputType.text,
+                          keyboardType: TextInputType.text,
                           prefixIcon: const Icon(Icons.numbers),
-                          validation: (value) =>
+                          validator: (value) =>
                               Validation.cardNumberValidation(value),
                         ),
                         const SizedBox(
@@ -134,10 +134,10 @@ class AddCardScreen extends GetView<AddCardController> {
                                 hint:
                                     LocaleKeys.payment_exp_date_example_text.tr,
                                 maxLength: 5,
-                                keyboardtype: TextInputType.datetime,
+                                keyboardType: TextInputType.datetime,
                                 prefixIcon:
                                     const Icon(Icons.date_range_outlined),
-                                validation: (value) =>
+                                validator: (value) =>
                                     Validation.expiryDateValidation(
                                   value,
                                 ),
@@ -152,9 +152,9 @@ class AddCardScreen extends GetView<AddCardController> {
                                 hint:
                                     LocaleKeys.payment_cvv_code_example_text.tr,
                                 maxLength: 3,
-                                keyboardtype: TextInputType.number,
+                                keyboardType: TextInputType.number,
                                 prefixIcon: const Icon(Icons.numbers),
-                                validation: (value) => Validation.cvvValidation(
+                                validator: (value) => Validation.cvvValidation(
                                   value,
                                 ),
                               ),
@@ -171,11 +171,14 @@ class AddCardScreen extends GetView<AddCardController> {
                 SizedBox(
                   height: height * 0.04,
                 ),
-                Obx(() => LoadingButton(
-                      isLoading: controller.isLoading.value,
-                      onTap: () => controller.addCard(),
-                      text: LocaleKeys.button_add.tr,
-                    )),
+                Obx(() => controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        onPressed: () => controller.addCard(),
+                        text: LocaleKeys.button_add.tr,
+                      )),
                 SizedBox(
                   height: height * 0.04,
                 ),

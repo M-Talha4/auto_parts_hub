@@ -1,13 +1,26 @@
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user_config.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/splash_interface/splash_repository.dart';
-import 'package:auto_parts_hub/domain/db/local_storage/my_prefs.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+import 'dart:io';
+import '../../services/firebase_services/user_services.dart';
+import '/domain/core/interfaces/splash_interface/splash_repository.dart';
+import '../../../../domain/exceptions/network_exception.dart';
+import '../../../../domain/exceptions/time_out_exception.dart';
 
 class SplashDao implements SplashRepository {
+  final UserServices _userServices;
+
+  SplashDao(this._userServices);
+
   @override
-  Future<UserConfig> getUserConfig() async {
-    return UserConfig(
-        isAdmin: MyPrefs.getAdmin(),
-        language: MyPrefs.getLanguage(),
-        user: MyPrefs.getUser());
+  Future<void> getCurrentUser() async {
+    try {
+      await _userServices.getUserData();
+    } on SocketException catch (e) {
+      throw NetworkException.connectionError(e.message);
+    } on TimeoutException catch (e) {
+      throw RequestTimeoutException.timeOut(e.message!);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

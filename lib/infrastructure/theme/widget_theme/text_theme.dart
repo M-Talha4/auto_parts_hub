@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../domain/const/global_variable.dart';
 import '../text_size.dart';
 import '../imports.dart';
 

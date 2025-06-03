@@ -1,22 +1,23 @@
-import 'package:auto_parts_hub/domain/core/interfaces/auth_interface/auth_repository.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/home_interface/home_repository.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/product_interdace/products_repository.dart';
-import 'package:auto_parts_hub/domain/core/interfaces/user_management_interface/user_management_repository.dart';
-import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/logout_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/get_products_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/home_usecase/search_product_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/users_usecase/check_account_deletion_usecase.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/auth_dao/auth_dao.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/home_dao/home_dao.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/product_dao/product_dao.dart';
-import 'package:auto_parts_hub/infrastructure/dal/daos/user_management_dao/user_management_dao.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/auth_services.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/chat_service.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firebase_storage_service.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/domain/core/interfaces/auth_interface/auth_repository.dart';
+import '/domain/core/interfaces/home_interface/home_repository.dart';
+import '/domain/core/interfaces/product_interdace/products_repository.dart';
+import '/domain/core/interfaces/user_management_interface/user_management_repository.dart';
+import '/domain/core/usecase/auth_usecase/logout_usecase.dart';
+import '/domain/core/usecase/products_usecase/get_products_usecase.dart';
+import '/domain/core/usecase/home_usecase/search_product_usecase.dart';
+import '/domain/core/usecase/users_usecase/check_account_deletion_usecase.dart';
+import '/infrastructure/dal/daos/auth_dao/auth_dao.dart';
+import '/infrastructure/dal/daos/home_dao/home_dao.dart';
+import '/infrastructure/dal/daos/product_dao/product_dao.dart';
+import '/infrastructure/dal/daos/user_management_dao/user_management_dao.dart';
+import '/infrastructure/dal/services/firebase_services/auth_services.dart';
+import '/infrastructure/dal/services/firebase_services/chat_service.dart';
+import '/infrastructure/dal/services/firebase_services/firebase_storage_service.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 import 'package:get/get.dart';
 
 import '../../../../../presentation/dashboard/home/controllers/home.controller.dart';
+import '../../../../dal/services/firebase_services/notification_services.dart';
 
 class HomeControllerBinding extends Bindings {
   @override
@@ -25,7 +26,7 @@ class HomeControllerBinding extends Bindings {
       () => HomeDao(Get.find<FireStoreServices>()),
     );
     Get.lazyPut<AuthRepository>(
-      () => AuthDao(Get.find<AuthServices>()),
+      () => AuthDao(Get.find<AuthServices>(), Get.find<NotificationServices>()),
     );
     Get.lazyPut<ProductsRepository>(
       () => ProductDao(
@@ -48,9 +49,9 @@ class HomeControllerBinding extends Bindings {
       () => CheckAccountDeletionUsecase(Get.find<UserManagementRepository>()),
     );
     Get.lazyPut<HomeController>(() => HomeController(
-        Get.find<GetProductsUsecase>(),
-        Get.find<SearchProductUsecase>(),
-        Get.find<LogoutUsecase>(),
-        Get.find<CheckAccountDeletionUsecase>()));
+          Get.find<GetProductsUsecase>(),
+          Get.find<SearchProductUsecase>(),
+          Get.find<LogoutUsecase>(),
+        ));
   }
 }

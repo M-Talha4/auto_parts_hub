@@ -1,14 +1,48 @@
-import 'dart:convert';
-import 'package:auto_parts_hub/domain/core/entities/cart_entities/cart.dart';
+import 'package:json_annotation/json_annotation.dart';
+import '/domain/core/entities/cart_entities/cart_entity.dart';
 
-class CartModel extends Cart {
+part 'cart_model.g.dart';
+
+@JsonSerializable()
+class CartModel extends CartEntity {
+  @override
+  @JsonKey(name: 'itemId', defaultValue: '')
+  final String itemId;
+
+  @override
+  @JsonKey(name: 'itemName', defaultValue: '')
+  final String itemName;
+
+  @override
+  @JsonKey(name: 'itemCount', defaultValue: 0)
+  final int itemCount;
+
+  @override
+  @JsonKey(name: 'itemImage', defaultValue: '')
+  final String itemImage;
+
+  @override
+  @JsonKey(name: 'itemPrice', defaultValue: 0)
+  final int itemPrice;
+
   CartModel({
-    required super.itemId,
-    required super.itemName,
-    required super.itemCount,
-    required super.itemImage,
-    required super.itemPrice,
-  });
+    required this.itemId,
+    required this.itemName,
+    required this.itemCount,
+    required this.itemImage,
+    required this.itemPrice,
+  }) : super(
+          itemId: itemId,
+          itemName: itemName,
+          itemCount: itemCount,
+          itemImage: itemImage,
+          itemPrice: itemPrice,
+        );
+
+  factory CartModel.fromJson(Map<String, dynamic> json) =>
+      _$CartModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CartModelToJson(this);
 
   CartModel copyWith({
     String? itemId,
@@ -26,53 +60,12 @@ class CartModel extends Cart {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'itemId': itemId,
-      'itemName': itemName,
-      'itemCount': itemCount,
-      'itemImage': itemImage,
-      'itemPrice': itemPrice,
-    };
-  }
-
-  factory CartModel.fromMap(Map<String, dynamic> map) {
-    return CartModel(
-      itemId: map['itemId'] as String,
-      itemName: map['itemName'] as String,
-      itemCount: map['itemCount'] as int,
-      itemImage: map['itemImage'] as String,
-      itemPrice: map['itemPrice'] as int,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CartModel.fromJson(String source) =>
-      CartModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'CartModel(itemId: $itemId, itemName: $itemName, itemCount: $itemCount, itemImage: $itemImage, itemPrice: $itemPrice)';
-  }
-
-  @override
-  bool operator ==(covariant CartModel other) {
-    if (identical(this, other)) return true;
-
-    return other.itemId == itemId &&
-        other.itemName == itemName &&
-        other.itemCount == itemCount &&
-        other.itemImage == itemImage &&
-        other.itemPrice == itemPrice;
-  }
-
-  @override
-  int get hashCode {
-    return itemId.hashCode ^
-        itemName.hashCode ^
-        itemCount.hashCode ^
-        itemImage.hashCode ^
-        itemPrice.hashCode;
+  // equals method to compare two instances
+  bool equals(CartModel other) {
+    return itemId == other.itemId &&
+        itemName == other.itemName &&
+        itemCount == other.itemCount &&
+        itemImage == other.itemImage &&
+        itemPrice == other.itemPrice;
   }
 }

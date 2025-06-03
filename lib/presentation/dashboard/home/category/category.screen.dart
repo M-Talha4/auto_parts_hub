@@ -1,12 +1,11 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/infrastructure/theme/imports.dart';
+import 'package:auto_parts_hub/domain/utils/context_extensions.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'controllers/category.controller.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/generated/locales.generated.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/price_rich_text.dart';
 
 class CategoryScreen extends GetView<CategoryController> {
   const CategoryScreen({super.key});
@@ -67,7 +66,7 @@ class CategoryScreen extends GetView<CategoryController> {
                                     ))),
                             background: Container(
                               decoration: BoxDecoration(
-                                color: colorScheme(context).secondary,
+                                color: context.colorScheme.secondary,
                                 borderRadius: const BorderRadius.vertical(
                                     bottom: Radius.circular(30)),
                                 image: DecorationImage(
@@ -102,7 +101,7 @@ class CategoryScreen extends GetView<CategoryController> {
                             Container(
                               height: 120,
                               decoration: BoxDecoration(
-                                  color: colorScheme(context).shadow,
+                                  color: context.colorScheme.shadow,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(width: 1),
                                   image: DecorationImage(
@@ -115,7 +114,7 @@ class CategoryScreen extends GetView<CategoryController> {
                               maxlines: 1,
                               overflow: TextOverflow.ellipsis,
                               fontSize: 18,
-                              color: colorScheme(context).primary,
+                              color: context.colorScheme.primary,
                             ),
                             PriceText(
                                 price: controller.products[index].productPrice,

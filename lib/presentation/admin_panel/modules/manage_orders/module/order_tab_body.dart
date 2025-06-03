@@ -1,8 +1,9 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/admin_panel/modules/manage_orders/controllers/manage_orders.controller.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/admin_panel/modules/manage_orders/controllers/manage_orders.controller.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'tile_cart_items.dart';
@@ -55,7 +56,7 @@ class OrderTabBody extends GetView<ManageOrdersController> {
                                               'CANCELLED'),
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor:
-                                              colorScheme(context).error),
+                                              context.colorScheme.error),
                                       child: CustomText(
                                           text: LocaleKeys.button_cancel.tr)),
                                 ElevatedButton(
@@ -77,7 +78,7 @@ class OrderTabBody extends GetView<ManageOrdersController> {
                           : Center(
                               child: CustomText(
                               text: LocaleKeys.order_order_delivered.tr,
-                              color: colorScheme(context).primary,
+                              color: context.colorScheme.primary,
                               fontSize: AppTextSize.bodyLargeFont,
                             )).paddingOnly(bottom: 8, left: 8, right: 8),
                     ],

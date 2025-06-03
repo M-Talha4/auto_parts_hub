@@ -1,13 +1,14 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/presentation/admin_panel/controllers/admin_panel.controller.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/presentation/admin_panel/controllers/admin_panel.controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/const/static_data.dart';
+import '/domain/const/assets_paths.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
 
 class AdminPanelDrawer extends GetView<AdminPanelController> {
   const AdminPanelDrawer({super.key});
@@ -21,7 +22,7 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
         width: width * 0.75,
         height: height,
         decoration: BoxDecoration(
-            color: colorScheme(context).onPrimary,
+            color: context.colorScheme.onPrimary,
             borderRadius:
                 const BorderRadius.horizontal(right: Radius.circular(12))),
         child: SingleChildScrollView(
@@ -33,7 +34,7 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
                     height: 200,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: colorScheme(context).primary,
+                      color: context.colorScheme.primary,
                       borderRadius: const BorderRadius.horizontal(
                           right: Radius.circular(12)),
                     ),
@@ -44,10 +45,10 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
                         InkWell(
                           onTap: () => Get.back(),
                           child: Container(
-                            color: colorScheme(context).primary,
+                            color: context.colorScheme.primary,
                             child: Icon(
                               Icons.close,
-                              color: colorScheme(context).onPrimary,
+                              color: context.colorScheme.onPrimary,
                               size: width * 0.048,
                             ),
                           ),
@@ -56,16 +57,16 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
                           children: [
                             CircleAvatar(
                               radius: 28,
-                              backgroundColor: colorScheme(context).onPrimary,
+                              backgroundColor: context.colorScheme.onPrimary,
                               child: CircleAvatar(
                                 radius: 25,
-                                backgroundColor: colorScheme(context).secondary,
+                                backgroundColor: context.colorScheme.secondary,
                                 child: StaticData.profileImage == ''
                                     ? SvgPicture.asset(
                                         ImagePath.proileAvatarSvg,
                                         height: 35,
                                         colorFilter: ColorFilter.mode(
-                                            colorScheme(context).onPrimary,
+                                            context.colorScheme.onPrimary,
                                             BlendMode.srcIn),
                                       )
                                     : ClipOval(
@@ -85,13 +86,13 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
                               children: [
                                 CustomText(
                                   text: StaticData.name,
-                                  color: colorScheme(context).onPrimary,
+                                  color: context.colorScheme.onPrimary,
                                   fontWeight: FontWeight.w500,
                                   fontSize: AppTextSize.bodySmallFont,
                                 ),
                                 CustomText(
                                   text: StaticData.email,
-                                  color: colorScheme(context).onPrimary,
+                                  color: context.colorScheme.onPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: AppTextSize.bodySmallFont,
                                 ),

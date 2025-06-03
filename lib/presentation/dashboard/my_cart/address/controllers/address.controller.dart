@@ -1,14 +1,15 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/core/entities/address_entities/address.dart';
-import 'package:auto_parts_hub/domain/core/usecase/address_usecase/delete_address_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/address_usecase/get_address_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/address_models/address_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/order_models/order_model.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/core/entities/address_entities/address_entity.dart';
+import '/domain/core/usecase/address_usecase/delete_address_usecase.dart';
+import '/domain/core/usecase/address_usecase/get_address_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/address_models/address_model.dart';
+import '/infrastructure/dal/models/order_models/order_model.dart';
+import '/infrastructure/navigation/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class AddressController extends GetxController {
   AddressController(this._getAddressUsecase, this._deleteAddressUsecase);
 
   RxInt selectedIndex = (0).obs;
-  RxList<Address> addressList = RxList.empty();
+  RxList<AddressEntity> addressList = RxList.empty();
 
   @override
   onInit() async {
@@ -33,7 +34,7 @@ class AddressController extends GetxController {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
@@ -74,20 +75,20 @@ class AddressController extends GetxController {
   TextStyle textStyle(int index) {
     return selectedIndex.value == index
         ? TextStyle(
-            color: colorScheme(Get.context).surface,
+            color: Get.context?.colorScheme.surface,
             fontWeight: FontWeight.w600)
         : TextStyle(
-            color: colorScheme(Get.context).onSurface,
+            color: Get.context?.colorScheme.onSurface,
             fontWeight: FontWeight.w600);
   }
 
   TextStyle textStyle2(int index) {
     return selectedIndex.value == index
         ? TextStyle(
-            color: colorScheme(Get.context).onSurface,
+            color: Get.context?.colorScheme.onSurface,
             fontWeight: FontWeight.w600)
         : TextStyle(
-            color: colorScheme(Get.context).outlineVariant,
+            color: Get.context?.colorScheme.outlineVariant,
             fontWeight: FontWeight.w600);
   }
 
@@ -96,8 +97,8 @@ class AddressController extends GetxController {
       if (selectedIndex.value != -1) {
         int amount = Get.arguments['amount'];
         OrdersModel orders = Get.arguments['order'];
-        orders.shippingAddress =
-            addressList[selectedIndex.value] as AddressModel;
+        orders = orders.copyWith(
+            shippingAddress: addressList[selectedIndex.value] as AddressModel);
         Get.toNamed(Routes.PAYMENTS,
             arguments: {'order': orders, 'amount': amount});
       } else {

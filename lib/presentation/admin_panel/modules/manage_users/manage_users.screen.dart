@@ -1,8 +1,9 @@
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/assets_paths.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter_svg/svg.dart';
 import 'controllers/manage_users.controller.dart';
 import 'package:flutter/material.dart';
@@ -36,17 +37,17 @@ class ManageUsersScreen extends GetView<ManageUsersController> {
                         children: [
                           CircleAvatar(
                             radius: 44,
-                            backgroundColor: colorScheme(context).outline,
+                            backgroundColor: context.colorScheme.outline,
                             child: CircleAvatar(
                               radius: 40,
-                              backgroundColor: colorScheme(context).secondary,
+                              backgroundColor: context.colorScheme.secondary,
                               child: controller.usersList[index].profileImage ==
                                       ''
                                   ? SvgPicture.asset(
                                       ImagePath.proileAvatarSvg,
                                       height: 50,
                                       colorFilter: ColorFilter.mode(
-                                          colorScheme(context).onSecondary,
+                                          context.colorScheme.onSecondary,
                                           BlendMode.srcIn),
                                     )
                                   : ClipOval(
@@ -84,7 +85,7 @@ class ManageUsersScreen extends GetView<ManageUsersController> {
                                     ),
                                     CustomText(
                                         text: controller.usersList[index].email,
-                                        color: colorScheme(context).secondary),
+                                        color: context.colorScheme.secondary),
                                   ],
                                 ),
                               ],

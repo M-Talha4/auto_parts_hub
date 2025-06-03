@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:auto_parts_hub/domain/core/usecase/users_usecase/user_config_usecase.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
+import '../../../infrastructure/dal/services/firebase_services/user_services.dart';
+import '/infrastructure/navigation/routes.dart';
+import '../../../domain/core/usecase/users_usecase/get_current_user_usecase.dart';
 
 class SplashController extends GetxController {
-  final UserConfigUsecase _userConfigUsecase;
-  SplashController(this._userConfigUsecase);
+  final GetCurrentUserUsecase _getCurrentUserUsecase;
+  SplashController(this._getCurrentUserUsecase);
 
   bool isDarkMode = (Get.theme.brightness == Brightness.dark);
   @override
@@ -16,17 +17,14 @@ class SplashController extends GetxController {
   }
 
   Future<void> getUserConfig() async {
-    var userConfig = await _userConfigUsecase.execute();
-    Timer(const Duration(seconds: 2), () {
-      if (userConfig.language == null) {
-        Get.offNamed(Routes.LANGUAGE);
-      } else if (userConfig.user != null) {
-        userConfig.isAdmin == true
-            ? Get.offNamed(Routes.ADMIN_PANEL)
-            : Get.offNamed(Routes.HOME);
-      } else {
-        Get.offNamed(Routes.LOGIN);
-      }
-    });
+    await _getCurrentUserUsecase.execute();
+    var user = Get.find<UserServices>().user.value;
+    if (user.userId.isEmpty) {
+      Get.offNamed(Routes.LOGIN);
+    } else {
+      user.isAdmin == true
+          ? Get.offNamed(Routes.ADMIN_PANEL)
+          : Get.offNamed(Routes.HOME);
+    }
   }
 }

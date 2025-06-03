@@ -1,12 +1,12 @@
 import 'dart:async';
-import 'package:auto_parts_hub/infrastructure/dal/services/firebase_services/firestore_services.dart';
+import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:auto_parts_hub/domain/const/const.dart';
+import '/domain/const/const.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
+import '/domain/core/entities/user_entities/user_entity.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
 
 class AuthServices extends GetxService {
   final FireStoreServices _fireStoreServices;
@@ -50,12 +50,13 @@ class AuthServices extends GetxService {
     }
   }
 
-  Future<UserModel> getUserCollection(String uid) async {
+  Future<UserModel> getUserCollection() async {
     try {
-      _fireStoreServices.loggedIn(uid);
-      DocumentSnapshot doc = await userCollection.doc(uid).get();
+      String userId = _firebaseAuth.currentUser?.uid ?? '';
+      _fireStoreServices.loggedIn(userId);
+      DocumentSnapshot doc = await userCollection.doc(userId).get();
       if (doc.exists) {
-        return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+        return UserModel.fromJson(doc.data() as Map<String, dynamic>);
       }
       logout();
       throw 'User has been deleted by Admin!';
@@ -64,10 +65,11 @@ class AuthServices extends GetxService {
     }
   }
 
-  Future<UserModel> getAdminCollection(String uid) async {
+  Future<UserModel> getAdminCollection() async {
     try {
-      DocumentSnapshot doc = await adminCollection.doc(uid).get();
-      return UserModel.fromMap(doc.data() as Map<String, dynamic>);
+      String userId = _firebaseAuth.currentUser?.uid ?? '';
+      DocumentSnapshot doc = await adminCollection.doc(userId).get();
+      return UserModel.fromJson(doc.data() as Map<String, dynamic>);
     } catch (e) {
       rethrow;
     }
@@ -80,7 +82,7 @@ class AuthServices extends GetxService {
         return [];
       }
       return querySnapshot.docs
-          .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
     } catch (e) {
       rethrow;
@@ -94,7 +96,7 @@ class AuthServices extends GetxService {
         return [];
       }
       return querySnapshot.docs
-          .map((doc) => UserModel.fromMap(doc.data() as Map<String, dynamic>))
+          .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
           .toList();
     } catch (e) {
       rethrow;
@@ -102,7 +104,8 @@ class AuthServices extends GetxService {
   }
 
   // ---------------------------- Signup ----------------------------------
-  Future<String?> signUpWithEmailAndPassword(User user, String password) async {
+  Future<String> signUpWithEmailAndPassword(
+      UserEntity user, String password) async {
     try {
       firebase_auth.UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: user.email, password: password)
@@ -118,7 +121,7 @@ class AuthServices extends GetxService {
   Future<void> createUserCollection(UserModel user) async {
     try {
       _fireStoreServices.loggedIn(user.userId);
-      await userCollection.doc(user.userId).set(user.toMap());
+      await userCollection.doc(user.userId).set(user.toJson());
     } catch (e) {
       rethrow;
     }
@@ -126,7 +129,7 @@ class AuthServices extends GetxService {
 
   Future<void> createAdminCollection(UserModel user) async {
     try {
-      await adminCollection.doc(user.userId).set(user.toMap());
+      await adminCollection.doc(user.userId).set(user.toJson());
     } catch (e) {
       rethrow;
     }
@@ -135,7 +138,7 @@ class AuthServices extends GetxService {
   //----------------------------- Update -----------------------------
   Future<void> updateUserCollection(UserModel user) async {
     try {
-      await userCollection.doc(user.userId).update((user.toMap()));
+      await userCollection.doc(user.userId).update((user.toJson()));
       debugPrint(
         'User collection updated successfully!',
       );

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
 
 abstract class ProductsRepository {
-  Future<List<Product>?> getProducts();
+  Future<List<ProductEntity>?> getProducts();
   Future<void> deleteProduct(String productId);
   Future<String> uploadImage(File file);
-  Future<void> addProduct(Product product);
-  Future<void> updateProduct(Product product);
+  Future<void> addProduct(ProductEntity product);
+  Future<void> updateProduct(ProductEntity product);
 }

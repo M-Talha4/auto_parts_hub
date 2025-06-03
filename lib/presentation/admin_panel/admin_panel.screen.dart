@@ -1,12 +1,12 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/admin_panel/drawer/admin_panel_drawer.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/const/static_data.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/admin_panel/drawer/admin_panel_drawer.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/admin_panel.controller.dart';
+import '/domain/utils/context_extensions.dart';
 
 class AdminPanelScreen extends GetView<AdminPanelController> {
   const AdminPanelScreen({super.key});
@@ -25,13 +25,13 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                     text: LocaleKeys.admin_panel_welcome_text.tr,
                     style: TextStyle(
                         fontSize: AppTextSize.titleSmallFont,
-                        color: colorScheme(context).primaryContainer),
+                        color: context.colorScheme.primaryContainer),
                     children: [
                   TextSpan(
                     text: ' ${StaticData.name},',
                     style: TextStyle(
                         fontSize: AppTextSize.titleMediumFont,
-                        color: colorScheme(context).secondary),
+                        color: context.colorScheme.secondary),
                   )
                 ])).paddingOnly(left: 16, top: 32),
             Padding(
@@ -49,8 +49,8 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                     onTap: () => controller.onTapPanelItem(
                         controller.adminPanelItems[index].title),
                     child: Card(
-                      shadowColor: colorScheme(context).primary,
-                      surfaceTintColor: colorScheme(context).primaryContainer,
+                      shadowColor: context.colorScheme.primary,
+                      surfaceTintColor: context.colorScheme.primaryContainer,
                       child: index != lastItemIndex
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,23 +71,22 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                               children: [
                                 CircleAvatar(
                                   radius: 50,
-                                  backgroundColor: colorScheme(context)
-                                      .secondary
-                                      .withOpacity(0.05),
+                                  backgroundColor: context.colorScheme.secondary
+                                      .withAlpha(15),
                                   child: CircleAvatar(
                                       radius: 40,
-                                      backgroundColor: colorScheme(context)
-                                          .secondary
-                                          .withOpacity(0.2),
+                                      backgroundColor: context
+                                          .colorScheme.secondary
+                                          .withAlpha(51),
                                       child: CircleAvatar(
                                           radius: 30,
-                                          backgroundColor: colorScheme(context)
-                                              .secondary
-                                              .withOpacity(0.4),
+                                          backgroundColor: context
+                                              .colorScheme.secondary
+                                              .withAlpha(100),
                                           child: Icon(
                                             Icons.add,
                                             color:
-                                                colorScheme(context).onPrimary,
+                                                context.colorScheme.onPrimary,
                                           ))),
                                 ),
                                 CustomText(

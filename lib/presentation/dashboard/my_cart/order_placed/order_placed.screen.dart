@@ -1,8 +1,9 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -29,17 +30,17 @@ class OrderPlacedScreen extends GetView<OrderPlacedController> {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                          width: 4, color: colorScheme(context).secondary)),
+                          width: 4, color: context.colorScheme.secondary)),
                   child: Icon(
                     Icons.done_all_rounded,
                     size: width * 0.4,
-                    color: colorScheme(context).secondary,
+                    color: context.colorScheme.secondary,
                   ),
                 ),
                 CustomText(
                   text: LocaleKeys.my_cart_order_placed_text.tr,
                   fontSize: height * 0.055,
-                  color: colorScheme(context).secondary,
+                  color: context.colorScheme.secondary,
                   fontstyle: FontStyle.italic,
                   decoration: TextDecoration.underline,
                   decorationStyle: TextDecorationStyle.dashed,
@@ -54,7 +55,7 @@ class OrderPlacedScreen extends GetView<OrderPlacedController> {
                   ),
                 ),
                 CustomButton(
-                    onTap: () => Get.offAllNamed(Routes.HOME),
+                    onPressed: () => Get.offAllNamed(Routes.HOME),
                     text: LocaleKeys.button_back_to_home.tr)
               ]),
         ),

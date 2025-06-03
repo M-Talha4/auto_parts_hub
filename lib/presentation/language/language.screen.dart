@@ -1,5 +1,6 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/infrastructure/theme/text_size.dart';
 import '../../generated/locales.generated.dart';
 import 'controllers/language.controller.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +43,14 @@ class LanguageScreen extends GetView<LanguageController> {
                                 horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
                                 color: index == controller.selectedIndex
-                                    ? colorScheme(context).primary
+                                    ? context.colorScheme.primary
                                     : null,
                                 borderRadius: BorderRadius.circular(5)),
                             child: CustomText(
                               text: controller.languages[index].tr,
                               fontSize: AppTextSize.titleSmallFont,
                               color: index == controller.selectedIndex
-                                  ? colorScheme(context).onPrimary
+                                  ? context.colorScheme.onPrimary
                                   : null,
                             ),
                           ),
@@ -57,7 +58,7 @@ class LanguageScreen extends GetView<LanguageController> {
                       ),
                     ),
                     CustomButton(
-                      onTap: () => controller.onContinue(),
+                      onPressed: () => controller.onContinue(),
                       text: LocaleKeys.button_continue.tr,
                     ),
                   ],

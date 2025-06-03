@@ -1,16 +1,15 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'domain/const/global_variable.dart';
 import 'infrastructure/theme/theme.dart';
 import 'generated/locales.generated.dart';
 import 'package:get_storage/get_storage.dart';
 import 'infrastructure/navigation/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'infrastructure/navigation/navigation.dart';
-import 'package:auto_parts_hub/firebase_options.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/infrastructure/theme/imports.dart';
+import '/firebase_options.dart';
 import 'infrastructure/dal/services/bindings/service_bindings.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/language_services/language_services.dart';
+import '/infrastructure/dal/services/language_services/language_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

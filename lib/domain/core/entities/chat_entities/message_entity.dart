@@ -1,16 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
 
-class MessageEntity {
-  String senderId;
-  String recieverId;
-  String message;
-  bool messageSeen;
-  Timestamp timestamp;
+abstract class MessageEntity {
+  final String _senderId;
+  final String _recieverId;
+  final String _message;
+  final bool _messageSeen;
+  final Timestamp _timestamp;
+
   MessageEntity({
-    required this.senderId,
-    required this.recieverId,
-    required this.message,
-    required this.messageSeen,
-    required this.timestamp,
-  });
+    required String senderId,
+    required String recieverId,
+    required String message,
+    required bool messageSeen,
+    required Timestamp timestamp,
+  })  : _senderId = senderId,
+        _recieverId = recieverId,
+        _message = message,
+        _messageSeen = messageSeen,
+        _timestamp = timestamp;
+
+  String get senderId => _senderId;
+  String get recieverId => _recieverId;
+  String get message => _message;
+  bool get messageSeen => _messageSeen;
+  Timestamp get timestamp => _timestamp;
 }

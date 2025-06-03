@@ -1,12 +1,12 @@
-import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/signup_usecase.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
+import '/domain/core/usecase/auth_usecase/signup_usecase.dart';
+import '/infrastructure/dal/models/user_models/user_model.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/generated/locales.generated.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/domain/const/static_data.dart';
+import '/domain/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -42,6 +42,7 @@ class SignupController extends GetxController with LoadingMixin {
         isAdmin: false,
         language: StaticData.language,
         profileImage: StaticData.profileImage,
+        fcmToken: '',
       );
       try {
         await _signupUsecase.execute(
@@ -61,7 +62,7 @@ class SignupController extends GetxController with LoadingMixin {
         if (e is AppException) {
           showSnackbar(message: e.message!, icon: e.icon, isError: true);
         } else {
-          Logger.e(e.toString());
+          Logger.error(message: e.toString());
         }
       }
     }

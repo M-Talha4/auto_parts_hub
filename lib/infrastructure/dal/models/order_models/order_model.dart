@@ -1,22 +1,67 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/foundation.dart';
-import 'package:auto_parts_hub/domain/core/entities/order_entities/order.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/cart_models/cart_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/address_models/address_model.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
+import '../../../../domain/core/entities/order_entities/order_entity.dart';
+import '../address_models/address_model.dart';
+import '../cart_models/cart_model.dart';
+import '../credit_card_models/credit_card_model.dart';
 
-class OrdersModel extends Orders {
+part 'order_model.g.dart';
+
+@JsonSerializable()
+class OrdersModel extends OrdersEntity {
+  @override
+  @JsonKey(name: 'orderId')
+  final String? orderId;
+
+  @override
+  @JsonKey(name: 'customerId')
+  final String? customerId;
+
+  @override
+  @JsonKey(name: 'customerEmail')
+  final String? customerEmail;
+
+  @override
+  @JsonKey(name: 'orderStatus')
+  final String? orderStatus;
+
+  @override
+  @JsonKey(name: 'orderPrice')
+  final int? orderPrice;
+
+  @override
+  @JsonKey(name: 'cartItems')
+  final List<CartModel>? cartItems;
+
+  @override
+  @JsonKey(name: 'paymentDetails')
+  final CreditCardModel? paymentDetails;
+
+  @override
+  @JsonKey(name: 'shippingAddress')
+  final AddressModel? shippingAddress;
+
   OrdersModel({
-    super.orderId,
-    super.customerId,
-    super.customerEmail,
-    super.orderStatus,
-    super.orderPrice,
-    super.cartItems,
-    super.paymentDetails,
-    super.shippingAddress,
-  });
+    this.orderId,
+    this.customerId,
+    this.customerEmail,
+    this.orderStatus,
+    this.orderPrice,
+    this.cartItems,
+    this.paymentDetails,
+    this.shippingAddress,
+  }) : super(
+          orderId: orderId,
+          customerId: customerId,
+          customerEmail: customerEmail,
+          orderStatus: orderStatus,
+          orderPrice: orderPrice,
+          cartItems: cartItems,
+          paymentDetails: paymentDetails,
+          shippingAddress: shippingAddress,
+        );
 
+  // CopyWith method
   OrdersModel copyWith({
     String? orderId,
     String? customerId,
@@ -39,61 +84,10 @@ class OrdersModel extends Orders {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'orderId': orderId,
-      'customerId': customerId,
-      'customerEmail': customerEmail,
-      'orderStatus': orderStatus,
-      'orderPrice': orderPrice,
-      'cartItems': cartItems?.map((x) => x.toMap()).toList(),
-      'paymentDetails': paymentDetails?.toMap(),
-      'shippingAddress': shippingAddress?.toMap(),
-    };
-  }
-
-  factory OrdersModel.fromMap(Map<String, dynamic> map) {
-    return OrdersModel(
-      orderId: map['orderId'] != null ? map['orderId'] as String : null,
-      customerId:
-          map['customerId'] != null ? map['customerId'] as String : null,
-      customerEmail:
-          map['customerEmail'] != null ? map['customerEmail'] as String : null,
-      orderStatus:
-          map['orderStatus'] != null ? map['orderStatus'] as String : null,
-      orderPrice: map['orderPrice'] != null ? map['orderPrice'] as int : null,
-      cartItems: map['cartItems'] != null
-          ? List<CartModel>.from(
-              (map['cartItems'] as List<dynamic>).map<CartModel>(
-                (x) => CartModel.fromMap(x as Map<String, dynamic>),
-              ),
-            )
-          : null,
-      paymentDetails: map['paymentDetails'] != null
-          ? CreditCardModel.fromMap(
-              map['paymentDetails'] as Map<String, dynamic>)
-          : null,
-      shippingAddress: map['shippingAddress'] != null
-          ? AddressModel.fromMap(map['shippingAddress'] as Map<String, dynamic>)
-          : null,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory OrdersModel.fromJson(String source) =>
-      OrdersModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'OrdersModel(orderId: $orderId, customerId: $customerId,customerEmail: $customerEmail, orderStatus: $orderStatus, orderPrice: $orderPrice, cartItems: $cartItems, paymentDetails: $paymentDetails, shippingAddress: $shippingAddress)';
-  }
-
-  @override
-  bool operator ==(covariant Orders other) {
-    if (identical(this, other)) return true;
-
-    return other.orderId == orderId &&
+  // Equals method
+  bool equals(Object other) {
+    return other is OrdersModel &&
+        other.orderId == orderId &&
         other.customerId == customerId &&
         other.customerEmail == customerEmail &&
         other.orderStatus == orderStatus &&
@@ -103,15 +97,8 @@ class OrdersModel extends Orders {
         other.shippingAddress == shippingAddress;
   }
 
-  @override
-  int get hashCode {
-    return orderId.hashCode ^
-        customerId.hashCode ^
-        customerEmail.hashCode ^
-        orderStatus.hashCode ^
-        orderPrice.hashCode ^
-        cartItems.hashCode ^
-        paymentDetails.hashCode ^
-        shippingAddress.hashCode;
-  }
+  factory OrdersModel.fromJson(Map<String, dynamic> json) =>
+      _$OrdersModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrdersModelToJson(this);
 }

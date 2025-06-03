@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'package:auto_parts_hub/domain/const/const.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/core/entities/user_entities/user.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/chat_model/message_model.dart';
+import '../../../../domain/const/static_data.dart';
+import '/domain/const/const.dart';
+import '/domain/core/entities/user_entities/user_entity.dart';
+import '/infrastructure/dal/models/chat_model/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +27,7 @@ class ChatService extends GetxService {
       chatCollection
           .doc(chatRoomId)
           .collection(firebaseChatSubCollectionMessage)
-          .add(messageModel.toMap());
+          .add(messageModel.toJson());
     } catch (e) {
       rethrow;
     }
@@ -46,7 +46,7 @@ class ChatService extends GetxService {
     }
   }
 
-  Future<void> deleteChat(String userId, List<User> admins) async {
+  Future<void> deleteChat(String userId, List<UserEntity> admins) async {
     try {
       for (var admin in admins) {
         List<String> chatId = [userId, admin.userId]..sort();

@@ -1,13 +1,13 @@
 import 'dart:io';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/add_product_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/update_product_usecase.dart';
-import 'package:auto_parts_hub/domain/core/usecase/products_usecase/upload_product_image_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/app_exception.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/models/product_models/product_model.dart';
+import '/domain/core/usecase/products_usecase/add_product_usecase.dart';
+import '/domain/core/usecase/products_usecase/update_product_usecase.dart';
+import '/domain/core/usecase/products_usecase/upload_product_image_usecase.dart';
+import '/domain/exceptions/app_exception.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/domain/utils/logger.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/models/product_models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -121,7 +121,7 @@ class AddProductsController extends GetxController with LoadingMixin {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
     setLoading(false);
@@ -144,7 +144,7 @@ class AddProductsController extends GetxController with LoadingMixin {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }
@@ -166,7 +166,7 @@ class AddProductsController extends GetxController with LoadingMixin {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.e(e.toString());
+        Logger.error(message: e.toString());
       }
     }
   }

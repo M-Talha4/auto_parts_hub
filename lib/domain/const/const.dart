@@ -1,8 +1,7 @@
-// ignore: constant_identifier_names
+// ignore_for_file: constant_identifier_names
+
 const String IS_DARK_MODE = 'isDarkMode';
-const String appName = 'Auto Parts Hub';
-const String fillAllFields = 'Please Fill All Fields!';
-const String continueText = 'Continue';
+const String APP_NAME = 'Auto Parts Hub';
 
 // ........................Firebase Data.........................................
 const String firebaseChatCollection = 'chat';
@@ -14,3 +13,6 @@ const String firebaseUsersSubCollectionCart = 'cart';
 const String firebaseUsersSubCollectionCard = 'cards';
 const String firebaseChatSubCollectionMessage = 'message';
 const String firebaseUsersSubCollectionAddress = 'address';
+
+// ....................... Remote Config Keys
+const String SERVICE_ACCOUNT_KEY = 'service_account_key';

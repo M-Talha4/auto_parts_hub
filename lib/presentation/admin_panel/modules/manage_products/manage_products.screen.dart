@@ -1,9 +1,10 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'controllers/manage_products.controller.dart';
@@ -44,7 +45,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                 height: 150,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                    color: colorScheme(context).onSurface,
+                                    color: context.colorScheme.onSurface,
                                     borderRadius: BorderRadius.circular(6),
                                     image: DecorationImage(
                                       image: NetworkImage(controller
@@ -82,7 +83,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                               fontSize:
                                                   AppTextSize.titleSmallFont,
                                               color:
-                                                  colorScheme(context).outline,
+                                                  context.colorScheme.outline,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ],
@@ -106,7 +107,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                               fontSize:
                                                   AppTextSize.titleSmallFont,
                                               color:
-                                                  colorScheme(context).outline,
+                                                  context.colorScheme.outline,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ],
@@ -130,7 +131,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                               fontSize:
                                                   AppTextSize.titleSmallFont,
                                               color:
-                                                  colorScheme(context).outline,
+                                                  context.colorScheme.outline,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ],
@@ -169,7 +170,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                           text: controller.productsList[index]
                                               .productDescription,
                                           fontSize: AppTextSize.titleSmallFont,
-                                          color: colorScheme(context).outline,
+                                          color: context.colorScheme.outline,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ],
@@ -188,7 +189,7 @@ class ManageProductsScreen extends GetView<ManageProductsController> {
                                       controller.productsList[index].productId),
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor:
-                                          colorScheme(context).error),
+                                          context.colorScheme.error),
                                   child: CustomText(
                                       text: LocaleKeys.button_delete.tr)),
                               ElevatedButton(

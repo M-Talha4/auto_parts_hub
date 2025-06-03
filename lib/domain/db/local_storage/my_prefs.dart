@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 import '../../const/static_data.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../core/entities/user_entities/user.dart';
+import '../../core/entities/user_entities/user_entity.dart';
 import '../../../infrastructure/dal/models/user_models/user_model.dart';
 
 class MyPrefs {
@@ -10,7 +12,7 @@ class MyPrefs {
   static const String _language = 'language';
   static const String _isDarkTheme = 'isDarkTheme';
 
-  static storeUser({required User user}) {
+  static storeUser({required UserEntity user}) {
     _getStorage.write(_user, user);
     StaticData.userId = user.userId;
     StaticData.name = user.name;
@@ -37,7 +39,8 @@ class MyPrefs {
 
   static UserModel? getUser() {
     String? userJson = _getStorage.read(_user);
-    UserModel? user = userJson != null ? UserModel.fromJson(userJson) : null;
+    UserModel? user =
+        userJson != null ? UserModel.fromJson(jsonDecode(userJson)) : null;
     if (user != null) {
       StaticData.userId = user.userId;
       StaticData.name = user.name;

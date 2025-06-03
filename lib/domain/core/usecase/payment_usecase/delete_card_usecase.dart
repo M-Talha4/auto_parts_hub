@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/interfaces/payment_interface/payment_repository.dart';
+import '/domain/core/interfaces/payment_interface/payment_repository.dart';
 
 class DeleteCardUsecase {
   final PaymentRepository _paymentRepository;

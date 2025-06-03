@@ -1,10 +1,11 @@
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_button.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/presentation/widgets/price_rich_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/assets_paths.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_button.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/presentation/widgets/price_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'controllers/payments.controller.dart';
@@ -64,7 +65,7 @@ class PaymentsScreen extends GetView<PaymentsController> {
                           return Obx(
                             () => Card(
                               color: controller.selectedIndex.value == index
-                                  ? colorScheme(context).secondary
+                                  ? context.colorScheme.secondary
                                   : Colors.white,
                               child: ListTile(
                                   onTap: () =>
@@ -133,8 +134,8 @@ class PaymentsScreen extends GetView<PaymentsController> {
                                         Icons.delete,
                                         color: controller.selectedIndex.value ==
                                                 index
-                                            ? colorScheme(context).onSurface
-                                            : colorScheme(context).error,
+                                            ? context.colorScheme.onSurface
+                                            : context.colorScheme.error,
                                       ))),
                             ),
                           );
@@ -143,7 +144,7 @@ class PaymentsScreen extends GetView<PaymentsController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,7 +161,7 @@ class PaymentsScreen extends GetView<PaymentsController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +180,7 @@ class PaymentsScreen extends GetView<PaymentsController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -198,16 +199,19 @@ class PaymentsScreen extends GetView<PaymentsController> {
               Divider(
                 height: height * 0.05,
                 thickness: 1,
-                color: colorScheme(context).secondary,
+                color: context.colorScheme.secondary,
               ),
               SizedBox(
                 height: height * 0.015,
               ),
               Obx(
-                () => LoadingButton(
-                    onTap: () => controller.onTapContinue(),
-                    isLoading: controller.isLoading.value,
-                    text: LocaleKeys.button_continue.tr),
+                () => controller.isLoading.value
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        onPressed: () => controller.onTapContinue(),
+                        text: LocaleKeys.button_continue.tr),
               ),
               const SizedBox(
                 height: 10,
@@ -220,10 +224,10 @@ class PaymentsScreen extends GetView<PaymentsController> {
         padding: const EdgeInsets.only(bottom: 50),
         child: FloatingActionButton(
           onPressed: () => Get.toNamed(Routes.ADD_CARD),
-          backgroundColor: colorScheme(context).primary,
+          backgroundColor: context.colorScheme.primary,
           child: Icon(
             Icons.add_card,
-            color: colorScheme(context).onPrimary,
+            color: context.colorScheme.onPrimary,
             size: 26,
           ),
         ),

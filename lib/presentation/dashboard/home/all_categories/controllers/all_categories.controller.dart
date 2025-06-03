@@ -1,4 +1,4 @@
-import 'package:auto_parts_hub/domain/core/entities/product_entities/product.dart';
+import '/domain/core/entities/product_entities/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +7,7 @@ class AllCategoriesController extends GetxController {
   RxInt currentIndex = 0.obs;
   List<String> carouselImages = [];
   List<String> carouselTitles = [];
-  List<Product> products = [];
+  List<ProductEntity> products = [];
   @override
   onInit() {
     carouselTitles = Get.arguments['titles'];

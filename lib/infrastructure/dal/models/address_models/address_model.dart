@@ -1,14 +1,50 @@
-import 'dart:convert';
-import 'package:auto_parts_hub/domain/core/entities/address_entities/address.dart';
+import 'package:json_annotation/json_annotation.dart';
+import '/domain/core/entities/address_entities/address_entity.dart';
 
-class AddressModel extends Address {
-  AddressModel(
-      {required super.id,
-      required super.name,
-      required super.address,
-      required super.city,
-      required super.postalCode});
+part 'address_model.g.dart';
 
+@JsonSerializable()
+class AddressModel extends AddressEntity {
+  @override
+  @JsonKey(name: 'id', defaultValue: '')
+  final String id;
+
+  @override
+  @JsonKey(name: 'name', defaultValue: '')
+  final String name;
+
+  @override
+  @JsonKey(name: 'address', defaultValue: '')
+  final String address;
+
+  @override
+  @JsonKey(name: 'city', defaultValue: '')
+  final String city;
+
+  @override
+  @JsonKey(name: 'postalCode', defaultValue: '')
+  final String postalCode;
+
+  AddressModel({
+    required this.id,
+    required this.name,
+    required this.address,
+    required this.city,
+    required this.postalCode,
+  }) : super(
+          id: id,
+          name: name,
+          address: address,
+          city: city,
+          postalCode: postalCode,
+        );
+
+  factory AddressModel.fromJson(Map<String, dynamic> json) =>
+      _$AddressModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddressModelToJson(this);
+
+  // CopyWith method to create a new instance with optional changes
   AddressModel copyWith({
     String? id,
     String? name,
@@ -25,53 +61,12 @@ class AddressModel extends Address {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'address': address,
-      'city': city,
-      'postalCode': postalCode,
-    };
-  }
-
-  factory AddressModel.fromMap(Map<String, dynamic> map) {
-    return AddressModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      address: map['address'] as String,
-      city: map['city'] as String,
-      postalCode: map['postalCode'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory AddressModel.fromJson(String source) =>
-      AddressModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'Address(id: $id, name: $name, address: $address, city: $city, postalCode: $postalCode)';
-  }
-
-  @override
-  bool operator ==(covariant AddressModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.name == name &&
-        other.address == address &&
-        other.city == city &&
-        other.postalCode == postalCode;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        address.hashCode ^
-        city.hashCode ^
-        postalCode.hashCode;
+  // equals method to compare two instances
+  bool equals(AddressModel other) {
+    return id == other.id &&
+        name == other.name &&
+        address == other.address &&
+        city == other.city &&
+        postalCode == other.postalCode;
   }
 }

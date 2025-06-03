@@ -1,10 +1,11 @@
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
-import 'package:auto_parts_hub/domain/db/local_storage/my_prefs.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/infrastructure/dal/services/language_services/language_services.dart';
-import 'package:auto_parts_hub/infrastructure/theme/text_size.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/domain/const/static_data.dart';
+import '/domain/db/local_storage/my_prefs.dart';
+import '/generated/locales.generated.dart';
+import '/infrastructure/dal/services/language_services/language_services.dart';
+import '/infrastructure/theme/text_size.dart';
+import '/presentation/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +13,7 @@ class SettingsController extends GetxController {
   RxString selectedLanguage = ''.obs;
   int selectedIndex = 0;
   RxBool isDarkMode =
-      (colorScheme(Get.context).brightness == Brightness.dark).obs;
+      (Get.context?.colorScheme.brightness == Brightness.dark).obs;
   RxString selectedTheme = ''.obs;
 
   List<String> languages = [
@@ -58,7 +59,7 @@ class SettingsController extends GetxController {
   void selectLanguage(String language) {
     Get.bottomSheet(Container(
       padding: const EdgeInsets.all(20),
-      color: colorScheme(Get.context).onPrimary,
+      color: Get.context?.colorScheme.onPrimary,
       child: Column(
         children: [
           CustomText(
@@ -77,14 +78,14 @@ class SettingsController extends GetxController {
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                   decoration: BoxDecoration(
                       color: index == selectedIndex
-                          ? colorScheme(context).primary
+                          ? context.colorScheme.primary
                           : null,
                       borderRadius: BorderRadius.circular(5)),
                   child: CustomText(
                     text: languages[index].tr,
                     fontSize: AppTextSize.titleSmallFont,
                     color: index == selectedIndex
-                        ? colorScheme(context).onPrimary
+                        ? context.colorScheme.onPrimary
                         : null,
                   ),
                 ),

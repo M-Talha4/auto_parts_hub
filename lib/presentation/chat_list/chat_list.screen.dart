@@ -1,10 +1,11 @@
-import 'package:auto_parts_hub/infrastructure/dal/models/user_models/user_model.dart';
-import 'package:auto_parts_hub/infrastructure/navigation/routes.dart';
-import 'package:auto_parts_hub/presentation/widgets/custom_text.dart';
-import 'package:auto_parts_hub/domain/const/global_variable.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/domain/const/assets_paths.dart';
-import 'package:auto_parts_hub/domain/const/static_data.dart';
+import '/domain/utils/context_extensions.dart';
+
+import '/infrastructure/dal/models/user_models/user_model.dart';
+import '/infrastructure/navigation/routes.dart';
+import '/presentation/widgets/custom_text.dart';
+import '/generated/locales.generated.dart';
+import '/domain/const/assets_paths.dart';
+import '/domain/const/static_data.dart';
 import 'controllers/chat_list.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -34,22 +35,21 @@ class ChatListScreen extends GetView<ChatListController> {
           itemBuilder: (context, index) {
             UserModel person = controller.chatList[index];
             return Card(
-              surfaceTintColor: colorScheme(context).outline,
+              surfaceTintColor: context.colorScheme.outline,
               child: ListTile(
                 onTap: () => Get.toNamed(Routes.CHAT, arguments: person),
                 leading: CircleAvatar(
                   radius: 28,
-                  backgroundColor: colorScheme(context).outline,
+                  backgroundColor: context.colorScheme.outline,
                   child: CircleAvatar(
                     radius: 25,
-                    backgroundColor: colorScheme(context).secondary,
+                    backgroundColor: context.colorScheme.secondary,
                     child: controller.chatList[index].profileImage == ''
                         ? SvgPicture.asset(
                             ImagePath.proileAvatarSvg,
                             height: 35,
                             colorFilter: ColorFilter.mode(
-                                colorScheme(context).onPrimary,
-                                BlendMode.srcIn),
+                                context.colorScheme.onPrimary, BlendMode.srcIn),
                           )
                         : ClipOval(
                             child: Image.network(

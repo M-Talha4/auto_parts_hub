@@ -6,8 +6,8 @@ ElevatedButtonThemeData get lightElevatedButtonTheme => ElevatedButtonThemeData(
         splashFactory: InkRipple.splashFactory,
         backgroundColor: WidgetStateProperty.all(colorSchemeLight.primary),
         foregroundColor: WidgetStateProperty.all(colorSchemeLight.onPrimary),
-        overlayColor: WidgetStateProperty.all(
-            colorSchemeLight.secondary.withOpacity(0.2)),
+        overlayColor:
+            WidgetStateProperty.all(colorSchemeLight.secondary.withAlpha(51)),
         shadowColor: WidgetStateProperty.all(colorSchemeLight.shadow),
         elevation: WidgetStateProperty.all(2),
         textStyle: WidgetStateProperty.all(
@@ -28,7 +28,7 @@ ElevatedButtonThemeData get darkElevatedButtonTheme => ElevatedButtonThemeData(
         backgroundColor: WidgetStateProperty.all(colorSchemeDark.primary),
         foregroundColor: WidgetStateProperty.all(colorSchemeDark.onPrimary),
         overlayColor:
-            WidgetStateProperty.all(colorSchemeDark.secondary.withOpacity(0.2)),
+            WidgetStateProperty.all(colorSchemeDark.secondary.withAlpha(51)),
         shadowColor: WidgetStateProperty.all(colorSchemeDark.shadow),
         elevation: WidgetStateProperty.all(2),
         textStyle: WidgetStateProperty.all(

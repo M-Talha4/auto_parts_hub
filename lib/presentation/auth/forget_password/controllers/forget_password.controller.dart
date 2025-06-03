@@ -1,9 +1,9 @@
-import 'package:auto_parts_hub/domain/core/usecase/auth_usecase/forget_password_usecase.dart';
-import 'package:auto_parts_hub/domain/exceptions/auth_exceptions.dart';
-import 'package:auto_parts_hub/domain/utils/custom_snackbar.dart';
-import 'package:auto_parts_hub/generated/locales.generated.dart';
-import 'package:auto_parts_hub/domain/utils/loading_mixin.dart';
-import 'package:auto_parts_hub/domain/utils/logger.dart';
+import '/domain/core/usecase/auth_usecase/forget_password_usecase.dart';
+import '/domain/exceptions/auth_exceptions.dart';
+import '/domain/utils/custom_snackbar.dart';
+import '/generated/locales.generated.dart';
+import '/domain/utils/loading_mixin.dart';
+import '/domain/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -30,7 +30,7 @@ class ForgetPasswordController extends GetxController with LoadingMixin {
         if (e is AuthExceptions) {
           showSnackbar(message: e.message!, icon: e.icon, isError: true);
         } else {
-          Logger.e(e.toString());
+          Logger.error(message: e.toString());
         }
       }
       setLoading(false);
