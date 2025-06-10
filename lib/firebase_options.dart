@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDiDmZx7iORH4wwVVTEpOaJWgv3pSYmoW8',
-    appId: '1:524531441500:android:d60b6077ff0c512aef2b99',
+    appId: '1:524531441500:android:782df8caf283c32eef2b99',
     messagingSenderId: '524531441500',
     projectId: 'autopartshub-e3ad7',
     storageBucket: 'autopartshub-e3ad7.appspot.com',
@@ -59,11 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBLVoKR0QFa-DgHCSj1NbgPj50RwzSW3sM',
-    appId: '1:524531441500:ios:95bc2c74ee4f64efef2b99',
+    appId: '1:524531441500:ios:9568ae5d6237ca23ef2b99',
     messagingSenderId: '524531441500',
     projectId: 'autopartshub-e3ad7',
     storageBucket: 'autopartshub-e3ad7.appspot.com',
-    iosBundleId: 'com.example.autoPartsHub',
+    iosBundleId: 'com.talha.autoPartsHub',
   );
-
 }

@@ -1,10 +1,11 @@
 import 'dart:async';
-import '../../../../domain/const/static_data.dart';
 import '/domain/const/const.dart';
 import '/domain/core/entities/user_entities/user_entity.dart';
 import '/infrastructure/dal/models/chat_model/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
+import 'user_services.dart';
 
 class ChatService extends GetxService {
   CollectionReference chatCollection =
@@ -12,7 +13,7 @@ class ChatService extends GetxService {
 
   Future<void> sendMessage(
       {required String otherId, required String message}) async {
-    String senderId = StaticData.userId;
+    String senderId = Get.find<UserServices>().user.value.userId;
     MessageModel messageModel = MessageModel(
         senderId: senderId,
         recieverId: otherId,
@@ -34,7 +35,7 @@ class ChatService extends GetxService {
   }
 
   CollectionReference getMessages(String otherId) {
-    String senderId = StaticData.userId;
+    String senderId = Get.find<UserServices>().user.value.userId;
     try {
       List<String> chatId = [senderId, otherId]..sort();
       String chatRoomId = chatId.join('-');

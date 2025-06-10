@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/utils/logger.dart';
-import '/domain/const/static_data.dart';
 import '/domain/utils/loading_mixin.dart';
 import '/generated/locales.generated.dart';
 import '/domain/utils/custom_snackbar.dart';
@@ -20,6 +20,12 @@ class LoginController extends GetxController with LoadingMixin {
 
   RxList<bool> errorBools = List.generate(5, (index) => false).obs;
 
+  @override
+  void onInit() {
+    _clearFields();
+    super.onInit();
+  }
+
   void showPassword() {
     hidePassword.value = !hidePassword.value;
   }
@@ -32,14 +38,14 @@ class LoginController extends GetxController with LoadingMixin {
           emailController.text.trim().toString(),
           passwordController.text.trim().toString(),
         );
-        _clearFields();
+        formKey.currentState?.reset();
         showSnackbar(
           message: LocaleKeys.auth_logged_in_successfully_text.tr,
         );
         Timer(
           const Duration(milliseconds: 800),
           () {
-            if (StaticData.isAdmin) {
+            if (Get.find<UserServices>().user.value.isAdmin) {
               Get.offNamed(Routes.ADMIN_PANEL);
             } else {
               Get.offNamed(Routes.HOME);

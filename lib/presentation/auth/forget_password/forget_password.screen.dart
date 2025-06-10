@@ -12,75 +12,64 @@ class ForgetPasswordScreen extends GetView<ForgetPasswordController> {
   const ForgetPasswordScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.sizeOf(context).width;
-    final double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        title: CustomText(
-          text: LocaleKeys.auth_forget_password_text.tr,
-        ),
-        leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: const Icon(
-              Icons.keyboard_arrow_left,
-              size: 26,
-            )),
-      ),
-      body: SizedBox(
-        width: width,
-        height: height,
-        child: Padding(
-          padding: EdgeInsets.all(width * 0.06),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: height * 0.1,
-                ),
-                CustomText(
-                  text: LocaleKeys.auth_write_email_to_get_reset_link_text.tr,
-                  fontSize: AppTextSize.bodyLargeFont,
-                ),
-                SizedBox(
-                  height: height * 0.04,
-                ),
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: height * 0.1,
-                  ),
-                  child: Form(
-                    key: controller.formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomTextFormField(
-                          controller: controller.emailController,
-                          hint: LocaleKeys.auth_enter_your_email_text.tr,
-                          keyboardType: TextInputType.emailAddress,
-                          prefixIcon: const Icon(Icons.mail),
-                          validator: (value) =>
-                              Validation.emaiValidation(value),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: height * 0.04,
-                ),
-                Obx(() => controller.isLoading.value
-                    ? Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : CustomButton(
-                        onPressed: () => controller.resetPassword(),
-                        text: LocaleKeys.auth_reset_text.tr,
-                      )),
-              ],
-            ),
+          //TODO Localization remove
+
+          // title: CustomText(
+          //   text: LocaleKeys.auth_forget_password_text.tr,
+          // ),
+          // leading: IconButton(
+          //     onPressed: () => Get.back(),
+          //     icon: const Icon(
+          //       Icons.keyboard_arrow_left,
+          //       size: 26,
+          //     )),
           ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          spacing: 12,
+          children: [
+            const SizedBox(height: 80),
+            //TODO Localization
+            CustomText(
+              text: 'Don\'t remember your Password?',
+              fontSize: AppTextSize.titleLargeFont,
+            ),
+            CustomText(
+              text: 'Please enter your email to recieve a password reset link!',
+              fontSize: AppTextSize.bodyMediumFont,
+            ),
+            //TODO Localization remove
+
+            // CustomText(
+            //   text: LocaleKeys.auth_write_email_to_get_reset_link_text.tr,
+            //   fontSize: AppTextSize.bodyLargeFont,
+            // ),
+
+            const SizedBox(height: 12),
+            Form(
+              key: controller.formKey,
+              child: CustomTextFormField(
+                controller: controller.emailController,
+                hint: LocaleKeys.auth_enter_your_email_text.tr,
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: const Icon(Icons.mail),
+                validator: (value) => Validation.emaiValidation(value),
+              ),
+            ),
+            SizedBox(height: 36),
+            Obx(() => controller.isLoading.value
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : CustomButton(
+                    onPressed: () => controller.resetPassword(),
+                    text: LocaleKeys.auth_reset_text.tr,
+                  )),
+          ],
         ),
       ),
     );

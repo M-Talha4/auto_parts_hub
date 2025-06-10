@@ -1,4 +1,4 @@
-import '/domain/const/static_data.dart';
+import '../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/usecase/chat_usecase.dart/get_chat_list_usecase.dart';
 import '/domain/exceptions/app_exception.dart';
 import '/domain/utils/custom_snackbar.dart';
@@ -20,8 +20,9 @@ class ChatListController extends GetxController {
 
   Future<void> _getChatList() async {
     try {
-      chatList.value =
-          await _getChatListUsecase.execute(StaticData.isAdmin) ?? [];
+      chatList.value = await _getChatListUsecase
+              .execute(Get.find<UserServices>().user.value.isAdmin) ??
+          [];
     } catch (e) {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);

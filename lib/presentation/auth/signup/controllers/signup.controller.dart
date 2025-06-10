@@ -1,3 +1,4 @@
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/usecase/auth_usecase/signup_usecase.dart';
 import '/infrastructure/dal/models/user_models/user_model.dart';
 import '/infrastructure/navigation/routes.dart';
@@ -5,7 +6,6 @@ import '/domain/exceptions/app_exception.dart';
 import '/domain/utils/custom_snackbar.dart';
 import '/generated/locales.generated.dart';
 import '/domain/utils/loading_mixin.dart';
-import '/domain/const/static_data.dart';
 import '/domain/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +23,12 @@ class SignupController extends GetxController with LoadingMixin {
   TextEditingController confPasswordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  @override
+  void onInit() {
+    _clearFields();
+    super.onInit();
+  }
+
   void showPassword() {
     hidePassword.value = !hidePassword.value;
   }
@@ -35,24 +41,24 @@ class SignupController extends GetxController with LoadingMixin {
     if (formKey.currentState!.validate()) {
       setLoading(true);
       UserModel user = UserModel(
-        userId: StaticData.userId,
+        userId: '',
         name: nameController.text.trim().toString(),
         email: emailController.text.trim().toString(),
         phoneNo: phoneNoController.text.trim().toString(),
         isAdmin: false,
-        language: StaticData.language,
-        profileImage: StaticData.profileImage,
+        language: LocaleKeys.select_language_english_language,
+        profileImage: '',
         fcmToken: '',
       );
       try {
         await _signupUsecase.execute(
             user, passwordController.text.trim().toString());
-        _clearFields();
+        formKey.currentState?.reset();
         showSnackbar(
           message: LocaleKeys.auth_signed_up_successfully_text.tr,
         );
         Timer(const Duration(milliseconds: 800), () {
-          if (StaticData.isAdmin) {
+          if (Get.find<UserServices>().user.value.isAdmin) {
             Get.offNamed(Routes.ADMIN_PANEL);
           } else {
             Get.offNamed(Routes.HOME);

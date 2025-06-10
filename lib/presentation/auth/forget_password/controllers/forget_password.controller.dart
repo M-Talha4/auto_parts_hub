@@ -15,14 +15,20 @@ class ForgetPasswordController extends GetxController with LoadingMixin {
   TextEditingController emailController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  @override
+  void onInit() {
+    _clearFields();
+    super.onInit();
+  }
+
   void resetPassword() async {
     if (formKey.currentState!.validate()) {
       setLoading(true);
       try {
         await _forgetPasswordUsecase
             .execute(emailController.text.trim().toString());
-        _clearFields();
         Timer(const Duration(milliseconds: 800), () => Get.back());
+        formKey.currentState?.reset();
         showSnackbar(
           message: LocaleKeys.auth_email_sent_text.tr,
         );

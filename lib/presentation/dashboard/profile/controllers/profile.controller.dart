@@ -1,5 +1,5 @@
 import 'dart:io';
-import '/domain/const/static_data.dart';
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/usecase/profile_usecae/update_profile_usecase.dart';
 import '/domain/core/usecase/profile_usecae/upload_profile_image_usecase.dart';
 import '/domain/exceptions/app_exception.dart';
@@ -34,9 +34,9 @@ class ProfileController extends GetxController with LoadingMixin {
   }
 
   void _initialValue() {
-    nameController.text = StaticData.name;
-    phoneController.text = StaticData.phoneNo;
-    imagePath.value = StaticData.profileImage;
+    nameController.text = Get.find<UserServices>().user.value.name;
+    phoneController.text = Get.find<UserServices>().user.value.phoneNo;
+    imagePath.value = Get.find<UserServices>().user.value.profileImage;
     isNetworkImage.value = imagePath.value != '';
   }
 
@@ -63,18 +63,21 @@ class ProfileController extends GetxController with LoadingMixin {
   Future<void> onSave() async {
     setLoading(true);
     if (formKey.currentState!.validate()) {
-      if (StaticData.name != nameController.text.trim().toString() ||
-          StaticData.phoneNo != phoneController.text.trim().toString() ||
-          image != null) {
-        _uploadImage();
+      if (image != null) {
+        await _uploadImage();
+      } else if (Get.find<UserServices>().user.value.name !=
+              nameController.text.trim().toString() ||
+          Get.find<UserServices>().user.value.phoneNo !=
+              phoneController.text.trim().toString()) {
+        await _updateUser();
       }
     }
+    setLoading(false);
   }
 
   Future<void> _uploadImage() async {
     try {
-      StaticData.profileImage =
-          await _uploadProfileImageUsecase.execute(image!) ?? '';
+      imagePath.value = await _uploadProfileImageUsecase.execute(image!) ?? '';
       _updateUser();
     } catch (e) {
       if (e is AppException) {
@@ -83,19 +86,18 @@ class ProfileController extends GetxController with LoadingMixin {
         Logger.error(message: e.toString());
       }
     }
-    setLoading(false);
   }
 
   Future<void> _updateUser() async {
     try {
       UserModel user = UserModel(
-        userId: StaticData.userId,
+        userId: Get.find<UserServices>().user.value.userId,
         name: nameController.text.trim().toString(),
-        email: StaticData.email,
-        isAdmin: StaticData.isAdmin,
-        language: StaticData.language,
+        email: Get.find<UserServices>().user.value.email,
+        isAdmin: Get.find<UserServices>().user.value.isAdmin,
+        language: Get.find<UserServices>().user.value.language,
         phoneNo: phoneController.text.trim().toString(),
-        profileImage: StaticData.profileImage,
+        profileImage: imagePath.value,
         fcmToken: '',
       );
 
@@ -109,6 +111,5 @@ class ProfileController extends GetxController with LoadingMixin {
         Logger.error(message: e.toString());
       }
     }
-    setLoading(false);
   }
 }

@@ -5,7 +5,7 @@ class GetUserOrdersUsecase {
   final OrdersRepository _ordersRepository;
   GetUserOrdersUsecase(this._ordersRepository);
 
-  Future<List<OrdersEntity>?> execute() {
-    return _ordersRepository.getUserOrders();
+  Future<List<OrdersEntity>?> execute(String userId) {
+    return _ordersRepository.getUserOrders(userId);
   }
 }

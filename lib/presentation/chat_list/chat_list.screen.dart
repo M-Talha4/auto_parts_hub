@@ -1,3 +1,4 @@
+import '../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/utils/context_extensions.dart';
 
 import '/infrastructure/dal/models/user_models/user_model.dart';
@@ -5,7 +6,6 @@ import '/infrastructure/navigation/routes.dart';
 import '/presentation/widgets/custom_text.dart';
 import '/generated/locales.generated.dart';
 import '/domain/const/assets_paths.dart';
-import '/domain/const/static_data.dart';
 import 'controllers/chat_list.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -41,24 +41,28 @@ class ChatListScreen extends GetView<ChatListController> {
                 leading: CircleAvatar(
                   radius: 28,
                   backgroundColor: context.colorScheme.outline,
-                  child: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: context.colorScheme.secondary,
-                    child: controller.chatList[index].profileImage == ''
-                        ? SvgPicture.asset(
-                            ImagePath.proileAvatarSvg,
-                            height: 35,
-                            colorFilter: ColorFilter.mode(
-                                context.colorScheme.onPrimary, BlendMode.srcIn),
-                          )
-                        : ClipOval(
-                            child: Image.network(
-                            StaticData.profileImage,
-                            fit: BoxFit.cover,
-                            width: 50,
-                            height: 50,
-                          )),
-                  ),
+                  child: Obx(() => CircleAvatar(
+                        radius: 25,
+                        backgroundColor: context.colorScheme.secondary,
+                        child: controller.chatList[index].profileImage == ''
+                            ? SvgPicture.asset(
+                                ImagePath.proileAvatarSvg,
+                                height: 35,
+                                colorFilter: ColorFilter.mode(
+                                    context.colorScheme.onPrimary,
+                                    BlendMode.srcIn),
+                              )
+                            : ClipOval(
+                                child: Image.network(
+                                Get.find<UserServices>()
+                                    .user
+                                    .value
+                                    .profileImage,
+                                fit: BoxFit.cover,
+                                width: 50,
+                                height: 50,
+                              )),
+                      )),
                 ),
                 title: CustomText(text: person.name),
                 subtitle: CustomText(

@@ -1,10 +1,10 @@
+import '../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/utils/context_extensions.dart';
 
 import '/presentation/admin_panel/controllers/admin_panel.controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
-import '/domain/const/static_data.dart';
 import '/domain/const/assets_paths.dart';
 import '/generated/locales.generated.dart';
 import '/infrastructure/theme/text_size.dart';
@@ -58,46 +58,60 @@ class AdminPanelDrawer extends GetView<AdminPanelController> {
                             CircleAvatar(
                               radius: 28,
                               backgroundColor: context.colorScheme.onPrimary,
-                              child: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: context.colorScheme.secondary,
-                                child: StaticData.profileImage == ''
-                                    ? SvgPicture.asset(
-                                        ImagePath.proileAvatarSvg,
-                                        height: 35,
-                                        colorFilter: ColorFilter.mode(
-                                            context.colorScheme.onPrimary,
-                                            BlendMode.srcIn),
-                                      )
-                                    : ClipOval(
-                                        child: Image.network(
-                                        StaticData.profileImage,
-                                        fit: BoxFit.cover,
-                                        width: 50,
-                                        height: 50,
-                                      )),
-                              ),
+                              child: Obx(() => CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor:
+                                        context.colorScheme.secondary,
+                                    child: Get.find<UserServices>()
+                                                .user
+                                                .value
+                                                .profileImage ==
+                                            ''
+                                        ? SvgPicture.asset(
+                                            ImagePath.proileAvatarSvg,
+                                            height: 35,
+                                            colorFilter: ColorFilter.mode(
+                                                context.colorScheme.onPrimary,
+                                                BlendMode.srcIn),
+                                          )
+                                        : ClipOval(
+                                            child: Image.network(
+                                            Get.find<UserServices>()
+                                                .user
+                                                .value
+                                                .profileImage,
+                                            fit: BoxFit.cover,
+                                            width: 50,
+                                            height: 50,
+                                          )),
+                                  )),
                             ),
                             const SizedBox(
                               width: 10,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                CustomText(
-                                  text: StaticData.name,
-                                  color: context.colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: AppTextSize.bodySmallFont,
-                                ),
-                                CustomText(
-                                  text: StaticData.email,
-                                  color: context.colorScheme.onPrimary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: AppTextSize.bodySmallFont,
-                                ),
-                              ],
-                            )
+                            Obx(() => Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomText(
+                                      text: Get.find<UserServices>()
+                                          .user
+                                          .value
+                                          .name,
+                                      color: context.colorScheme.onPrimary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: AppTextSize.bodySmallFont,
+                                    ),
+                                    CustomText(
+                                      text: Get.find<UserServices>()
+                                          .user
+                                          .value
+                                          .email,
+                                      color: context.colorScheme.onPrimary,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: AppTextSize.bodySmallFont,
+                                    ),
+                                  ],
+                                ))
                           ],
                         ),
                       ],

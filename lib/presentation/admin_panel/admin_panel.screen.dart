@@ -1,4 +1,4 @@
-import '/domain/const/static_data.dart';
+import '../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/generated/locales.generated.dart';
 import '/infrastructure/theme/text_size.dart';
 import '/presentation/admin_panel/drawer/admin_panel_drawer.dart';
@@ -28,7 +28,7 @@ class AdminPanelScreen extends GetView<AdminPanelController> {
                         color: context.colorScheme.primaryContainer),
                     children: [
                   TextSpan(
-                    text: ' ${StaticData.name},',
+                    text: ' ${Get.find<UserServices>().user.value.name},',
                     style: TextStyle(
                         fontSize: AppTextSize.titleMediumFont,
                         color: context.colorScheme.secondary),

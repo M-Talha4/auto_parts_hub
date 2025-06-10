@@ -11,7 +11,9 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       recieverId: json['recieverId'] as String? ?? '',
       message: json['message'] as String? ?? '',
       messageSeen: json['messageSeen'] as bool? ?? false,
-      timestamp: MessageModel._timestampFromJson(json['timestamp'] as String),
+      timestamp: (json['timestamp'] is Timestamp)
+          ? json['timestamp']
+          : Timestamp.now(),
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -20,5 +22,5 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'recieverId': instance.recieverId,
       'message': instance.message,
       'messageSeen': instance.messageSeen,
-      'timestamp': MessageModel._timestampToJson(instance.timestamp),
+      'timestamp': instance.timestamp,
     };

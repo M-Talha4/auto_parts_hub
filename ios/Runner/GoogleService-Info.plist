@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.autoPartsHub</string>
+	<string>com.talha.autoPartsHub</string>
 	<key>PROJECT_ID</key>
 	<string>autopartshub-e3ad7</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:524531441500:ios:95bc2c74ee4f64efef2b99</string>
+	<string>1:524531441500:ios:9568ae5d6237ca23ef2b99</string>
 </dict>
 </plist>

@@ -1,4 +1,4 @@
-import '/domain/const/static_data.dart';
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/usecase/cart_usecase/delete_cart_item_usecae.dart';
 import '/domain/core/usecase/cart_usecase/get_cart_items_usecase.dart';
 import '/domain/core/usecase/cart_usecase/update_cart_usecase.dart';
@@ -116,8 +116,8 @@ class MyCartController extends GetxController {
     if (cartItems.isNotEmpty) {
       OrdersModel ordersModel = OrdersModel(
         orderId: DateTime.now().toString(),
-        customerId: StaticData.userId,
-        customerEmail: StaticData.email,
+        customerId: Get.find<UserServices>().user.value.userId,
+        customerEmail: Get.find<UserServices>().user.value.email,
         orderStatus: 'IN-PROCESS',
         orderPrice: totalAmount.value,
         cartItems: items,

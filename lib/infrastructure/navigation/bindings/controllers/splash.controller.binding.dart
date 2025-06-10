@@ -15,8 +15,8 @@ class SplashControllerBinding extends Bindings {
     Get.lazyPut<GetCurrentUserUsecase>(
       () => GetCurrentUserUsecase(Get.find<SplashRepository>()),
     );
-    Get.lazyPut<SplashController>(
-      () => SplashController(Get.find<GetCurrentUserUsecase>()),
+    Get.put<SplashController>(
+      SplashController(Get.find<GetCurrentUserUsecase>()),
     );
   }
 }

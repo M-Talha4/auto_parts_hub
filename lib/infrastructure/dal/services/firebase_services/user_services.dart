@@ -53,12 +53,25 @@ class UserServices extends GetxService {
   }
 
   //----------------------------- Update -----------------------------
-  Future<void> updateUserCollection(UserModel user) async {
+  void updateUser(UserModel? userModel) async {
+    _user.value = userModel ??
+        UserModel(
+            userId: '',
+            name: '',
+            email: '',
+            isAdmin: false,
+            language: '',
+            phoneNo: '',
+            profileImage: '',
+            fcmToken: '');
+  }
+
+  //----------------------------- Update -----------------------------
+  Future<void> updateUserCollection(UserModel userModel) async {
     try {
-      await userCollection.doc(user.userId).update((user.toJson()));
-      debugPrint(
-        'User collection updated successfully!',
-      );
+      await userCollection.doc(userModel.userId).update((user.toJson()));
+      _user.value = userModel;
+      debugPrint('User collection updated successfully!');
     } catch (e) {
       rethrow;
     }

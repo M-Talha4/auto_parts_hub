@@ -1,3 +1,4 @@
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/entities/order_entities/order_entity.dart';
 import '/domain/core/usecase/orders_usecase/get_user_orders_usecase.dart';
 import '/domain/exceptions/app_exception.dart';
@@ -24,7 +25,9 @@ class MyOrdersController extends GetxController
 
   Future<void> _getOrders() async {
     try {
-      orderList.value = await _getUserOrdersUsecase.execute() ?? [];
+      orderList.value = await _getUserOrdersUsecase
+              .execute(Get.find<UserServices>().user.value.userId) ??
+          [];
     } catch (e) {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);

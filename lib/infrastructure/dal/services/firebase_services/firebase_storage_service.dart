@@ -1,16 +1,17 @@
 import 'dart:io';
-import '/domain/const/static_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+
+import 'user_services.dart';
 
 class FirebaseStorageService extends GetxService {
   Reference storageReference = FirebaseStorage.instance.ref();
 
   Future<String> uploadProfileImage(File file) async {
     try {
-      Reference imageRef =
-          storageReference.child('profileImages/${StaticData.userId}.png');
+      Reference imageRef = storageReference.child(
+          'profileImages/${Get.find<UserServices>().user.value.userId}.png');
       TaskSnapshot snapshot = await imageRef.putFile(file);
       debugPrint(snapshot.toString());
       return await imageRef.getDownloadURL();

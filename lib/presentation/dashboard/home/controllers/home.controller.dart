@@ -167,18 +167,16 @@ class HomeController extends GetxController {
       );
       deletePrefs();
       Get.offAllNamed(Routes.LOGIN);
-    } catch (e) {
+    } catch (e, stc) {
       if (e is AppException) {
         showSnackbar(message: e.message!, icon: e.icon, isError: true);
       } else {
-        Logger.error(message: e.toString());
+        Logger.error(message: e.toString(), stackTrace: stc);
       }
     }
   }
 
   void deletePrefs() {
-    MyPrefs.removeUser();
-    MyPrefs.storeAdmin(isAdmin: false);
     MyPrefs.storeLanguage(
         language: LocaleKeys.select_language_english_language);
     Get.updateLocale(const Locale('en', 'US'));

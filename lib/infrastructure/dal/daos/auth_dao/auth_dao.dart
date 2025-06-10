@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import '../../services/firebase_services/user_services.dart';
 import '/infrastructure/dal/services/language_services/language_services.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '/domain/db/local_storage/my_prefs.dart';
@@ -43,11 +44,10 @@ class AuthDao implements AuthRepository {
             ? await _authServices.getAdminCollection()
             : await _authServices.getUserCollection();
       });
+      Get.find<UserServices>().updateUser(user);
       Get.updateLocale(
           LanguageServices.instance.onLanguageSelected(user.language));
       MyPrefs.storeLanguage(language: user.language);
-      MyPrefs.storeAdmin(isAdmin: user.isAdmin);
-      MyPrefs.storeUser(user: user);
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw AuthExceptions.firebaseExceptions(e);
     } on SocketException catch (e) {
@@ -71,10 +71,9 @@ class AuthDao implements AuthRepository {
         user.isAdmin == true
             ? _authServices.createAdminCollection(user)
             : _authServices.createUserCollection(user);
+        Get.find<UserServices>().updateUser(user);
       });
       MyPrefs.storeLanguage(language: user.language);
-      MyPrefs.storeAdmin(isAdmin: user.isAdmin);
-      MyPrefs.storeUser(user: user);
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw AuthExceptions.firebaseExceptions(e);
     } on SocketException catch (e) {
@@ -89,9 +88,10 @@ class AuthDao implements AuthRepository {
   @override
   Future<void> logout() async {
     try {
-      await _authServices.logout();
       await _notificationServices
-          .removeToken(_authServices.userCredential?.user?.uid ?? "");
+          .removeToken(Get.find<UserServices>().user.value.userId);
+      Get.find<UserServices>().updateUser(null);
+      await _authServices.logout();
     } on firebase_auth.FirebaseAuthException catch (e) {
       throw AuthExceptions.firebaseExceptions(e);
     } on SocketException catch (e) {

@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/domain/const/const.dart';
-import '/domain/const/static_data.dart';
 import '/domain/core/entities/order_entities/order_entity.dart';
 import '/domain/core/entities/product_entities/product_entity.dart';
 import '/infrastructure/dal/models/cart_models/cart_model.dart';
@@ -10,6 +9,7 @@ import '/infrastructure/dal/models/order_models/order_model.dart';
 import '/infrastructure/dal/models/address_models/address_model.dart';
 import '/infrastructure/dal/models/product_models/product_model.dart';
 import '/infrastructure/dal/models/credit_card_models/credit_card_model.dart';
+import 'user_services.dart';
 
 class FireStoreServices extends GetxService {
   CollectionReference usersCollection =
@@ -26,12 +26,12 @@ class FireStoreServices extends GetxService {
 
   @override
   onInit() {
-    loggedIn(StaticData.userId);
+    loggedIn(Get.find<UserServices>().user.value.userId);
     super.onInit();
   }
 
   Future<void> loggedIn(String userId) async {
-    if (StaticData.userId == '') return;
+    if (userId == '') return;
     try {
       addressCollection = usersCollection
           .doc(userId)
@@ -142,7 +142,7 @@ class FireStoreServices extends GetxService {
     try {
       CollectionReference cartCollection = FirebaseFirestore.instance
           .collection(firebaseUsersCollection)
-          .doc(StaticData.userId)
+          .doc(Get.find<UserServices>().user.value.userId)
           .collection(firebaseUsersSubCollectionCart);
       for (var item in cartItems) {
         await cartCollection.doc(item.itemId).delete();

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/infrastructure/dal/services/firebase_services/firestore_services.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +9,7 @@ import '/domain/const/const.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import '/domain/core/entities/user_entities/user_entity.dart';
 import '/infrastructure/dal/models/user_models/user_model.dart';
+import 'user_services.dart';
 
 class AuthServices extends GetxService {
   final FireStoreServices _fireStoreServices;
@@ -17,7 +20,6 @@ class AuthServices extends GetxService {
       FirebaseFirestore.instance.collection(firebaseUsersCollection);
   CollectionReference adminCollection =
       FirebaseFirestore.instance.collection(firebaseAdminCollection);
-  firebase_auth.UserCredential? userCredential;
 
 // ----------------------------reset password ----------------------------------
   Future<void> resetPassword({required String email}) async {
@@ -41,10 +43,10 @@ class AuthServices extends GetxService {
   Future<String> loginWithEmailAndPassword(
       String email, String password) async {
     try {
-      userCredential = await _firebaseAuth
+      UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
           .timeout(const Duration(seconds: 10));
-      return userCredential!.user!.uid;
+      return userCredential.user!.uid;
     } catch (e) {
       rethrow;
     }
@@ -139,9 +141,7 @@ class AuthServices extends GetxService {
   Future<void> updateUserCollection(UserModel user) async {
     try {
       await userCollection.doc(user.userId).update((user.toJson()));
-      debugPrint(
-        'User collection updated successfully!',
-      );
+      Get.find<UserServices>().updateUser(user);
     } catch (e) {
       rethrow;
     }

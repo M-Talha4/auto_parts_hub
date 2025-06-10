@@ -1,6 +1,5 @@
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/utils/context_extensions.dart';
-
-import '/domain/const/static_data.dart';
 import '/domain/db/local_storage/my_prefs.dart';
 import '/generated/locales.generated.dart';
 import '/infrastructure/dal/services/language_services/language_services.dart';
@@ -40,7 +39,7 @@ class SettingsController extends GetxController {
   }
 
   void _getLanguage() {
-    String? lang = StaticData.language;
+    String? lang = Get.find<UserServices>().user.value.language;
     selectedLanguage.value = capitalizeFirstLetter(lang.tr);
     selectedIndex = languages.indexOf(lang);
   }
@@ -132,6 +131,7 @@ class SettingsController extends GetxController {
   }
 
   String capitalizeFirstLetter(String input) {
+    if (input.isEmpty) return input;
     return input[0].toUpperCase() + input.substring(1);
   }
 }

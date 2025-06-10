@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-import '/domain/const/static_data.dart';
 import '/domain/core/interfaces/orders_interface/orders_repository.dart';
 import '/domain/exceptions/network_exception.dart';
 import '/domain/exceptions/time_out_exception.dart';
@@ -25,11 +24,10 @@ class OrderDao implements OrdersRepository {
   }
 
   @override
-  Future<List<OrdersModel>> getUserOrders() async {
+  Future<List<OrdersModel>> getUserOrders(String userId) async {
     try {
-      return await _fireStoreServices.getOrdersList().then((orders) => orders
-          .where((order) => order.customerId == StaticData.userId)
-          .toList());
+      return await _fireStoreServices.getOrdersList().then((orders) =>
+          orders.where((order) => order.customerId == userId).toList());
     } on SocketException catch (e) {
       throw NetworkException.connectionError(e.message);
     } on TimeoutException catch (e) {

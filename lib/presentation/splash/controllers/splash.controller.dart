@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/infrastructure/navigation/routes.dart';
@@ -9,7 +8,6 @@ class SplashController extends GetxController {
   final GetCurrentUserUsecase _getCurrentUserUsecase;
   SplashController(this._getCurrentUserUsecase);
 
-  bool isDarkMode = (Get.theme.brightness == Brightness.dark);
   @override
   onInit() {
     getUserConfig();

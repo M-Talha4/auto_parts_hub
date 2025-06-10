@@ -94,8 +94,6 @@ class AdminPanelController extends GetxController {
   }
 
   void deletePrefs() {
-    MyPrefs.removeUser();
-    MyPrefs.storeAdmin(isAdmin: false);
     MyPrefs.storeLanguage(
         language: LocaleKeys.select_language_english_language);
     Get.updateLocale(const Locale('en', 'US'));

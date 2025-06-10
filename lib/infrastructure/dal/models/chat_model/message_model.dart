@@ -5,20 +5,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'message_model.g.dart';
 
 // Custom converter to handle Timestamp to String conversion
-class TimestampConverter implements JsonConverter<Timestamp, String> {
-  const TimestampConverter();
-
-  @override
-  Timestamp fromJson(String json) {
-    return Timestamp.fromMillisecondsSinceEpoch(int.parse(json));
-  }
-
-  @override
-  String toJson(Timestamp timestamp) {
-    return timestamp.seconds
-        .toString(); // Converts to a String representation of the seconds
-  }
-}
 
 @JsonSerializable()
 class MessageModel extends MessageEntity {
@@ -39,8 +25,7 @@ class MessageModel extends MessageEntity {
   final bool messageSeen;
 
   @override
-  @JsonKey(
-      name: 'timestamp', fromJson: _timestampFromJson, toJson: _timestampToJson)
+  @JsonKey(name: 'timestamp')
   final Timestamp timestamp;
 
   MessageModel({
@@ -88,13 +73,4 @@ class MessageModel extends MessageEntity {
 
   // toJson method for json_serializable
   Map<String, dynamic> toJson() => _$MessageModelToJson(this);
-
-  // Custom fromJson and toJson methods for Timestamp
-  static Timestamp _timestampFromJson(String timestamp) {
-    return Timestamp.fromMillisecondsSinceEpoch(int.parse(timestamp));
-  }
-
-  static String _timestampToJson(Timestamp timestamp) {
-    return timestamp.seconds.toString();
-  }
 }

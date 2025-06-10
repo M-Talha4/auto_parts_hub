@@ -1,14 +1,11 @@
-import '/domain/const/static_data.dart';
+import '../../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/core/usecase/chat_usecase.dart/get_message_usecase.dart';
 import '/domain/core/usecase/chat_usecase.dart/send_message_usecase.dart';
 import '/domain/utils/loading_mixin.dart';
-import '/infrastructure/dal/models/chat_model/message_model.dart';
 import '/infrastructure/dal/models/user_models/user_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart'
-    show QuerySnapshot, Timestamp;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '/domain/utils/logger.dart';
-import 'package:flutter/material.dart'
-    show AsyncSnapshot, TextEditingController;
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' show DateFormat;
 import 'package:get/get.dart';
 
@@ -25,6 +22,15 @@ class ChatController extends GetxController with LoadingMixin {
   UserModel user = Get.arguments;
 
   TextEditingController chatController = TextEditingController();
+
+  String getChatRoomId() {
+    List<String> chatId = [
+      Get.find<UserServices>().user.value.userId,
+      user.userId
+    ]..sort();
+    String chatRoomId = chatId.join('-');
+    return chatRoomId;
+  }
 
   Stream<QuerySnapshot> getMessages() {
     try {
@@ -51,16 +57,20 @@ class ChatController extends GetxController with LoadingMixin {
     }
   }
 
-  List<MessageModel> getList(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
-    return snapshot.data!.docs
-        .map((message) =>
-            MessageModel.fromJson(message.data() as Map<String, dynamic>))
-        .toList();
-  }
+  // List<MessageModel> getList(AsyncSnapshot<QuerySnapshot<Object?>> snapshot) {
+  //   return snapshot.data!.docs
+  //       .map((message) =>
+  //           MessageModel.fromJson(message.data() as Map<String, dynamic>))
+  //       .toList();
+  // }
 
   String convertTime(Timestamp timestamp) {
-    DateTime date = timestamp.toDate();
-    DateFormat format = DateFormat('h: mm aa');
+    DateTime date =
+        DateTime.fromMillisecondsSinceEpoch(timestamp.millisecondsSinceEpoch);
+
+    // Logger.info(message: date);
+    DateFormat format = DateFormat('K: mm aa');
+    Logger.info(message: format.format(date));
     return format.format(date);
   }
 
@@ -70,7 +80,9 @@ class ChatController extends GetxController with LoadingMixin {
       NotificationModel notificationModel = NotificationModel(
           fcmToken: user.fcmToken,
           notification: NotificationBodyModel(
-              title: 'Message From ${StaticData.name}', body: message));
+              title:
+                  'Message From ${Get.find<UserServices>().user.value.isAdmin ? 'Admin' : Get.find<UserServices>().user.value.name}',
+              body: message));
       await _sendNotificationUsecase.execute(notificationModel);
     } catch (e) {
       Logger.error(message: e);

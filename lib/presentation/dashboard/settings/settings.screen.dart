@@ -1,6 +1,5 @@
+import '../../../infrastructure/dal/services/firebase_services/user_services.dart';
 import '/domain/utils/context_extensions.dart';
-
-import '/domain/const/static_data.dart';
 import '/generated/locales.generated.dart';
 import '/infrastructure/theme/text_size.dart';
 import '/presentation/widgets/custom_text.dart';
@@ -27,76 +26,74 @@ class SettingsScreen extends GetView<SettingsController> {
                 size: AppTextSize.displayMediumFont,
               )),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: width * 0.05, vertical: 12),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () => controller.selectLanguage(StaticData.language),
-                  child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () => controller.selectLanguage(
+                    Get.find<UserServices>().user.value.language),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CustomText(
+                      text: LocaleKeys.settings_selected_language_text.tr,
+                      fontSize: AppTextSize.titleMediumFont,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    Obx(
+                      () => CustomText(
+                        text: controller.selectedLanguage.value.tr,
+                        fontSize: AppTextSize.titleSmallFont,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              CustomText(
+                text: '${LocaleKeys.settings_theme_mode_text.tr}:',
+                fontSize: AppTextSize.bodyLargeFont,
+                fontWeight: FontWeight.w500,
+              ).paddingSymmetric(vertical: 4),
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                    color: context.colorScheme.outlineVariant,
+                    borderRadius: BorderRadius.circular(4)),
+                child: Obx(
+                  () => Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomText(
-                        text: LocaleKeys.settings_selected_language_text.tr,
-                        fontSize: AppTextSize.titleMediumFont,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      Obx(
-                        () => CustomText(
-                          text: controller.selectedLanguage.value.tr,
-                          fontSize: AppTextSize.titleSmallFont,
+                    children: controller.themeModes.map((themeMode) {
+                      return InkWell(
+                        onTap: () => controller.selectTheme(themeMode),
+                        child: Container(
+                          width: 100,
+                          height: controller.selectedLanguage.value ==
+                                  LocaleKeys.select_language_russian_language
+                              ? 60
+                              : 32,
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                              color: controller.selectedTheme.value == themeMode
+                                  ? context.colorScheme.primary
+                                  : context.colorScheme.surface,
+                              borderRadius: BorderRadius.circular(8)),
+                          child: CustomText(
+                            text: themeMode.tr,
+                            color: controller.selectedTheme.value == themeMode
+                                ? context.colorScheme.onPrimary
+                                : context.colorScheme.onSurface,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
+                      );
+                    }).toList(),
                   ),
                 ),
-                CustomText(
-                  text: '${LocaleKeys.settings_theme_mode_text.tr}:',
-                  fontSize: AppTextSize.bodyLargeFont,
-                  fontWeight: FontWeight.w500,
-                ).paddingSymmetric(vertical: 4),
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                      color: context.colorScheme.outlineVariant,
-                      borderRadius: BorderRadius.circular(4)),
-                  child: Obx(
-                    () => Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: controller.themeModes.map((themeMode) {
-                        return InkWell(
-                          onTap: () => controller.selectTheme(themeMode),
-                          child: Container(
-                            width: 100,
-                            height: controller.selectedLanguage.value ==
-                                    LocaleKeys.select_language_russian_language
-                                ? 60
-                                : 32,
-                            alignment: Alignment.center,
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                color:
-                                    controller.selectedTheme.value == themeMode
-                                        ? context.colorScheme.primary
-                                        : context.colorScheme.surface,
-                                borderRadius: BorderRadius.circular(8)),
-                            child: CustomText(
-                              text: themeMode.tr,
-                              color: controller.selectedTheme.value == themeMode
-                                  ? context.colorScheme.onPrimary
-                                  : context.colorScheme.onSurface,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ));
   }

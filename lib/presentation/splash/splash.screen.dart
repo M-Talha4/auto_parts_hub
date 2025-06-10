@@ -10,7 +10,7 @@ class SplashScreen extends GetView<SplashController> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          controller.isDarkMode
+          Get.theme.brightness == Brightness.dark
               ? ImagePath.appLogoDark
               : ImagePath.appLogoLight,
           height: 240,
